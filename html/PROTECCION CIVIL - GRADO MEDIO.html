@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grado Medio en Emergencias y Protección Civil | CampusFP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #E31E24;
+    --red-dark: #B71519;
+    --red-light: #FF3A40;
+    --navy: #0B1F3A;
+    --navy-mid: #142A4A;
+    --blue-accent: #1565C0;
+    --white: #FFFFFF;
+    --off-white: #F7F8FA;
+    --light-gray: #EEF0F4;
+    --mid-gray: #9BA3AF;
+    --dark-gray: #3D4451;
+    --text: #1A1D23;
+    --shadow: 0 4px 32px rgba(11,31,58,0.10);
+    --shadow-strong: 0 8px 48px rgba(11,31,58,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 3px solid var(--red);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+  }
+  .nav-logo-badge {
+    background: var(--red);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    padding: 6px 14px;
+    border-radius: 4px;
+  }
+  .nav-logo-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--navy);
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+  .nav-logo-sub { font-weight: 400; font-size: 0.78rem; color: var(--mid-gray); display: block; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dark-gray);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta {
+    background: var(--red);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--red-dark) !important; color: white !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+    padding-top: 68px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, rgba(11,31,58,0.97) 0%, rgba(11,31,58,0.78) 50%, rgba(227,30,36,0.22) 100%),
+      url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover no-repeat;
+  }
+  .hero-overlay-lines {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 100px,
+      rgba(255,255,255,0.015) 100px,
+      rgba(255,255,255,0.015) 101px
+    );
+  }
+  .hero-red-bar {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--red);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 6rem 2rem 5rem;
+    display: grid; grid-template-columns: 1fr 400px; gap: 5rem; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--red);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 3px;
+    margin-bottom: 1.4rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before {
+    content: '●'; font-size: 0.6rem; animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    line-height: 1.0;
+    color: white;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title .red { color: var(--red); }
+  .hero-subtitle-line {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-desc {
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.80);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-stats {
+    display: flex; gap: 2rem; margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .stat {
+    text-align: center; border-left: 3px solid var(--red); padding-left: 1rem;
+  }
+  .stat-num {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2.2rem; color: white; line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .btn-primary {
+    background: var(--red); color: white;
+    padding: 15px 32px; border-radius: 4px;
+    font-weight: 700; font-size: 1rem;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: all 0.25s; border: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(227,30,36,0.4); }
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 15px 32px; border-radius: 4px;
+    font-weight: 600; font-size: 1rem;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: all 0.25s;
+    border: 2px solid rgba(255,255,255,0.4);
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  /* hero card */
+  .hero-card {
+    background: white; border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 1.15rem;
+    color: var(--navy); letter-spacing: 0.03em;
+    text-transform: uppercase; margin-bottom: 1.4rem;
+    padding-bottom: 0.8rem; border-bottom: 2px solid var(--light-gray);
+  }
+  .card-form-group { margin-bottom: 1rem; }
+  .card-form-group label {
+    display: block; font-size: 0.78rem; font-weight: 600;
+    color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px;
+  }
+  .card-form-group input, .card-form-group select {
+    width: 100%; padding: 11px 14px;
+    border: 1.5px solid var(--light-gray);
+    border-radius: 6px; font-size: 0.92rem; font-family: 'Barlow', sans-serif;
+    color: var(--text); background: var(--off-white);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .card-form-group input:focus, .card-form-group select:focus {
+    border-color: var(--red);
+    background: white;
+  }
+  .card-submit {
+    width: 100%; padding: 13px; background: var(--red); color: white;
+    border: none; border-radius: 6px; font-size: 1rem; font-weight: 700;
+    cursor: pointer; font-family: 'Barlow Semi Condensed', sans-serif;
+    letter-spacing: 0.04em; transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+  .card-submit:hover { background: var(--red-dark); }
+  .card-privacy { font-size: 0.72rem; color: var(--mid-gray); margin-top: 0.7rem; text-align: center; line-height: 1.5; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── STRIP ─── */
+  .strip {
+    background: var(--red);
+    padding: 1.1rem 2rem;
+    display: flex; align-items: center; justify-content: center; gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .strip-item {
+    display: flex; align-items: center; gap: 10px;
+    color: white; font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .strip-item svg { opacity: 0.9; flex-shrink: 0; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 0.8rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 28px; height: 3px; background: var(--red);
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--navy); line-height: 1.05; margin-bottom: 1.2rem;
+  }
+  .section-desc {
+    font-size: 1.05rem; line-height: 1.8; color: var(--dark-gray); max-width: 640px;
+  }
+
+  /* ─── ABOUT ─── */
+  #sobre { background: var(--off-white); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px;
+    background: linear-gradient(135deg, var(--navy) 0%, #1565C0 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .about-img-placeholder {
+    width: 100%; height: 320px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a6e 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  }
+  .about-img-placeholder svg { opacity: 0.25; }
+  .about-img-placeholder span { color: rgba(255,255,255,0.4); font-size: 0.85rem; }
+  .about-badge-float {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--red); color: white;
+    padding: 1.2rem 1.5rem; border-radius: 10px;
+    text-align: center; box-shadow: 0 8px 32px rgba(227,30,36,0.35);
+  }
+  .about-badge-float .big { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.5rem; line-height: 1; }
+  .about-badge-float .sm { font-size: 0.75rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; }
+  .about-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .pillar {
+    background: white; border-radius: 8px; padding: 1.2rem;
+    border-left: 4px solid var(--red);
+    box-shadow: var(--shadow);
+  }
+  .pillar-title { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.3rem; }
+  .pillar-desc { font-size: 0.82rem; color: var(--mid-gray); line-height: 1.5; }
+
+  /* ─── MODULES ─── */
+  #modulos { background: var(--white); }
+  .modules-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; gap: 2rem; }
+  .year-tabs { display: flex; gap: 0.5rem; }
+  .year-tab {
+    padding: 9px 22px; border-radius: 4px; font-weight: 600; font-size: 0.9rem;
+    border: none; cursor: pointer; transition: all 0.2s;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    letter-spacing: 0.03em;
+  }
+  .year-tab.active { background: var(--red); color: white; }
+  .year-tab:not(.active) { background: var(--light-gray); color: var(--dark-gray); }
+  .year-tab:not(.active):hover { background: #d8dce5; }
+  .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+  .module-card {
+    background: var(--off-white); border-radius: 8px; padding: 1.4rem;
+    border: 1.5px solid var(--light-gray); transition: all 0.2s;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .module-card:hover { border-color: var(--red); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .module-num {
+    background: var(--navy); color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    min-width: 44px; height: 44px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .module-info h4 { font-weight: 700; font-size: 0.95rem; color: var(--navy); margin-bottom: 0.3rem; line-height: 1.3; }
+  .module-hours { font-size: 0.8rem; color: var(--red); font-weight: 600; }
+  .module-desc { font-size: 0.8rem; color: var(--mid-gray); margin-top: 0.3rem; line-height: 1.4; }
+  .year-panel { display: none; }
+  .year-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+  .fft-card {
+    background: var(--navy); color: white; border-radius: 8px; padding: 1.6rem;
+    grid-column: 1 / -1; display: flex; align-items: center; gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .fft-card svg { flex-shrink: 0; opacity: 0.85; }
+  .fft-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 0.3rem; }
+  .fft-card p { font-size: 0.88rem; opacity: 0.75; }
+
+  /* ─── SALIDAS ─── */
+  #salidas { background: var(--navy); }
+  #salidas .section-title { color: white; }
+  #salidas .section-desc { color: rgba(255,255,255,0.65); }
+  .salidas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .salida-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 1.8rem;
+    transition: all 0.25s;
+  }
+  .salida-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); border-color: var(--red); }
+  .salida-icon {
+    width: 52px; height: 52px; border-radius: 10px;
+    background: rgba(227,30,36,0.2); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+  .salida-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; color: white; margin-bottom: 0.5rem; }
+  .salida-card p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+  .salida-tag {
+    display: inline-block; margin-top: 1rem;
+    background: rgba(227,30,36,0.25); color: var(--red-light);
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 3px;
+  }
+
+  /* ─── DUAL ─── */
+  #dual { background: var(--off-white); }
+  .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .dual-steps { display: flex; flex-direction: column; gap: 1.5rem; }
+  .dual-step { display: flex; gap: 1.2rem; }
+  .step-num {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: 2rem; color: var(--red); line-height: 1; flex-shrink: 0; min-width: 36px;
+  }
+  .step-body h4 { font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; font-size: 1rem; }
+  .step-body p { font-size: 0.88rem; color: var(--dark-gray); line-height: 1.65; }
+  .dual-highlight {
+    background: var(--navy); color: white; border-radius: 12px; padding: 2.5rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .dh-stat { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.2rem; }
+  .dh-stat:last-child { border-bottom: none; padding-bottom: 0; }
+  .dh-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.8rem; color: white; line-height: 1; }
+  .dh-num span { color: var(--red); }
+  .dh-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.25rem; }
+
+  /* ─── REQUISITOS ─── */
+  #requisitos { background: white; }
+  .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .req-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+  .req-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 0.95rem; line-height: 1.55; color: var(--dark-gray); padding: 1rem 1.2rem;
+    background: var(--off-white); border-radius: 8px; border-left: 4px solid var(--red);
+  }
+  .req-check {
+    width: 22px; height: 22px; background: var(--red); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .req-check svg { width: 12px; height: 12px; }
+  .progression-box {
+    background: var(--navy); border-radius: 12px; padding: 2rem; color: white;
+  }
+  .progression-box h3 {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem;
+    margin-bottom: 1.5rem; color: white;
+  }
+  .prog-arrow { display: flex; flex-direction: column; gap: 0; }
+  .prog-item {
+    background: rgba(255,255,255,0.07); border-radius: 8px; padding: 1rem 1.2rem;
+    font-size: 0.9rem; color: rgba(255,255,255,0.85); position: relative;
+  }
+  .prog-item strong { color: white; display: block; margin-bottom: 0.2rem; font-size: 0.95rem; }
+  .prog-connector {
+    width: 2px; background: var(--red); height: 24px; margin: 0 auto; opacity: 0.6;
+  }
+
+  /* ─── CENTROS ─── */
+  #centros { background: var(--off-white); }
+  .centros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .centro-card {
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: var(--shadow); transition: transform 0.25s;
+  }
+  .centro-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-strong); }
+  .centro-img {
+    height: 180px;
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a6e 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .centro-img-overlay {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=70') center/cover;
+    opacity: 0.3;
+  }
+  .centro-img-badge {
+    position: relative; z-index: 1;
+    background: var(--red); color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.4rem;
+    padding: 10px 20px; border-radius: 6px;
+  }
+  .centro-body { padding: 1.5rem; }
+  .centro-body h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .centro-body p { font-size: 0.88rem; color: var(--dark-gray); margin-bottom: 1rem; }
+  .centro-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    background: var(--light-gray); color: var(--dark-gray);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .tag.red-tag { background: rgba(227,30,36,0.1); color: var(--red); }
+
+  /* ─── FOOTER LINKS ─── */
+  .quick-links-section { background: var(--navy); padding: 4rem 2rem; }
+  .ql-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem;
+  }
+  .ql-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 1.5rem; text-align: center;
+    text-decoration: none; color: white;
+    transition: all 0.25s; cursor: pointer;
+  }
+  .ql-card:hover { background: rgba(227,30,36,0.2); border-color: var(--red); transform: translateY(-3px); }
+  .ql-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .ql-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.03em; margin-bottom: 0.3rem; }
+  .ql-card p { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* ─── CTA BAND ─── */
+  .cta-band {
+    background: var(--red);
+    padding: 4rem 2rem; text-align: center;
+  }
+  .cta-band h2 {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2rem,4vw,3rem);
+    color: white; margin-bottom: 0.8rem;
+  }
+  .cta-band p { color: rgba(255,255,255,0.85); font-size: 1.1rem; margin-bottom: 2rem; }
+  .cta-band .btn-white {
+    background: white; color: var(--red);
+    padding: 15px 36px; border-radius: 4px;
+    font-weight: 800; font-size: 1.05rem;
+    text-decoration: none; display: inline-block;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    transition: all 0.2s;
+  }
+  .cta-band .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #07131F; padding: 3rem 2rem 2rem;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+  }
+  .footer-brand .fb-logo {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem;
+    color: white; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;
+  }
+  .footer-brand .fb-logo span { background: var(--red); padding: 4px 10px; border-radius: 3px; }
+  .footer-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 280px; margin-bottom: 1.2rem; }
+  .social-links { display: flex; gap: 0.8rem; }
+  .social-link {
+    width: 36px; height: 36px; border-radius: 6px;
+    background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.8rem;
+    transition: all 0.2s; font-weight: 700;
+  }
+  .social-link:hover { background: var(--red); color: white; }
+  .footer-col h5 {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+    margin-bottom: 1rem;
+  }
+  .footer-col a {
+    display: block; text-decoration: none; color: rgba(255,255,255,0.7);
+    font-size: 0.88rem; margin-bottom: 0.6rem; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--red); }
+  .footer-bottom {
+    max-width: 1200px; margin: 2.5rem auto 0;
+    padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  .footer-badges { display: flex; gap: 1rem; align-items: center; }
+  .footer-badge-item {
+    background: rgba(255,255,255,0.06); border-radius: 4px;
+    padding: 5px 12px; font-size: 0.72rem; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+
+  /* ─── FAQ ─── */
+  #faq { background: white; }
+  .faq-list { max-width: 800px; margin: 3rem auto 0; }
+  .faq-item { border-bottom: 1px solid var(--light-gray); }
+  .faq-q {
+    width: 100%; background: none; border: none; text-align: left;
+    padding: 1.4rem 0; display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; gap: 1rem;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 600; font-size: 1.02rem; color: var(--navy);
+  }
+  .faq-q .arrow { color: var(--red); font-size: 1.4rem; transition: transform 0.25s; flex-shrink: 0; }
+  .faq-q.open .arrow { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s;
+    font-size: 0.95rem; line-height: 1.75; color: var(--dark-gray);
+  }
+  .faq-a.open { max-height: 300px; padding-bottom: 1.4rem; }
+
+  /* ─── PROFILE ─── */
+  #perfil { background: var(--off-white); }
+  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+  .profile-trait {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.2rem; background: white; border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  .trait-emoji { font-size: 1.8rem; flex-shrink: 0; }
+  .trait-body h4 { font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
+  .trait-body p { font-size: 0.87rem; color: var(--dark-gray); line-height: 1.55; }
+
+  /* ─── BECAS ─── */
+  #becas { background: white; }
+  .becas-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .beca-card {
+    background: var(--off-white); border-radius: 10px; padding: 1.8rem;
+    border-top: 4px solid var(--red); text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .beca-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .beca-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--navy); margin-bottom: 0.6rem; }
+  .beca-card p { font-size: 0.87rem; color: var(--dark-gray); line-height: 1.6; }
+  .beca-card .beca-link {
+    display: inline-block; margin-top: 1.2rem;
+    color: var(--red); font-weight: 700; font-size: 0.88rem; text-decoration: none;
+    border-bottom: 2px solid transparent; transition: border-color 0.2s;
+  }
+  .beca-card .beca-link:hover { border-color: var(--red); }
+
+  /* mobile */
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-card { display: none; }
+    .about-grid, .dual-grid, .req-grid, .centros-grid, .footer-inner, .profile-grid { grid-template-columns: 1fr; }
+    .becas-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .about-badge-float { display: none; }
+  }
+  @media (max-width: 560px) {
+    .becas-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; }
+    section { padding: 4rem 1.2rem; }
+    .strip { gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-badge">Campus<strong>FP</strong></div>
+    <div class="nav-logo-text">
+      Formación Profesional
+      <span class="nav-logo-sub">Centro Autorizado · Madrid</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#modulos">Contenidos</a>
+    <a href="#salidas">Salidas</a>
+    <a href="#dual">FP Dual</a>
+    <a href="#requisitos">Requisitos</a>
+    <a href="#centros">Centros</a>
+    <a href="#contacto" class="nav-cta">Solicitar Info</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay-lines"></div>
+  <div class="hero-red-bar"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">Grado Medio · Seguridad y Medio Ambiente</div>
+      <h1 class="hero-title">Emergencias<br>y <span class="red">Protección</span><br>Civil</h1>
+      <p class="hero-subtitle-line">Técnico en Emergencias · FP Oficial</p>
+      <p class="hero-desc">
+        Fórmate para salvar vidas. Aprende a intervenir en incendios, rescates, catástrofes y emergencias con 500 horas de práctica real en servicios operativos de Madrid.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">2.000h</span>
+          <span class="stat-label">de formación</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">500h</span>
+          <span class="stat-label">en empresa real</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2 años</span>
+          <span class="stat-label">de ciclo</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">
+          ▶ Solicitar información gratuita
+        </a>
+        <a href="#modulos" class="btn-outline">Ver contenidos</a>
+      </div>
+    </div>
+    <div class="hero-card" id="contacto">
+      <h3>🎓 Empieza tu formación</h3>
+      <div class="card-form-group">
+        <label>Nombre y apellidos</label>
+        <input type="text" placeholder="Tu nombre completo">
+      </div>
+      <div class="card-form-group">
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="correo@email.com">
+      </div>
+      <div class="card-form-group">
+        <label>Teléfono</label>
+        <input type="tel" placeholder="6XX XXX XXX">
+      </div>
+      <div class="card-form-group">
+        <label>Centro de interés</label>
+        <select>
+          <option value="">Elige tu centro</option>
+          <option>CampusFP Humanes – Fuenlabrada</option>
+          <option>CampusFP Alcalá de Henares</option>
+        </select>
+      </div>
+      <div class="card-form-group">
+        <label>Estudios realizados</label>
+        <select>
+          <option value="">Nivel de estudios</option>
+          <option>ESO / Graduado Escolar</option>
+          <option>Bachillerato</option>
+          <option>FP Grado Medio</option>
+          <option>FP Grado Superior</option>
+          <option>Otros</option>
+        </select>
+      </div>
+      <button class="card-submit" onclick="alert('¡Gracias! Un asesor se pondrá en contacto contigo pronto.')">Recibir información →</button>
+      <p class="card-privacy">Sin compromiso · Respuesta en 24h<br>Tus datos están protegidos según el RGPD</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Título Oficial
+  </div>
+  <div class="strip-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    Modalidad Presencial
+  </div>
+  <div class="strip-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    FP Dual
+  </div>
+  <div class="strip-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Madrid · 2 Centros
+  </div>
+  <div class="strip-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    Alta Empleabilidad
+  </div>
+</div>
+
+<!-- SOBRE EL CICLO -->
+<section id="sobre">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-img-placeholder">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>Intervención en Emergencias</span>
+        </div>
+        <div class="about-badge-float">
+          <span class="big">95%</span>
+          <span class="sm">Inserción<br>Laboral</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">El ciclo</div>
+        <h2 class="section-title">Aprende a actuar cuando más importa</h2>
+        <p class="section-desc">
+          El Grado Medio en Emergencias y Protección Civil te prepara para ser el profesional que interviene en las situaciones más exigentes: incendios, rescates, catástrofes naturales y emergencias colectivas. Una formación práctica e intensa desde el primer día.
+        </p>
+        <div class="about-pillars">
+          <div class="pillar">
+            <div class="pillar-title">🔥 Extinción de Incendios</div>
+            <div class="pillar-desc">Forestales y urbanos con equipos profesionales reales</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">🚁 Salvamento y Rescate</div>
+            <div class="pillar-desc">Técnicas de rescate en condiciones de riesgo real</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">🏥 Atención Sanitaria</div>
+            <div class="pillar-desc">Primeros auxilios y apoyo psicológico en crisis</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">📡 Coordinación Operativa</div>
+            <div class="pillar-desc">Gestión de equipos y recursos en escenarios reales</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section id="modulos">
+  <div class="container">
+    <div class="modules-header">
+      <div>
+        <div class="section-label">Plan de estudios</div>
+        <h2 class="section-title">Contenidos del ciclo</h2>
+      </div>
+      <div class="year-tabs">
+        <button class="year-tab active" onclick="showYear(1,this)">1º Curso</button>
+        <button class="year-tab" onclick="showYear(2,this)">2º Curso</button>
+      </div>
+    </div>
+
+    <div class="year-panel active" id="year1">
+      <div class="module-card">
+        <div class="module-num">01</div>
+        <div class="module-info">
+          <h4>Atención sanitaria inicial en emergencias</h4>
+          <div class="module-hours">205 horas</div>
+          <div class="module-desc">Primeros auxilios, soporte vital básico, triaje y manejo de múltiples víctimas</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">02</div>
+        <div class="module-info">
+          <h4>Mantenimiento de medios materiales en prevención de incendios</h4>
+          <div class="module-hours">135 horas</div>
+          <div class="module-desc">Vehículos, equipos de protección individual y medios técnicos de extinción</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">03</div>
+        <div class="module-info">
+          <h4>Vigilancia e intervención en incendios forestales</h4>
+          <div class="module-hours">170 horas</div>
+          <div class="module-desc">Técnicas de vigilancia, detección temprana y extinción en entornos forestales</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">04</div>
+        <div class="module-info">
+          <h4>Intervención en extinción de incendios urbanos</h4>
+          <div class="module-hours">170 horas</div>
+          <div class="module-desc">Protocolos de extinción en edificios, industrias y espacios confinados</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">05</div>
+        <div class="module-info">
+          <h4>Intervención en salvamento y rescate</h4>
+          <div class="module-hours">170 horas</div>
+          <div class="module-desc">Rescate en altura, espacios confinados, accidentes de tráfico y derrumbes</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">06</div>
+        <div class="module-info">
+          <h4>Optativa: Enfermedades infecciosas en emergencias</h4>
+          <div class="module-hours">50 horas</div>
+          <div class="module-desc">Gestión sanitaria en situaciones de pandemia y emergencias biológicas</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">07</div>
+        <div class="module-info">
+          <h4>Itinerario personal para la empleabilidad I</h4>
+          <div class="module-hours">100 horas</div>
+          <div class="module-desc">Orientación profesional, habilidades transversales y competencias laborales</div>
+        </div>
+      </div>
+      <div class="fft-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <div>
+          <h4>Fase de Formación en Empresa — Primer Curso</h4>
+          <p>60 horas de práctica real en servicios de emergencias y protección civil de Madrid</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="year-panel" id="year2">
+      <div class="module-card">
+        <div class="module-num">08</div>
+        <div class="module-info">
+          <h4>Apoyo psicológico en situaciones de emergencia</h4>
+          <div class="module-hours">105 horas</div>
+          <div class="module-desc">Técnicas de intervención psicosocial y gestión del estrés en catástrofes</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">09</div>
+        <div class="module-info">
+          <h4>Intervención en sucesos de origen natural, tecnológico y antrópico</h4>
+          <div class="module-hours">230 horas</div>
+          <div class="module-desc">Inundaciones, accidentes industriales, catástrofes NRBQ y emergencias complejas</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">10</div>
+        <div class="module-info">
+          <h4>Inspección de establecimientos para prevención de incendios</h4>
+          <div class="module-hours">115 horas</div>
+          <div class="module-desc">Normativa de prevención, auditorías de seguridad y revisión de instalaciones</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">11</div>
+        <div class="module-info">
+          <h4>Coordinación de equipos y unidades de emergencias</h4>
+          <div class="module-hours">230 horas</div>
+          <div class="module-desc">Liderazgo operativo, comunicaciones y gestión de recursos en crisis</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">12</div>
+        <div class="module-info">
+          <h4>Inglés profesional</h4>
+          <div class="module-hours">50 horas</div>
+          <div class="module-desc">Comunicación técnica en inglés aplicada al sector de emergencias</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">13-15</div>
+        <div class="module-info">
+          <h4>Digitalización, Sostenibilidad e Itinerario II</h4>
+          <div class="module-hours">130 horas</div>
+          <div class="module-desc">Competencias digitales, sostenibilidad y orientación laboral avanzada</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">16</div>
+        <div class="module-info">
+          <h4>Módulo optativo + Proyecto intermodular</h4>
+          <div class="module-hours">140 horas</div>
+          <div class="module-desc">Proyecto integrador de competencias del ciclo formativo completo</div>
+        </div>
+      </div>
+      <div class="fft-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <div>
+          <h4>Fase de Formación en Empresa — Segundo Curso</h4>
+          <p>440 horas de práctica real · Total: 500 horas en servicios de emergencias operativos</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SALIDAS PROFESIONALES -->
+<section id="salidas">
+  <div class="container">
+    <div class="section-label" style="color:rgba(255,255,255,0.5)">Salidas profesionales</div>
+    <h2 class="section-title">¿A dónde te lleva este ciclo?</h2>
+    <p class="section-desc">Al titularte accedes a uno de los sectores con mayor estabilidad laboral: los servicios esenciales operan 365 días al año y necesitan técnicos cualificados en renovación continua.</p>
+    <div class="salidas-grid">
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E31E24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h3>Bombero / Bombera</h3>
+        <p>Extinción de incendios urbanos, forestales y rescate en cuerpos de bomberos municipales y autonómicos.</p>
+        <span class="salida-tag">Sector Público</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E31E24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Protección Civil</h3>
+        <p>Integración en unidades de protección civil, coordinación de planes de emergencia municipales y regionales.</p>
+        <span class="salida-tag">Administración Pública</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E31E24" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Técnico en Rescate</h3>
+        <p>Rescate en accidentes de tráfico, derrumbes, inundaciones y espacios confinados con equipos especializados.</p>
+        <span class="salida-tag">Alta Demanda</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E31E24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <h3>Emergencias Industriales</h3>
+        <p>Brigadas de emergencia en empresas del sector industrial, químico y energético con altos requisitos de seguridad.</p>
+        <span class="salida-tag">Sector Privado</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E31E24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Forestal y Medioambiente</h3>
+        <p>Retenes de extinción de incendios forestales, vigilancia de parques naturales y gestión de emergencias medioambientales.</p>
+        <span class="salida-tag">Temporada extensa</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E31E24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Coordinación de Emergencias</h3>
+        <p>Centros de coordinación 112, sala de control y gestión de recursos ante incidentes de múltiples organismos.</p>
+        <span class="salida-tag">Crecimiento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FP DUAL -->
+<section id="dual">
+  <div class="container">
+    <div class="dual-grid">
+      <div>
+        <div class="section-label">Metodología</div>
+        <h2 class="section-title">FP Dual: la diferencia está en la práctica</h2>
+        <p class="section-desc" style="margin-bottom:2.5rem">
+          En CampusFP no esperamos al último año para que te enfrentes a situaciones reales. Desde el primer curso trabajas en servicios operativos de emergencias reales, con equipos profesionales.
+        </p>
+        <div class="dual-steps">
+          <div class="dual-step">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h4>Formación técnica en aula y laboratorio</h4>
+              <p>Teoría, protocolos y técnicas operativas con material actualizado al sector real.</p>
+            </div>
+          </div>
+          <div class="dual-step">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h4>Simulaciones en escenarios controlados</h4>
+              <p>Prácticas intensivas en instalaciones equipadas con medios similares a los servicios de emergencias reales.</p>
+            </div>
+          </div>
+          <div class="dual-step">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h4>500 horas en servicios reales</h4>
+              <p>Integración en unidades operativas, protección civil y servicios de emergencias de Madrid desde el primer año.</p>
+            </div>
+          </div>
+          <div class="dual-step">
+            <div class="step-num">04</div>
+            <div class="step-body">
+              <h4>Bolsa de empleo directa</h4>
+              <p>CampusFP conecta a los mejores alumnos con oportunidades laborales reales al finalizar el ciclo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dual-highlight">
+        <div class="dh-stat">
+          <div class="dh-num">500<span>h</span></div>
+          <div class="dh-label">Horas totales de formación en empresa con servicios reales de emergencias</div>
+        </div>
+        <div class="dh-stat">
+          <div class="dh-num">2<span> cursos</span></div>
+          <div class="dh-label">Práctica desde el primer año, no solo al final</div>
+        </div>
+        <div class="dh-stat">
+          <div class="dh-num">365<span> días</span></div>
+          <div class="dh-label">Los servicios de emergencias operan cada día del año — la demanda no para</div>
+        </div>
+        <div class="dh-stat">
+          <div class="dh-num">2<span> sedes</span></div>
+          <div class="dh-label">Madrid · Humanes-Fuenlabrada y Alcalá de Henares</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFIL DEL ALUMNO -->
+<section id="perfil">
+  <div class="container">
+    <div class="section-label">¿Es para ti?</div>
+    <h2 class="section-title">El perfil que encaja en este ciclo</h2>
+    <div class="profile-grid">
+      <div class="profile-trait">
+        <div class="trait-emoji">🎯</div>
+        <div class="trait-body">
+          <h4>Vocación de servicio</h4>
+          <p>Te mueve proteger a las personas y quieres trabajar cuando más se te necesita.</p>
+        </div>
+      </div>
+      <div class="profile-trait">
+        <div class="trait-emoji">⚡</div>
+        <div class="trait-body">
+          <h4>Activo y dinámico</h4>
+          <p>Disfrutas de los entornos de trabajo físico, la acción y la toma de decisiones rápidas.</p>
+        </div>
+      </div>
+      <div class="profile-trait">
+        <div class="trait-emoji">🧠</div>
+        <div class="trait-body">
+          <h4>Templanza bajo presión</h4>
+          <p>Eres capaz de mantener la calma y pensar con claridad en situaciones de estrés.</p>
+        </div>
+      </div>
+      <div class="profile-trait">
+        <div class="trait-emoji">🤝</div>
+        <div class="trait-body">
+          <h4>Trabajo en equipo</h4>
+          <p>Valoras la coordinación y confías en tus compañeros como parte esencial de la respuesta.</p>
+        </div>
+      </div>
+      <div class="profile-trait">
+        <div class="trait-emoji">🏃</div>
+        <div class="trait-body">
+          <h4>Condición física activa</h4>
+          <p>Mantienes o quieres desarrollar una buena condición física para responder a las exigencias del sector.</p>
+        </div>
+      </div>
+      <div class="profile-trait">
+        <div class="trait-emoji">🌍</div>
+        <div class="trait-body">
+          <h4>Conciencia social y medioambiental</h4>
+          <p>Te preocupas por la seguridad colectiva, el medioambiente y el bienestar de tu comunidad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUISITOS -->
+<section id="requisitos">
+  <div class="container">
+    <div class="section-label">Acceso</div>
+    <h2 class="section-title">Requisitos de acceso</h2>
+    <p class="section-desc">Accedes al ciclo si cumples alguno de estos requisitos académicos. Sin más barreras.</p>
+    <div class="req-grid">
+      <div>
+        <ul class="req-list">
+          <li>
+            <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Graduado/a en Educación Secundaria Obligatoria (ESO)
+          </li>
+          <li>
+            <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Título de Técnico/a Básico/a, Técnico/a o Auxiliar
+          </li>
+          <li>
+            <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Bachillerato en cualquiera de sus modalidades
+          </li>
+          <li>
+            <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Prueba de acceso a ciclos de Grado Medio (sin necesidad de ESO)
+          </li>
+          <li>
+            <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Curso preparatorio específico autorizado por la Administración educativa
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="progression-box">
+          <h3>📈 ¿Y después del ciclo?</h3>
+          <div class="prog-arrow">
+            <div class="prog-item">
+              <strong>🎓 Técnico en Emergencias y Protección Civil</strong>
+              Título oficial al finalizar el ciclo
+            </div>
+            <div class="prog-connector"></div>
+            <div class="prog-item">
+              <strong>🔼 Grado Superior — Coordinación de Emergencias</strong>
+              Progresión natural con posibles convalidaciones de módulos
+            </div>
+            <div class="prog-connector"></div>
+            <div class="prog-item">
+              <strong>🎓 Bachillerato / Universidad</strong>
+              Acceso a Bachillerato en cualquier modalidad o estudios universitarios del sector
+            </div>
+            <div class="prog-connector"></div>
+            <div class="prog-item">
+              <strong>💼 Mercado laboral</strong>
+              Incorporación directa al sector con 500 horas de experiencia acreditada
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BECAS FP -->
+<section id="becas">
+  <div class="container">
+    <div class="section-label">Financiación</div>
+    <h2 class="section-title">Becas FP y ayudas al estudio</h2>
+    <p class="section-desc">Estudiar FP no tiene por qué suponer una barrera económica. CampusFP te informa sobre todas las ayudas disponibles para que puedas centrarte en aprender.</p>
+    <div class="becas-grid">
+      <div class="beca-card">
+        <div style="font-size:2.5rem;margin-bottom:0.8rem">🎓</div>
+        <h3>Becas Ministerio de Educación</h3>
+        <p>Ayudas generales del Estado para alumnos de FP con criterios académicos y económicos. Convocatoria anual.</p>
+        <a class="beca-link" href="https://campusfp.es/campus-becas-fp/" target="_blank">Ver condiciones →</a>
+      </div>
+      <div class="beca-card">
+        <div style="font-size:2.5rem;margin-bottom:0.8rem">🏛️</div>
+        <h3>Becas Comunidad de Madrid</h3>
+        <p>Ayudas autonómicas para residentes en Madrid cursando FP presencial en centros autorizados como CampusFP.</p>
+        <a class="beca-link" href="https://campusfp.es/campus-becas-fp/" target="_blank">Ver condiciones →</a>
+      </div>
+      <div class="beca-card">
+        <div style="font-size:2.5rem;margin-bottom:0.8rem">🌍</div>
+        <h3>Programa Erasmus+ FP</h3>
+        <p>Movilidades internacionales para completar parte de tu formación en empresas europeas con beca de desplazamiento.</p>
+        <a class="beca-link" href="https://campusfp.es/campus-becas-fp/" target="_blank">Ver condiciones →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENTROS -->
+<section id="centros">
+  <div class="container">
+    <div class="section-label">Nuestros centros</div>
+    <h2 class="section-title">Dos centros en Madrid</h2>
+    <p class="section-desc">Elige el campus más cercano o conveniente. Ambos imparten el ciclo en modalidad presencial con la misma metodología FP Dual y los mismos estándares de calidad.</p>
+    <div class="centros-grid">
+      <div class="centro-card">
+        <div class="centro-img">
+          <div class="centro-img-overlay"></div>
+          <div class="centro-img-badge">Humanes · Fuenlabrada</div>
+        </div>
+        <div class="centro-body">
+          <h3>CampusFP Humanes – Fuenlabrada</h3>
+          <p>Instalaciones modernas en el sur metropolitano de Madrid, con fácil acceso desde las líneas de Cercanías y autobús.</p>
+          <div class="centro-tags">
+            <span class="tag">Sur de Madrid</span>
+            <span class="tag">Cercanías</span>
+            <span class="tag red-tag">Emergencias y Protección Civil</span>
+          </div>
+        </div>
+      </div>
+      <div class="centro-card">
+        <div class="centro-img" style="background:linear-gradient(135deg,#0B1F3A 0%,#1a3a6e 100%)">
+          <div class="centro-img-overlay" style="background:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=70') center/cover;"></div>
+          <div class="centro-img-badge">Alcalá de Henares</div>
+        </div>
+        <div class="centro-body">
+          <h3>CampusFP Alcalá de Henares</h3>
+          <p>Campus en el Corredor del Henares, zona con alta actividad industrial y de servicios. Muy bien comunicado por tren.</p>
+          <div class="centro-tags">
+            <span class="tag">Corredor del Henares</span>
+            <span class="tag">Tren RENFE</span>
+            <span class="tag red-tag">Emergencias y Protección Civil</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 1rem">
+      <div class="section-label" style="justify-content:center">Preguntas frecuentes</div>
+      <h2 class="section-title">Resolvemos tus dudas</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cuánto dura el ciclo y cuántas horas tiene?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">El Grado Medio en Emergencias y Protección Civil tiene una duración de 2 cursos académicos con un total de aproximadamente 2.000 horas de formación, incluyendo las 500 horas de práctica en empresa real.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Necesito tener buena condición física para acceder?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">No se exige un nivel físico específico para acceder al ciclo. Durante la formación irás desarrollando las capacidades físicas necesarias para el desempeño profesional. Eso sí, es recomendable mantener hábitos saludables y activos desde el inicio.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo trabajar de bombero al terminar el ciclo?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">El título de Técnico en Emergencias y Protección Civil es valorado en las oposiciones a bombero y suma puntos en muchas convocatorias. Además, abre puertas directas a brigadas forestales, equipos de rescate y servicios de emergencias privados sin necesidad de opositar.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué diferencia hay entre este ciclo y la FP Dual?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">En CampusFP aplicamos metodología FP Dual desde el inicio del ciclo. Esto significa que las 500 horas de práctica en empresa no se concentran solo al final, sino que empiezan desde el primer curso (60h en 1º y 440h en 2º), integrando empresa y aula durante toda la formación.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Hay bolsa de empleo una vez finalizado el ciclo?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Sí. CampusFP cuenta con una bolsa de empleo activa que conecta a los egresados con empresas y servicios del sector. Las 500 horas en empresa real ya suponen en muchos casos una puerta directa a una primera experiencia laboral certificada.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo acceder si no tengo la ESO?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Sí, existen vías alternativas de acceso: puedes realizar una prueba de acceso oficial a Grado Medio o un curso preparatorio específico autorizado. Consulta con nuestros asesores tu situación particular para ver cuál es la mejor opción.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK LINKS -->
+<div class="quick-links-section">
+  <div class="ql-grid">
+    <div class="ql-card" onclick="window.location.href='#becas'">
+      <div class="ql-icon">🎓</div>
+      <h4>Becas FP</h4>
+      <p>Ayudas del Estado, autonómicas y Erasmus+</p>
+    </div>
+    <div class="ql-card" onclick="window.location.href='#centros'">
+      <div class="ql-icon">🏛️</div>
+      <h4>Nuestros Centros</h4>
+      <p>Humanes-Fuenlabrada y Alcalá de Henares</p>
+    </div>
+    <div class="ql-card" onclick="window.location.href='#salidas'">
+      <div class="ql-icon">💼</div>
+      <h4>Bolsa de Empleo</h4>
+      <p>Conexión directa con el sector profesional</p>
+    </div>
+    <div class="ql-card" onclick="window.location.href='#salidas'">
+      <div class="ql-icon">🚀</div>
+      <h4>Salidas Profesionales</h4>
+      <p>Bomberos, rescate, protección civil y más</p>
+    </div>
+    <div class="ql-card" onclick="window.location.href='#requisitos'">
+      <div class="ql-icon">📋</div>
+      <h4>Requisitos de Acceso</h4>
+      <p>Qué necesitas para matricularte</p>
+    </div>
+    <div class="ql-card" onclick="window.open('https://campusfp.es/erasmus/movilidades-erasmus.php','_blank')">
+      <div class="ql-icon">🌍</div>
+      <h4>Erasmus+ FP</h4>
+      <p>Formación en empresas europeas con beca</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-band">
+  <h2>Cuando la emergencia ocurre, alguien tiene que estar preparado.</h2>
+  <p>Ese alguien puede ser tú. Empieza tu formación en CampusFP este año.</p>
+  <a href="#contacto" class="btn-white">Solicitar información gratuita →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fb-logo"><span>Campus</span>FP</div>
+      <p>Centro de Formación Profesional autorizado por la Comunidad de Madrid. Líderes en FP Dual con más de 20 ciclos formativos en diferentes familias profesionales.</p>
+      <div class="social-links">
+        <a class="social-link" href="https://www.facebook.com/campusfp/" target="_blank">f</a>
+        <a class="social-link" href="https://www.instagram.com/campusfp_/" target="_blank">ig</a>
+        <a class="social-link" href="https://www.linkedin.com/company/10575264/" target="_blank">in</a>
+        <a class="social-link" href="https://www.tiktok.com/@campusfp.ia" target="_blank">tt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>El ciclo</h5>
+      <a href="#modulos">Contenidos</a>
+      <a href="#dual">FP Dual</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#salidas">Salidas</a>
+      <a href="#perfil">Perfil alumno</a>
+    </div>
+    <div class="footer-col">
+      <h5>CampusFP</h5>
+      <a href="https://campusfp.es/centros/" target="_blank">Nuestros centros</a>
+      <a href="https://campusfp.es/campus-becas-fp/" target="_blank">Becas FP</a>
+      <a href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank">Bolsa de empleo</a>
+      <a href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank">Erasmus+</a>
+      <a href="https://campusfp.es/noticias/" target="_blank">Noticias</a>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <a href="tel:+34911833122">📞 91 183 31 22</a>
+      <a href="mailto:secretaria@campusfp.es">✉ secretaria@campusfp.es</a>
+      <a href="#centros">Humanes – Fuenlabrada</a>
+      <a href="#centros">Alcalá de Henares</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 CampusFP · Centro autorizado Comunidad de Madrid · Todos los derechos reservados</p>
+    <div class="footer-badges">
+      <div class="footer-badge-item">Centro Autorizado</div>
+      <div class="footer-badge-item">Erasmus+</div>
+      <div class="footer-badge-item">FP Dual</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year tabs
+  function showYear(num, btn) {
+    document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('year' + num).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Scroll-in animation
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.module-card, .salida-card, .pillar, .profile-trait, .beca-card, .centro-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

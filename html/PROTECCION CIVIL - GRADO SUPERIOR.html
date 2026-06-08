@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grado Superior en Coordinación de Emergencias y Protección Civil | CampusFP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #E31E24;
+    --red-dark: #B71519;
+    --red-light: #FF3A40;
+    --navy: #0B1F3A;
+    --navy-mid: #142A4A;
+    --navy-light: #1a3355;
+    --gold: #C8A84B;
+    --gold-light: #E8C96A;
+    --white: #FFFFFF;
+    --off-white: #F7F8FA;
+    --light-gray: #EEF0F4;
+    --mid-gray: #9BA3AF;
+    --dark-gray: #3D4451;
+    --text: #1A1D23;
+    --shadow: 0 4px 32px rgba(11,31,58,0.10);
+    --shadow-strong: 0 8px 48px rgba(11,31,58,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+    border-bottom: 3px solid var(--red);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+    height: 68px; box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .nav-logo-badge {
+    background: var(--red); color: white;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.15rem;
+    letter-spacing: 0.04em; padding: 6px 14px; border-radius: 4px;
+  }
+  .nav-logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: var(--navy); letter-spacing: 0.03em; line-height: 1.2; }
+  .nav-logo-sub { font-weight: 400; font-size: 0.78rem; color: var(--mid-gray); display: block; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { text-decoration: none; color: var(--dark-gray); font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { background: var(--red); color: white !important; padding: 10px 22px; border-radius: 4px; font-weight: 600 !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--red-dark) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh; background: var(--navy);
+    position: relative; display: flex; align-items: center;
+    overflow: hidden; padding-top: 68px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(125deg, rgba(11,31,58,0.96) 0%, rgba(11,31,58,0.80) 45%, rgba(11,31,58,0.70) 100%),
+      url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80') center/cover no-repeat;
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.012) 80px, rgba(255,255,255,0.012) 81px),
+      repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.012) 80px, rgba(255,255,255,0.012) 81px);
+  }
+  .hero-accent-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--red); }
+  .hero-gold-line { position: absolute; top: 0; left: 6px; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold) 0%, transparent 60%); opacity: 0.4; }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 6rem 2rem 5rem;
+    display: grid; grid-template-columns: 1fr 400px; gap: 5rem; align-items: center;
+  }
+
+  .gs-badge-row { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; animation: fadeUp 0.5s ease both; }
+  .gs-pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 3px;
+  }
+  .pill-red { background: var(--red); color: white; }
+  .pill-gold { background: rgba(200,168,75,0.2); color: var(--gold-light); border: 1px solid rgba(200,168,75,0.35); }
+  .pill-outline { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.15); }
+  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    font-size: clamp(2.6rem, 4.8vw, 4.6rem); line-height: 1.0;
+    color: white; letter-spacing: -0.01em; margin-bottom: 0.5rem;
+    animation: fadeUp 0.5s 0.1s ease both;
+  }
+  .hero-title .red { color: var(--red); }
+  .hero-title .gold { color: var(--gold-light); }
+  .hero-subtitle-line {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    color: rgba(255,255,255,0.55); letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.8rem; animation: fadeUp 0.5s 0.2s ease both;
+  }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.78; color: rgba(255,255,255,0.78);
+    max-width: 560px; margin-bottom: 2.5rem; animation: fadeUp 0.5s 0.3s ease both;
+  }
+
+  .hero-stats { display: flex; gap: 0; margin-bottom: 2.5rem; animation: fadeUp 0.5s 0.35s ease both; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; }
+  .stat { text-align: center; padding: 1rem 1.4rem; flex: 1; border-right: 1px solid rgba(255,255,255,0.1); }
+  .stat:last-child { border-right: none; }
+  .stat-num { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2rem; color: white; line-height: 1; }
+  .stat-num .unit { font-size: 1.2rem; color: var(--gold-light); }
+  .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 4px; display: block; }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.5s 0.45s ease both; }
+  .btn-primary { background: var(--red); color: white; padding: 15px 30px; border-radius: 4px; font-weight: 700; font-size: 0.97rem; text-decoration: none; letter-spacing: 0.03em; transition: all 0.25s; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Barlow Semi Condensed', sans-serif; }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(227,30,36,0.4); }
+  .btn-gold { background: rgba(200,168,75,0.15); color: var(--gold-light); padding: 15px 30px; border-radius: 4px; font-weight: 600; font-size: 0.97rem; text-decoration: none; letter-spacing: 0.03em; transition: all 0.25s; border: 1.5px solid rgba(200,168,75,0.4); display: inline-flex; align-items: center; gap: 8px; font-family: 'Barlow Semi Condensed', sans-serif; }
+  .btn-gold:hover { background: rgba(200,168,75,0.25); border-color: var(--gold); }
+  .btn-outline-white { background: transparent; color: white; padding: 15px 30px; border-radius: 4px; font-weight: 600; font-size: 0.97rem; text-decoration: none; letter-spacing: 0.03em; transition: all 0.25s; border: 2px solid rgba(255,255,255,0.35); display: inline-flex; align-items: center; gap: 8px; font-family: 'Barlow Semi Condensed', sans-serif; }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.07); }
+
+  /* hero form card */
+  .hero-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 24px 64px rgba(0,0,0,0.45); animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.4rem; padding-bottom: 1rem; border-bottom: 2px solid var(--light-gray); }
+  .hero-card-icon { width: 38px; height: 38px; background: var(--red); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .hero-card-header h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--navy); letter-spacing: 0.03em; text-transform: uppercase; line-height: 1.2; }
+  .hero-card-header span { font-size: 0.75rem; color: var(--mid-gray); display: block; }
+  .card-form-group { margin-bottom: 0.9rem; }
+  .card-form-group label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 5px; }
+  .card-form-group input, .card-form-group select { width: 100%; padding: 10px 13px; border: 1.5px solid var(--light-gray); border-radius: 6px; font-size: 0.9rem; font-family: 'Barlow', sans-serif; color: var(--text); background: var(--off-white); transition: border-color 0.2s; outline: none; }
+  .card-form-group input:focus, .card-form-group select:focus { border-color: var(--red); background: white; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+  .card-submit { width: 100%; padding: 13px; background: var(--red); color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: 'Barlow Semi Condensed', sans-serif; letter-spacing: 0.04em; transition: background 0.2s; margin-top: 0.4rem; }
+  .card-submit:hover { background: var(--red-dark); }
+  .card-privacy { font-size: 0.7rem; color: var(--mid-gray); margin-top: 0.7rem; text-align: center; line-height: 1.5; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── DIFERENCIADOR GS ─── */
+  .gs-strip {
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-top: 2px solid var(--gold); border-bottom: 3px solid var(--red);
+    padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap;
+  }
+  .gs-strip-item { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.85); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.07em; text-transform: uppercase; }
+  .gs-strip-item .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+  .section-label::before { content: ''; display: block; width: 28px; height: 3px; background: var(--red); }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2rem, 4vw, 3.2rem); color: var(--navy); line-height: 1.05; margin-bottom: 1.2rem; }
+  .section-desc { font-size: 1.05rem; line-height: 1.8; color: var(--dark-gray); max-width: 640px; }
+
+  /* ─── VS GRADO MEDIO ─── */
+  #diferencia { background: var(--off-white); }
+  .diff-intro { text-align: center; max-width: 700px; margin: 0 auto 3.5rem; }
+  .diff-intro .section-label { justify-content: center; }
+  .diff-intro .section-label::before { display: none; }
+  .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .diff-card { border-radius: 12px; padding: 2.2rem; }
+  .diff-card.gm { background: white; border: 2px solid var(--light-gray); }
+  .diff-card.gs { background: var(--navy); border: 2px solid var(--gold); }
+  .diff-card-badge { display: inline-block; padding: 5px 14px; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
+  .diff-card.gm .diff-card-badge { background: var(--light-gray); color: var(--dark-gray); }
+  .diff-card.gs .diff-card-badge { background: var(--gold); color: var(--navy); }
+  .diff-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; margin-bottom: 0.7rem; }
+  .diff-card.gm h3 { color: var(--navy); }
+  .diff-card.gs h3 { color: white; }
+  .diff-card p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.2rem; }
+  .diff-card.gm p { color: var(--dark-gray); }
+  .diff-card.gs p { color: rgba(255,255,255,0.7); }
+  .diff-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .diff-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; line-height: 1.5; }
+  .diff-card.gm .diff-list li { color: var(--dark-gray); }
+  .diff-card.gs .diff-list li { color: rgba(255,255,255,0.8); }
+  .diff-list li::before { content: '→'; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+  .diff-card.gm .diff-list li::before { color: var(--mid-gray); }
+  .diff-card.gs .diff-list li::before { color: var(--gold); }
+
+  /* ─── SOBRE ─── */
+  #sobre { background: white; }
+  .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .sobre-visual { position: relative; }
+  .sobre-img-block { width: 100%; height: 360px; border-radius: 12px; background: linear-gradient(145deg, var(--navy) 0%, var(--navy-light) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; overflow: hidden; position: relative; }
+  .sobre-img-block::after { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=50') center/cover; opacity: 0.15; }
+  .sobre-img-label { position: relative; z-index: 1; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.4rem; color: white; letter-spacing: 0.05em; text-align: center; }
+  .sobre-img-sub { position: relative; z-index: 1; font-size: 0.82rem; color: rgba(255,255,255,0.45); text-align: center; letter-spacing: 0.08em; text-transform: uppercase; }
+  .sobre-float { position: absolute; bottom: -20px; right: -20px; background: var(--gold); color: var(--navy); padding: 1.3rem 1.6rem; border-radius: 10px; box-shadow: 0 8px 32px rgba(200,168,75,0.4); text-align: center; }
+  .sobre-float .big { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.4rem; line-height: 1; }
+  .sobre-float .sm { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.75; }
+  .competencias-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .comp-pill { background: var(--off-white); border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid var(--red); }
+  .comp-pill h4 { font-weight: 700; font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
+  .comp-pill p { font-size: 0.78rem; color: var(--mid-gray); line-height: 1.4; }
+
+  /* ─── MÓDULOS ─── */
+  #modulos { background: var(--off-white); }
+  .mods-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap; }
+  .year-tabs { display: flex; gap: 0.5rem; }
+  .year-tab { padding: 9px 22px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; transition: all 0.2s; font-family: 'Barlow Semi Condensed', sans-serif; letter-spacing: 0.03em; }
+  .year-tab.active { background: var(--red); color: white; }
+  .year-tab:not(.active) { background: var(--light-gray); color: var(--dark-gray); }
+  .year-tab:not(.active):hover { background: #d8dce5; }
+  .year-panel { display: none; }
+  .year-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+  .mod-card { background: white; border-radius: 8px; padding: 1.3rem; border: 1.5px solid var(--light-gray); transition: all 0.2s; display: flex; gap: 1rem; align-items: flex-start; }
+  .mod-card:hover { border-color: var(--red); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .mod-num { background: var(--navy); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; min-width: 44px; height: 44px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .mod-info h4 { font-weight: 700; font-size: 0.93rem; color: var(--navy); margin-bottom: 0.25rem; line-height: 1.3; }
+  .mod-hours { font-size: 0.78rem; color: var(--red); font-weight: 700; }
+  .mod-desc { font-size: 0.78rem; color: var(--mid-gray); margin-top: 0.3rem; line-height: 1.45; }
+  .ffe-card { background: var(--navy); color: white; border-radius: 8px; padding: 1.6rem; grid-column: 1/-1; display: flex; align-items: center; gap: 1.5rem; margin-top: 0.5rem; border: 1px solid rgba(200,168,75,0.3); }
+  .ffe-card svg { flex-shrink: 0; }
+  .ffe-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: 0.3rem; color: var(--gold-light); }
+  .ffe-card p { font-size: 0.87rem; opacity: 0.7; }
+
+  /* ─── SALIDAS ─── */
+  #salidas { background: var(--navy); }
+  #salidas .section-title { color: white; }
+  #salidas .section-desc { color: rgba(255,255,255,0.6); }
+  .salidas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .salida-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; padding: 1.8rem; transition: all 0.25s; }
+  .salida-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); border-color: rgba(200,168,75,0.4); }
+  .salida-icon { width: 50px; height: 50px; border-radius: 10px; background: rgba(200,168,75,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 1.1rem; }
+  .salida-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.18rem; color: white; margin-bottom: 0.5rem; }
+  .salida-card p { font-size: 0.84rem; color: rgba(255,255,255,0.58); line-height: 1.65; }
+  .salida-tag { display: inline-block; margin-top: 1rem; background: rgba(200,168,75,0.15); color: var(--gold-light); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; }
+
+  /* ─── DUAL ─── */
+  #dual { background: var(--off-white); }
+  .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .dual-steps { display: flex; flex-direction: column; gap: 1.5rem; }
+  .dual-step { display: flex; gap: 1.2rem; }
+  .step-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2rem; color: var(--red); line-height: 1; flex-shrink: 0; min-width: 36px; }
+  .step-body h4 { font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; font-size: 1rem; }
+  .step-body p { font-size: 0.88rem; color: var(--dark-gray); line-height: 1.65; }
+  .dual-panel { background: var(--navy); border-radius: 12px; padding: 2.5rem; border: 1px solid rgba(200,168,75,0.2); }
+  .dual-panel-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .dp-stat { padding-bottom: 1.3rem; margin-bottom: 1.3rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .dp-stat:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .dp-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.6rem; color: white; line-height: 1; }
+  .dp-num span { color: var(--gold-light); }
+  .dp-label { font-size: 0.84rem; color: rgba(255,255,255,0.55); margin-top: 4px; line-height: 1.5; }
+
+  /* ─── PERFIL ─── */
+  #perfil { background: white; }
+  .perfil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .perfil-card { display: flex; gap: 1.1rem; align-items: flex-start; padding: 1.3rem; background: var(--off-white); border-radius: 8px; border: 1.5px solid var(--light-gray); transition: border-color 0.2s; }
+  .perfil-card:hover { border-color: var(--red); }
+  .pe { font-size: 1.7rem; flex-shrink: 0; }
+  .perfil-card h4 { font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; font-size: 0.95rem; }
+  .perfil-card p { font-size: 0.84rem; color: var(--dark-gray); line-height: 1.55; }
+
+  /* ─── REQUISITOS ─── */
+  #requisitos { background: var(--off-white); }
+  .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .req-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .req-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.93rem; line-height: 1.55; color: var(--dark-gray); padding: 1rem 1.2rem; background: white; border-radius: 8px; border-left: 4px solid var(--red); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .req-check { width: 22px; height: 22px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .req-check svg { width: 12px; height: 12px; }
+  .prog-box { background: var(--navy); border-radius: 12px; padding: 2rem; border: 1px solid rgba(200,168,75,0.2); }
+  .prog-box h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--gold-light); }
+  .prog-item { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 1rem 1.2rem; font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+  .prog-item strong { color: white; display: block; margin-bottom: 0.2rem; font-size: 0.93rem; }
+  .prog-connector { width: 2px; background: var(--gold); height: 22px; margin: 0 auto; opacity: 0.5; }
+
+  /* ─── BECAS ─── */
+  #becas { background: white; }
+  .becas-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .beca-card { background: var(--off-white); border-radius: 10px; padding: 1.8rem; border-top: 4px solid var(--red); text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+  .beca-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .beca-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--navy); margin-bottom: 0.6rem; }
+  .beca-card p { font-size: 0.86rem; color: var(--dark-gray); line-height: 1.6; }
+  .beca-link { display: inline-block; margin-top: 1.1rem; color: var(--red); font-weight: 700; font-size: 0.87rem; text-decoration: none; border-bottom: 2px solid transparent; transition: border-color 0.2s; }
+  .beca-link:hover { border-color: var(--red); }
+
+  /* ─── CENTROS ─── */
+  #centros { background: var(--off-white); }
+  .centros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .centro-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.25s; }
+  .centro-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-strong); }
+  .centro-img { height: 175px; background: linear-gradient(135deg, var(--navy) 0%, #1a3a6e 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .centro-img-bg { position: absolute; inset: 0; opacity: 0.25; background: center/cover; }
+  .centro-badge { position: relative; z-index: 1; background: var(--red); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.3rem; padding: 9px 18px; border-radius: 6px; }
+  .centro-body { padding: 1.4rem; }
+  .centro-body h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--navy); margin-bottom: 0.4rem; }
+  .centro-body p { font-size: 0.87rem; color: var(--dark-gray); margin-bottom: 0.9rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { background: var(--light-gray); color: var(--dark-gray); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 20px; }
+  .tag.gold { background: rgba(200,168,75,0.12); color: #a0822a; }
+
+  /* ─── FAQ ─── */
+  #faq { background: white; }
+  .faq-list { max-width: 800px; margin: 3rem auto 0; }
+  .faq-item { border-bottom: 1px solid var(--light-gray); }
+  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 1.4rem 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 1rem; font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 600; font-size: 1rem; color: var(--navy); }
+  .faq-q .arrow { color: var(--red); font-size: 1.4rem; transition: transform 0.25s; flex-shrink: 0; }
+  .faq-q.open .arrow { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s; font-size: 0.94rem; line-height: 1.75; color: var(--dark-gray); }
+  .faq-a.open { max-height: 300px; padding-bottom: 1.4rem; }
+
+  /* ─── QUICK LINKS ─── */
+  .quick-links-section { background: var(--navy); padding: 4rem 2rem; border-top: 2px solid rgba(200,168,75,0.25); }
+  .ql-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(175px,1fr)); gap: 1.5rem; }
+  .ql-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.25s; text-decoration: none; color: white; display: block; }
+  .ql-card:hover { background: rgba(200,168,75,0.12); border-color: rgba(200,168,75,0.4); transform: translateY(-3px); }
+  .ql-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .ql-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.97rem; letter-spacing: 0.03em; margin-bottom: 0.3rem; }
+  .ql-card p { font-size: 0.76rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+  /* ─── CTA BAND ─── */
+  .cta-band { background: var(--red); padding: 4.5rem 2rem; text-align: center; }
+  .cta-band h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2rem,4vw,3rem); color: white; margin-bottom: 0.8rem; }
+  .cta-band p { color: rgba(255,255,255,0.85); font-size: 1.08rem; margin-bottom: 2rem; }
+  .btn-white { background: white; color: var(--red); padding: 15px 36px; border-radius: 4px; font-weight: 800; font-size: 1.05rem; text-decoration: none; display: inline-block; font-family: 'Barlow Semi Condensed', sans-serif; transition: all 0.2s; }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+  /* ─── FOOTER ─── */
+  footer { background: #07131F; padding: 3rem 2rem 2rem; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+  .fb-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; color: white; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+  .fb-logo span { background: var(--red); padding: 4px 10px; border-radius: 3px; }
+  .footer-brand p { font-size: 0.84rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 280px; margin-bottom: 1.2rem; }
+  .social-links { display: flex; gap: 0.8rem; }
+  .social-link { width: 36px; height: 36px; border-radius: 6px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.78rem; transition: all 0.2s; font-weight: 700; }
+  .social-link:hover { background: var(--red); color: white; }
+  .footer-col h5 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+  .footer-col a { display: block; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 0.87rem; margin-bottom: 0.6rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--red); }
+  .footer-bottom { max-width: 1200px; margin: 2.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.28); }
+  .footer-badges { display: flex; gap: 0.8rem; }
+  .footer-badge { background: rgba(255,255,255,0.05); border-radius: 4px; padding: 5px 12px; font-size: 0.7rem; color: rgba(255,255,255,0.35); letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 920px) {
+    .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-card { display: none; }
+    .diff-grid, .sobre-grid, .dual-grid, .req-grid, .centros-grid, .footer-inner, .perfil-grid { grid-template-columns: 1fr; }
+    .becas-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .sobre-float { display: none; }
+  }
+  @media (max-width: 560px) {
+    .becas-grid { grid-template-columns: 1fr; }
+    section { padding: 4rem 1.2rem; }
+    .gs-strip { gap: 1.2rem; }
+    .hero-stats { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-badge">Campus<strong>FP</strong></div>
+    <div class="nav-logo-text">
+      Formación Profesional
+      <span class="nav-logo-sub">Centro Autorizado · Madrid</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#modulos">Contenidos</a>
+    <a href="#salidas">Salidas</a>
+    <a href="#dual">FP Dual</a>
+    <a href="#requisitos">Requisitos</a>
+    <a href="#centros">Centros</a>
+    <a href="#contacto" class="nav-cta">Solicitar Info</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-accent-bar"></div>
+  <div class="hero-gold-line"></div>
+
+  <div class="hero-content">
+    <div>
+      <div class="gs-badge-row">
+        <div class="gs-pill pill-red"><span class="pill-dot"></span>Grado Superior</div>
+        <div class="gs-pill pill-gold">Seguridad y Medio Ambiente</div>
+        <div class="gs-pill pill-outline">Nivel 5 MECES</div>
+      </div>
+      <h1 class="hero-title">
+        Coordinación<br>de <span class="red">Emergencias</span><br>y <span class="gold">Protección Civil</span>
+      </h1>
+      <p class="hero-subtitle-line">Técnico Superior · FP Oficial · Emergency Operations Leader</p>
+      <p class="hero-desc">
+        Lidera cuando todo el mundo depende de ti. Planifica operativos, evalúa riesgos y coordina equipos en situaciones de máxima exigencia. El escalón superior de las emergencias profesionales.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">2.000<span class="unit">h</span></span>
+          <span class="stat-label">Formación total</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">500<span class="unit">h</span></span>
+          <span class="stat-label">En empresa real</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2<span class="unit">años</span></span>
+          <span class="stat-label">Duración del ciclo</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">GS<span class="unit" style="font-size:1rem">✓</span></span>
+          <span class="stat-label">Acceso universidad</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">▶ Solicitar información gratuita</a>
+        <a href="#diferencia" class="btn-gold">¿GM o GS? Ver diferencias</a>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="hero-card" id="contacto">
+      <div class="hero-card-header">
+        <div class="hero-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div>
+          <h3>Solicita información<br>sin compromiso</h3>
+          <span>Respuesta en menos de 24h</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="card-form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="card-form-group">
+          <label>Apellidos</label>
+          <input type="text" placeholder="Tus apellidos">
+        </div>
+      </div>
+      <div class="card-form-group">
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="correo@email.com">
+      </div>
+      <div class="card-form-group">
+        <label>Teléfono</label>
+        <input type="tel" placeholder="6XX XXX XXX">
+      </div>
+      <div class="card-form-group">
+        <label>Centro de interés</label>
+        <select>
+          <option value="">Elige tu centro</option>
+          <option>CampusFP Humanes – Fuenlabrada</option>
+          <option>CampusFP Alcalá de Henares</option>
+        </select>
+      </div>
+      <div class="card-form-group">
+        <label>Estudios realizados</label>
+        <select>
+          <option value="">Nivel de estudios</option>
+          <option>Bachillerato</option>
+          <option>FP Grado Medio</option>
+          <option>FP Grado Superior</option>
+          <option>Técnico en Emergencias y Protección Civil</option>
+          <option>Universitario</option>
+          <option>Otros</option>
+        </select>
+      </div>
+      <button class="card-submit" onclick="alert('¡Gracias! Un asesor se pondrá en contacto contigo pronto.')">Recibir información →</button>
+      <p class="card-privacy">Sin compromiso · Datos protegidos según RGPD<br>CampusFP · Centro Autorizado Madrid</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP DIFERENCIADOR -->
+<div class="gs-strip">
+  <div class="gs-strip-item"><div class="dot"></div>Título Oficial Grado Superior</div>
+  <div class="gs-strip-item"><div class="dot"></div>Acceso a Universidad</div>
+  <div class="gs-strip-item"><div class="dot"></div>Emergency Operations Leader</div>
+  <div class="gs-strip-item"><div class="dot"></div>FP Dual · 500h en Empresa</div>
+  <div class="gs-strip-item"><div class="dot"></div>2 Centros en Madrid</div>
+</div>
+
+<!-- DIFERENCIA GM vs GS -->
+<section id="diferencia">
+  <div class="container">
+    <div class="diff-intro">
+      <div class="section-label">Elige tu nivel</div>
+      <h2 class="section-title">¿Grado Medio o Grado Superior?</h2>
+      <p style="font-size:1rem;line-height:1.75;color:var(--dark-gray)">
+        Dos ciclos complementarios dentro de la misma familia profesional. Aquí tienes las diferencias para que elijas con claridad.
+      </p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card gm">
+        <div class="diff-card-badge">Grado Medio</div>
+        <h3>Técnico en Emergencias y Protección Civil</h3>
+        <p>El perfil operativo. Actúa en primera línea: extingues incendios, ejecutas rescates y aplicas protocolos de intervención en el terreno.</p>
+        <ul class="diff-list">
+          <li>Extinción de incendios forestales y urbanos</li>
+          <li>Salvamento y rescate de víctimas</li>
+          <li>Atención sanitaria inicial y apoyo psicológico</li>
+          <li>Mantenimiento de vehículos y equipos</li>
+          <li>Intervención directa en el escenario</li>
+        </ul>
+      </div>
+      <div class="diff-card gs">
+        <div class="diff-card-badge">⭐ Grado Superior — Este ciclo</div>
+        <h3>Técnico Superior en Coordinación de Emergencias</h3>
+        <p>El perfil estratégico. Planificas, diriges y supervisas. Coordinas equipos, evalúas riesgos y gestionas recursos en operativos complejos de múltiples organismos.</p>
+        <ul class="diff-list">
+          <li>Planificación y evaluación de riesgos</li>
+          <li>Dirección de operativos multirecurso</li>
+          <li>Coordinación de equipos de intervención</li>
+          <li>Elaboración de planes de emergencia</li>
+          <li>Gestión de catástrofes y emergencias colectivas</li>
+          <li>Acceso directo a la Universidad</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE EL CICLO -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-visual">
+        <div class="sobre-img-block">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="sobre-img-label">EMERGENCY OPERATIONS LEADER</div>
+          <div class="sobre-img-sub">Titular oficial de Grado Superior</div>
+        </div>
+        <div class="sobre-float">
+          <span class="big">+90%</span>
+          <span class="sm">Inserción<br>laboral</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">El ciclo superior</div>
+        <h2 class="section-title">Lidera la respuesta ante cualquier emergencia</h2>
+        <p class="section-desc">
+          El Grado Superior en Coordinación de Emergencias y Protección Civil te convierte en el profesional que toma las decisiones estratégicas: quién interviene, con qué medios, en qué orden y cómo se garantiza la seguridad de todos. Un perfil escaso y muy demandado.
+        </p>
+        <div class="competencias-grid">
+          <div class="comp-pill">
+            <h4>📊 Evaluación de Riesgos</h4>
+            <p>Análisis de amenazas naturales, tecnológicas y antrópicas. Planes de alerta y vigilancia.</p>
+          </div>
+          <div class="comp-pill">
+            <h4>🗂️ Planificación Operativa</h4>
+            <p>Elaboración de planes de protección civil y emergencias a nivel local y regional.</p>
+          </div>
+          <div class="comp-pill">
+            <h4>👥 Dirección de Equipos</h4>
+            <p>Coordinación de unidades de intervención, supervisión táctica y toma de decisiones bajo presión.</p>
+          </div>
+          <div class="comp-pill">
+            <h4>🎓 Formación y Divulgación</h4>
+            <p>Diseño e impartición de acciones formativas en protección civil y gestión de emergencias.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section id="modulos">
+  <div class="container">
+    <div class="mods-header">
+      <div>
+        <div class="section-label">Plan de estudios</div>
+        <h2 class="section-title">Contenidos del ciclo</h2>
+      </div>
+      <div class="year-tabs">
+        <button class="year-tab active" onclick="showYear(1,this)">1º Curso</button>
+        <button class="year-tab" onclick="showYear(2,this)">2º Curso</button>
+      </div>
+    </div>
+
+    <div class="year-panel active" id="year1">
+      <div class="mod-card">
+        <div class="mod-num">01</div>
+        <div class="mod-info">
+          <h4>Evaluación de riesgos y medidas preventivas</h4>
+          <div class="mod-hours">120 horas</div>
+          <div class="mod-desc">Análisis y cartografía de riesgos naturales, tecnológicos y antrópicos. Sistemas de alerta temprana y vigilancia.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">02</div>
+        <div class="mod-info">
+          <h4>Supervisión de la intervención en riesgos por fenómenos naturales</h4>
+          <div class="mod-hours">110 horas</div>
+          <div class="mod-desc">Inundaciones, terremotos, temporales y erupciones. Dirección técnica de operativos ante desastres naturales.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">03</div>
+        <div class="mod-info">
+          <h4>Supervisión en riesgos tecnológicos y antrópicos</h4>
+          <div class="mod-hours">170 horas</div>
+          <div class="mod-desc">Accidentes industriales, emergencias NRBQ, vertidos y catástrofes de origen humano o tecnológico.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">04</div>
+        <div class="mod-info">
+          <h4>Supervisión en incendios forestales y quemas prescritas</h4>
+          <div class="mod-hours">170 horas</div>
+          <div class="mod-desc">Dirección de dispositivos de extinción forestal, quemas controladas y gestión de interfaces urbano-forestales.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">05</div>
+        <div class="mod-info">
+          <h4>Supervisión en incendios urbanos y emergencias ordinarias</h4>
+          <div class="mod-hours">170 horas</div>
+          <div class="mod-desc">Mando de intervención en edificaciones. Coordinación de recursos humanos y técnicos en el escenario.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">06</div>
+        <div class="mod-info">
+          <h4>Gestión de recursos y emergencias de protección civil</h4>
+          <div class="mod-hours">110 horas</div>
+          <div class="mod-desc">Gestión de centros de coordinación, despacho de recursos y activación de planes de protección civil.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">07</div>
+        <div class="mod-info">
+          <h4>Optativa: Apoyo psicológico en situaciones de emergencia</h4>
+          <div class="mod-hours">50 horas</div>
+          <div class="mod-desc">Intervención psicosocial en catástrofes, gestión del estrés en equipos y apoyo a afectados.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">08</div>
+        <div class="mod-info">
+          <h4>Itinerario personal para la empleabilidad I</h4>
+          <div class="mod-hours">100 horas</div>
+          <div class="mod-desc">Orientación profesional, competencias transversales y desarrollo de la carrera en el sector de emergencias.</div>
+        </div>
+      </div>
+      <div class="ffe-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div>
+          <h4>Fase de Formación en Empresa — Primer Curso</h4>
+          <p>60 horas en organismos y servicios de emergencias y protección civil reales de la Comunidad de Madrid</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="year-panel" id="year2">
+      <div class="mod-card">
+        <div class="mod-num">09</div>
+        <div class="mod-info">
+          <h4>Planificación en emergencias y protección civil</h4>
+          <div class="mod-hours">180 horas</div>
+          <div class="mod-desc">Elaboración de planes de emergencia locales, insulares y autonómicos. Normativa nacional e internacional.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">10</div>
+        <div class="mod-info">
+          <h4>Planificación de acciones formativas e informativas en protección civil</h4>
+          <div class="mod-hours">140 horas</div>
+          <div class="mod-desc">Diseño, impartición y evaluación de cursos y campañas de divulgación en gestión de emergencias.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">11</div>
+        <div class="mod-info">
+          <h4>Supervisión en operaciones de salvamento y rescate</h4>
+          <div class="mod-hours">220 horas</div>
+          <div class="mod-desc">Dirección técnica de rescates en derrumbes, inundaciones, altura y emergencias con múltiples víctimas.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">12</div>
+        <div class="mod-info">
+          <h4>Supervisión del apoyo a personas afectadas por desastres</h4>
+          <div class="mod-hours">140 horas</div>
+          <div class="mod-desc">Alojamiento de emergencia, asistencia humanitaria, gestión de albergues y coordinación con servicios sociales.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">13</div>
+        <div class="mod-info">
+          <h4>Inglés profesional – Grado Superior</h4>
+          <div class="mod-hours">50 horas</div>
+          <div class="mod-desc">Comunicación técnica en inglés en el ámbito de las emergencias y la coordinación internacional.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">14–16</div>
+        <div class="mod-info">
+          <h4>Digitalización, Sostenibilidad e Itinerario II</h4>
+          <div class="mod-hours">130 horas</div>
+          <div class="mod-desc">Herramientas digitales para emergencias, sostenibilidad operativa y orientación laboral avanzada.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-num">17</div>
+        <div class="mod-info">
+          <h4>Módulo optativo + Proyecto intermodular</h4>
+          <div class="mod-hours">140 horas</div>
+          <div class="mod-desc">Proyecto integrador de todas las competencias del ciclo. Simulación de un operativo completo de gestión de emergencias.</div>
+        </div>
+      </div>
+      <div class="ffe-card">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div>
+          <h4>Fase de Formación en Empresa — Segundo Curso</h4>
+          <p>440 horas en organismos reales · Total: 500 horas en servicios operativos de coordinación y emergencias</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALIDAS PROFESIONALES -->
+<section id="salidas">
+  <div class="container">
+    <div class="section-label" style="color:rgba(255,255,255,0.4)">Salidas profesionales</div>
+    <h2 class="section-title">Puestos de responsabilidad en el sector</h2>
+    <p class="section-desc">El Técnico Superior coordina, planifica y dirige. Accedes a puestos de mayor responsabilidad y salario en los servicios de emergencias públicos y privados.</p>
+    <div class="salidas-grid">
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Coordinador/a de Emergencias</h3>
+        <p>Dirección de centros de coordinación 112, salas de operaciones y activación de planes de emergencia municipales y autonómicos.</p>
+        <span class="salida-tag">Alta Responsabilidad</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3>Jefe/a de Intervención</h3>
+        <p>Mando operativo en incendios, rescates y emergencias complejas. Decisión táctica sobre recursos y prioridades de intervención.</p>
+        <span class="salida-tag">Sector Público</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Técnico/a en Protección Civil</h3>
+        <p>Elaboración, implantación y actualización de planes de protección civil en administraciones locales, provinciales y autonómicas.</p>
+        <span class="salida-tag">Administración Pública</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Gestor/a de Seguridad Industrial</h3>
+        <p>Responsable de planes de autoprotección y brigadas de emergencia en plantas industriales, químicas y energéticas.</p>
+        <span class="salida-tag">Sector Privado</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Formador/a en Emergencias</h3>
+        <p>Diseño e impartición de formación especializada para cuerpos de seguridad, bomberos, voluntarios de protección civil y empresas.</p>
+        <span class="salida-tag">Docencia Especializada</span>
+      </div>
+      <div class="salida-card">
+        <div class="salida-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>UME y Organizaciones Humanitarias</h3>
+        <p>Unidad Militar de Emergencias, Cruz Roja, UNHCR y ONGs internacionales de respuesta humanitaria ante catástrofes globales.</p>
+        <span class="salida-tag">Alta Proyección</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FP DUAL -->
+<section id="dual">
+  <div class="container">
+    <div class="dual-grid">
+      <div>
+        <div class="section-label">Metodología</div>
+        <h2 class="section-title">La práctica que marca la diferencia</h2>
+        <p class="section-desc" style="margin-bottom:2.5rem">
+          Coordinar una emergencia no se aprende en un libro. En CampusFP trabajas con organismos reales desde el primer año, tomando decisiones en contextos operativos que imitan exactamente lo que te encontrarás en tu carrera profesional.
+        </p>
+        <div class="dual-steps">
+          <div class="dual-step">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h4>Marco teórico y normativo avanzado</h4>
+              <p>Legislación de protección civil, gestión de riesgos, planificación estratégica y herramientas de coordinación multiorganismo.</p>
+            </div>
+          </div>
+          <div class="dual-step">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h4>Simuladores y ejercicios de mesa</h4>
+              <p>Simulaciones de mesa (tabletop exercises) y escenarios complejos con múltiples recursos y organismos intervinientes.</p>
+            </div>
+          </div>
+          <div class="dual-step">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h4>500 horas en coordinación real</h4>
+              <p>Integración en centros de coordinación, servicios de protección civil, salas de mando y organismos públicos de Madrid.</p>
+            </div>
+          </div>
+          <div class="dual-step">
+            <div class="step-num">04</div>
+            <div class="step-body">
+              <h4>Conexión directa con empleadores</h4>
+              <p>Bolsa de empleo activa y red de empresas colaboradoras para facilitar tu inserción laboral al concluir el ciclo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dual-panel">
+        <div class="dual-panel-title">📊 El Grado Superior en números</div>
+        <div class="dp-stat">
+          <div class="dp-num">500<span>h</span></div>
+          <div class="dp-label">En servicios reales de coordinación y protección civil. Desde el primer año del ciclo.</div>
+        </div>
+        <div class="dp-stat">
+          <div class="dp-num">17<span> módulos</span></div>
+          <div class="dp-label">Contenidos diseñados para el perfil directivo y coordinador del sector de emergencias.</div>
+        </div>
+        <div class="dp-stat">
+          <div class="dp-num">+3<span> vías</span></div>
+          <div class="dp-label">Universidad, Grado Superior y mercado laboral como salidas tras finalizar el ciclo.</div>
+        </div>
+        <div class="dp-stat">
+          <div class="dp-num">365<span> días</span></div>
+          <div class="dp-label">Las emergencias no descansan. La demanda de coordinadores cualificados tampoco.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFIL ALUMNO -->
+<section id="perfil">
+  <div class="container">
+    <div class="section-label">¿Es para ti?</div>
+    <h2 class="section-title">El perfil que encaja en el Grado Superior</h2>
+    <p class="section-desc">Este ciclo está especialmente diseñado para quienes buscan liderar y no solo ejecutar.</p>
+    <div class="perfil-grid">
+      <div class="perfil-card">
+        <div class="pe">🎯</div>
+        <div>
+          <h4>Mentalidad de liderazgo</h4>
+          <p>Quieres tomar decisiones, dirigir equipos y asumir responsabilidad en las situaciones más críticas.</p>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <div class="pe">🧩</div>
+        <div>
+          <h4>Pensamiento estratégico</h4>
+          <p>Disfrutas analizando situaciones complejas, anticipando problemas y diseñando planes de actuación.</p>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <div class="pe">📋</div>
+        <div>
+          <h4>Capacidad organizativa</h4>
+          <p>Sabes coordinar recursos, personas y tiempos para conseguir el mejor resultado posible bajo presión.</p>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <div class="pe">💪</div>
+        <div>
+          <h4>Vocación de servicio público</h4>
+          <p>Te motiva proteger a la población y contribuir a la seguridad colectiva desde un rol de coordinación.</p>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <div class="pe">🎓</div>
+        <div>
+          <h4>Horizonte universitario</h4>
+          <p>Valoras el acceso a la universidad que ofrece el GS para seguir creciendo en el sector de la seguridad pública.</p>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <div class="pe">🔄</div>
+        <div>
+          <h4>Técnico/a de emergencias con experiencia</h4>
+          <p>Ya tienes el Grado Medio o experiencia en el sector y quieres dar el salto a puestos de coordinación y mando.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUISITOS -->
+<section id="requisitos">
+  <div class="container">
+    <div class="section-label">Acceso</div>
+    <h2 class="section-title">Requisitos de acceso al Grado Superior</h2>
+    <p class="section-desc">El Grado Superior requiere acreditar uno de los siguientes títulos o haber superado alguna de estas vías de acceso.</p>
+    <div class="req-grid">
+      <ul class="req-list">
+        <li>
+          <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Bachillerato (LOMLOE, LOGSE o BUP / COU)
+        </li>
+        <li>
+          <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Título de Técnico Superior de FP o equivalente
+        </li>
+        <li>
+          <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Grado universitario o diplomatura
+        </li>
+        <li>
+          <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Técnico de Grado Medio de FP (con prueba de acceso a GS)
+        </li>
+        <li>
+          <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Prueba de acceso a Grado Superior (mayores de 19 años)
+        </li>
+        <li>
+          <div class="req-check"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Curso específico preparatorio autorizado por la Administración educativa
+        </li>
+      </ul>
+      <div class="prog-box">
+        <h3>📈 ¿Y después del ciclo?</h3>
+        <div>
+          <div class="prog-item">
+            <strong>🎓 Técnico Superior en Coordinación de Emergencias</strong>
+            Título oficial Grado Superior al finalizar el ciclo
+          </div>
+          <div class="prog-connector"></div>
+          <div class="prog-item">
+            <strong>🏛️ Universidad — Acceso directo</strong>
+            Ingeniería Civil, Criminología, Ciencias Ambientales, Administración Pública y más
+          </div>
+          <div class="prog-connector"></div>
+          <div class="prog-item">
+            <strong>📚 Cursos de Especialización FP</strong>
+            Especialización post-ciclo en áreas como gestión de catástrofes o NRBQ
+          </div>
+          <div class="prog-connector"></div>
+          <div class="prog-item">
+            <strong>💼 Mercado laboral — Puestos de mando</strong>
+            Coordinador, jefe de intervención, técnico en protección civil o formador
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BECAS -->
+<section id="becas">
+  <div class="container">
+    <div class="section-label">Financiación</div>
+    <h2 class="section-title">Becas FP y ayudas disponibles</h2>
+    <p class="section-desc">Invertir en tu formación no tiene que ser un problema económico. CampusFP te orienta sobre todas las opciones disponibles.</p>
+    <div class="becas-grid">
+      <div class="beca-card">
+        <div style="font-size:2.4rem;margin-bottom:0.8rem">🎓</div>
+        <h3>Becas Ministerio de Educación</h3>
+        <p>Ayudas generales del Estado para estudiantes de FP Grado Superior con criterios académicos y económicos. Convocatoria anual.</p>
+        <a class="beca-link" href="https://campusfp.es/campus-becas-fp/" target="_blank">Consultar condiciones →</a>
+      </div>
+      <div class="beca-card">
+        <div style="font-size:2.4rem;margin-bottom:0.8rem">🏛️</div>
+        <h3>Becas Comunidad de Madrid</h3>
+        <p>Ayudas autonómicas para residentes en Madrid cursando FP presencial en centros autorizados. Compatibles con las del Ministerio.</p>
+        <a class="beca-link" href="https://campusfp.es/campus-becas-fp/" target="_blank">Consultar condiciones →</a>
+      </div>
+      <div class="beca-card">
+        <div style="font-size:2.4rem;margin-bottom:0.8rem">🌍</div>
+        <h3>Erasmus+ FP</h3>
+        <p>Movilidades internacionales para completar parte de la Fase de Formación en Empresa en organismos y servicios de Europa.</p>
+        <a class="beca-link" href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank">Ver movilidades →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENTROS -->
+<section id="centros">
+  <div class="container">
+    <div class="section-label">Nuestros centros</div>
+    <h2 class="section-title">Estudia el Grado Superior en Madrid</h2>
+    <p class="section-desc">El ciclo se imparte en modalidad presencial en dos campus. Elige el más conveniente; la formación y la metodología son idénticas en ambos.</p>
+    <div class="centros-grid">
+      <div class="centro-card">
+        <div class="centro-img">
+          <div class="centro-img-bg" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=60')"></div>
+          <div class="centro-badge">Humanes · Fuenlabrada</div>
+        </div>
+        <div class="centro-body">
+          <h3>CampusFP Humanes – Fuenlabrada</h3>
+          <p>Sur metropolitano de Madrid. Instalaciones equipadas con acceso por Cercanías y autobús interurbano desde múltiples municipios.</p>
+          <div class="tags">
+            <span class="tag">Sur de Madrid</span>
+            <span class="tag">Cercanías</span>
+            <span class="tag gold">Coordinación de Emergencias GS</span>
+          </div>
+        </div>
+      </div>
+      <div class="centro-card">
+        <div class="centro-img" style="background:linear-gradient(135deg,#0B1F3A 0%,#1a3a6e 100%)">
+          <div class="centro-img-bg" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=60')"></div>
+          <div class="centro-badge">Alcalá de Henares</div>
+        </div>
+        <div class="centro-body">
+          <h3>CampusFP Alcalá de Henares</h3>
+          <p>Corredor del Henares, área con alta concentración de actividad industrial y servicios. Excelente comunicación por tren RENFE.</p>
+          <div class="tags">
+            <span class="tag">Corredor del Henares</span>
+            <span class="tag">RENFE</span>
+            <span class="tag gold">Coordinación de Emergencias GS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 1rem">
+      <div class="section-label" style="justify-content:center">Preguntas frecuentes</div>
+      <h2 class="section-title">Resolvemos tus dudas</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿En qué se diferencia este ciclo del Grado Medio en Emergencias?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">El Grado Medio forma al técnico que interviene en primera línea: extingue incendios, realiza rescates y aplica protocolos operativos. El Grado Superior forma al coordinador: planifica, evalúa riesgos, dirige equipos y gestiona recursos en operativos complejos. Además, el GS da acceso a la universidad.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo acceder si tengo el Grado Medio en Emergencias y Protección Civil?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Sí. Si tienes el Grado Medio puedes acceder al Superior mediante la prueba de acceso a GS. Además, al ser la misma familia profesional, es posible que algunos módulos ya cursados puedan ser objeto de convalidación según la normativa vigente. Consulta con nuestros asesores tu caso concreto.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Este título me permite acceder a la universidad?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Sí. El título de Técnico Superior en Coordinación de Emergencias y Protección Civil da acceso directo a estudios universitarios, con posibilidad de convalidar créditos ECTS según las normativas vigentes. Carreras afines: Criminología, Ciencias Ambientales, Ingeniería Civil, Administración Pública o Seguridad Pública.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué salidas laborales concretas ofrece el Grado Superior?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Coordinador/a de emergencias en centros 112, jefe/a de intervención en bomberos, técnico/a de protección civil en administraciones locales o autonómicas, gestor/a de seguridad en industria, formador/a en emergencias, operador/a en sala de mando y cargos en la UME u organizaciones humanitarias internacionales.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cómo funciona la FP Dual en este ciclo?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">La metodología FP Dual de CampusFP integra empresa y aula desde el primer año. Las 500 horas de Fase de Formación en Empresa empiezan con 60h en 1º y continúan con 440h en 2º, en servicios reales de protección civil, coordinación de emergencias y organismos públicos de la Comunidad de Madrid.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Hay posibilidad de hacer movilidades internacionales?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">Sí. CampusFP es centro acreditado Erasmus+, lo que permite a los alumnos del Grado Superior realizar parte de sus prácticas en organismos y servicios de emergencias europeos con una beca de movilidad. Una experiencia que diferencia tu CV en el mercado laboral.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK LINKS -->
+<div class="quick-links-section">
+  <div class="ql-grid">
+    <a class="ql-card" href="#becas">
+      <div class="ql-icon">🎓</div>
+      <h4>Becas FP</h4>
+      <p>Ayudas y financiación disponibles</p>
+    </a>
+    <a class="ql-card" href="#centros">
+      <div class="ql-icon">🏛️</div>
+      <h4>Nuestros Centros</h4>
+      <p>Humanes-Fuenlabrada y Alcalá</p>
+    </a>
+    <a class="ql-card" href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank">
+      <div class="ql-icon">💼</div>
+      <h4>Bolsa de Empleo</h4>
+      <p>Conexión con el sector profesional</p>
+    </a>
+    <a class="ql-card" href="#salidas">
+      <div class="ql-icon">🚀</div>
+      <h4>Salidas Profesionales</h4>
+      <p>Coordinador, jefe de intervención y más</p>
+    </a>
+    <a class="ql-card" href="#requisitos">
+      <div class="ql-icon">📋</div>
+      <h4>Requisitos de Acceso</h4>
+      <p>Qué necesitas para matricularte</p>
+    </a>
+    <a class="ql-card" href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank">
+      <div class="ql-icon">🌍</div>
+      <h4>Erasmus+ FP</h4>
+      <p>Prácticas en empresas europeas</p>
+    </a>
+    <a class="ql-card" href="http://campusfp.es/grado_medio/tecnico-en-emergencias-y-proteccion-civil" target="_blank">
+      <div class="ql-icon">⬇️</div>
+      <h4>Grado Medio</h4>
+      <p>¿Buscas el perfil operativo? Ver GM</p>
+    </a>
+    <a class="ql-card" href="#diferencia">
+      <div class="ql-icon">⚖️</div>
+      <h4>GM vs GS</h4>
+      <p>Diferencias entre los dos ciclos</p>
+    </a>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-band">
+  <h2>Cuando la emergencia requiere un líder,<br>ese líder se forma en CampusFP.</h2>
+  <p>Solicita información sin compromiso. Un asesor te atenderá en menos de 24 horas.</p>
+  <a href="#contacto" class="btn-white">Solicitar información gratuita →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fb-logo"><span>Campus</span>FP</div>
+      <p>Centro de Formación Profesional autorizado por la Comunidad de Madrid. Más de 20 ciclos formativos con metodología FP Dual y acreditación Erasmus+, Pearson HND y British Council.</p>
+      <div class="social-links">
+        <a class="social-link" href="https://www.facebook.com/campusfp/" target="_blank">f</a>
+        <a class="social-link" href="https://www.instagram.com/campusfp_/" target="_blank">ig</a>
+        <a class="social-link" href="https://www.linkedin.com/company/10575264/" target="_blank">in</a>
+        <a class="social-link" href="https://www.tiktok.com/@campusfp.ia" target="_blank">tt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>El ciclo GS</h5>
+      <a href="#diferencia">GM vs GS</a>
+      <a href="#modulos">Contenidos</a>
+      <a href="#dual">FP Dual</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#salidas">Salidas</a>
+    </div>
+    <div class="footer-col">
+      <h5>CampusFP</h5>
+      <a href="https://campusfp.es/centros/" target="_blank">Nuestros centros</a>
+      <a href="https://campusfp.es/campus-becas-fp/" target="_blank">Becas FP</a>
+      <a href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank">Bolsa de empleo</a>
+      <a href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank">Erasmus+</a>
+      <a href="https://campusfp.es/noticias/" target="_blank">Noticias</a>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <a href="tel:+34911833122">📞 91 183 31 22</a>
+      <a href="mailto:secretaria@campusfp.es">✉ secretaria@campusfp.es</a>
+      <a href="#centros">Humanes – Fuenlabrada</a>
+      <a href="#centros">Alcalá de Henares</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 CampusFP · Centro autorizado Comunidad de Madrid · Todos los derechos reservados</p>
+    <div class="footer-badges">
+      <div class="footer-badge">Centro Autorizado</div>
+      <div class="footer-badge">Erasmus+</div>
+      <div class="footer-badge">Pearson HND</div>
+      <div class="footer-badge">FP Dual</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showYear(num, btn) {
+    document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('year' + num).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.mod-card, .salida-card, .comp-pill, .perfil-card, .beca-card, .centro-card, .diff-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
