@@ -143,9 +143,31 @@ La solución integra tecnologías de virtualización, administración de sistema
 
 La infraestructura está compuesta por servidores físicos y virtualizados que permiten desplegar múltiples servicios independientes dentro de una red centralizada.
 
-Próximamente se añadirá el diagrama completo de arquitectura.
+![Arquitectura General](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/arquitectura.png?raw=true)
 
 ---
+
+## Capturas del Proyecto
+
+### Plataforma Proxmox
+
+![Proxmox](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/proxmox.png?raw=true)
+
+### Monitorización con Grafana
+
+![Grafana](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/grafana.png?raw=true)
+
+### Oracle Database y Automatización
+
+![Oracle](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/oracle.png?raw=true)
+
+### Aplicación Excel integrada con PostgreSQL
+
+![Excel](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/excel.jpg?raw=true)
+
+### Landing Page de Servicios
+
+![Landing](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/landing.png?raw=true)
 
 ## Documentación
 
