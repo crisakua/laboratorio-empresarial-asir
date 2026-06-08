@@ -163,6 +163,7 @@ La documentación completa del proyecto se encuentra disponible en el repositori
 ## Autores
 
 **Cristina Calle Garrido**
+
 **Sergio Román Gutiérrez**
 
 Prácticas ASIR · CampusFP
