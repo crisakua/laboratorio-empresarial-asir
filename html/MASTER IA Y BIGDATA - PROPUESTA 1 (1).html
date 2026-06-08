@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Máster en Inteligencia Artificial & Big Data | CampusFP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* CampusFP Corporate Palette */
+  --cfp-blue: #1a3c6e;
+  --cfp-blue-dark: #0f2547;
+  --cfp-blue-mid: #2152a0;
+  --cfp-accent: #00b4d8;
+  --cfp-accent2: #0077b6;
+  --cfp-gold: #f4a226;
+  --cfp-green: #00a878;
+  --cfp-red: #e63946;
+
+  /* Neutrals */
+  --bg: #06101f;
+  --bg2: #0b1829;
+  --bg3: #101f35;
+  --bg4: #162540;
+  --surface: rgba(255,255,255,0.04);
+  --surface2: rgba(255,255,255,0.07);
+
+  /* Text */
+  --text: #eef1f7;
+  --text-sec: #94a3b8;
+  --text-muted: #5a6e8a;
+  --text-dim: #3a4e68;
+
+  /* Borders */
+  --border: rgba(255,255,255,0.07);
+  --border-blue: rgba(0,180,216,0.25);
+  --border-blue2: rgba(0,180,216,0.12);
+
+  /* Glow */
+  --glow-accent: rgba(0,180,216,0.15);
+  --glow-blue: rgba(26,60,110,0.5);
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* ══ NOISE TEXTURE ══ */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ══ TOP BAR ══ */
+.topbar {
+  background: var(--cfp-blue-dark);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0.45rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-sec);
+  position: relative; z-index: 101;
+}
+.topbar-left { display: flex; gap: 1.5rem; }
+.topbar-link {
+  color: var(--text-sec);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 0.4rem;
+  transition: color 0.2s;
+}
+.topbar-link:hover { color: var(--cfp-accent); }
+.topbar-right { display: flex; gap: 1rem; align-items: center; }
+.topbar-badge {
+  background: var(--cfp-gold);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+/* ══ NAV ══ */
+nav {
+  position: sticky; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 2.5rem;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(6,16,31,0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  transition: height 0.3s ease;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.65rem;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--cfp-blue-mid), var(--cfp-accent2));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: white;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.nav-logo-sub {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  font-family: var(--font-body);
+  display: block;
+  letter-spacing: 0.03em;
+}
+.nav-links {
+  display: flex; gap: 0.25rem; list-style: none;
+}
+.nav-links a {
+  font-size: 0.85rem;
+  color: var(--text-sec);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover {
+  color: var(--cfp-accent);
+  background: rgba(0,180,216,0.07);
+}
+.nav-actions { display: flex; gap: 0.6rem; align-items: center; }
+.btn-nav-ghost {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-sec);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1.1rem;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-nav-ghost:hover { border-color: rgba(255,255,255,0.18); color: var(--text); }
+.btn-nav-cta {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--cfp-blue-mid) 0%, var(--cfp-accent2) 100%);
+  border: none;
+  padding: 0.55rem 1.3rem;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  white-space: nowrap;
+}
+.btn-nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(33,82,160,0.45);
+  opacity: 0.93;
+}
+
+/* ══ HERO ══ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 5rem 4rem 4rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 4rem;
+  position: relative;
+}
+@media(max-width: 900px){ .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; gap: 2.5rem; } }
+
+/* hero bg elements */
+.hero-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  overflow: hidden;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,180,216,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,216,0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 90% 90% at 60% 40%, black 10%, transparent 75%);
+}
+.orb { position: absolute; border-radius: 50%; pointer-events: none; }
+.orb-1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(26,60,110,0.55) 0%, transparent 65%);
+  top: -150px; right: -100px;
+  animation: floatA 20s ease-in-out infinite;
+  filter: blur(40px);
+}
+.orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,119,182,0.2) 0%, transparent 70%);
+  bottom: 10%; left: -80px;
+  animation: floatB 25s ease-in-out infinite;
+  filter: blur(60px);
+}
+.orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(0,180,216,0.12) 0%, transparent 70%);
+  top: 40%; right: 30%;
+  animation: floatC 18s ease-in-out infinite;
+  filter: blur(50px);
+}
+@keyframes floatA { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,20px)} }
+@keyframes floatB { 0%,100%{transform:translate(0,0)} 50%{transform:translate(25px,-30px)} }
+@keyframes floatC { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-15px,20px)} }
+
+.hero-content { position: relative; z-index: 2; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cfp-accent);
+  background: rgba(0,180,216,0.07);
+  border: 1px solid rgba(0,180,216,0.2);
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  animation: fadeUp 0.7s ease both;
+}
+.eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cfp-accent);
+  animation: pulse 2.5s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-h1 .accent-blue {
+  background: linear-gradient(135deg, var(--cfp-accent) 0%, var(--cfp-accent2) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-h1 .accent-gold { color: var(--cfp-gold); }
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-sec);
+  max-width: 520px;
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-bottom: 2.25rem;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--text-sec);
+  background: var(--surface);
+  font-family: var(--font-mono);
+}
+.hero-chip .chip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--cfp-green); }
+
+.hero-cta {
+  display: flex; gap: 0.85rem; flex-wrap: wrap;
+  animation: fadeUp 0.7s 0.4s ease both;
+}
+.btn-primary-hero {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: linear-gradient(135deg, var(--cfp-blue-mid), var(--cfp-accent2));
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative; overflow: hidden;
+}
+.btn-primary-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0; transition: opacity 0.2s;
+}
+.btn-primary-hero:hover::after { opacity: 1; }
+.btn-primary-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(33,82,160,0.5);
+}
+.btn-arrow { font-size: 1.1rem; transition: transform 0.2s; }
+.btn-primary-hero:hover .btn-arrow { transform: translateX(4px); }
+
+.btn-secondary-hero {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem 1.75rem;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary-hero:hover { border-color: rgba(255,255,255,0.2); background: var(--surface2); }
+
+/* hero right: data card */
+.hero-right {
+  position: relative; z-index: 2;
+  animation: fadeUp 0.7s 0.25s ease both;
+}
+.data-card-outer {
+  background: var(--bg3);
+  border: 1px solid rgba(0,180,216,0.18);
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.data-card-outer::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--cfp-blue-mid), var(--cfp-accent), var(--cfp-gold));
+}
+.data-card-title {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.stat-cell {
+  background: var(--bg4);
+  padding: 1.25rem;
+  text-align: center;
+}
+.stat-cell:first-child { border-radius: 12px 0 0 0; }
+.stat-cell:nth-child(2) { border-radius: 0 12px 0 0; }
+.stat-cell:nth-child(3) { border-radius: 0 0 0 12px; }
+.stat-cell:last-child { border-radius: 0 0 12px 0; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat-num.c-accent { color: var(--cfp-accent); }
+.stat-num.c-gold { color: var(--cfp-gold); }
+.stat-num.c-green { color: var(--cfp-green); }
+.stat-num.c-blue { color: #7eb8f7; }
+.stat-label { font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; }
+
+.module-preview { display: flex; flex-direction: column; gap: 0.6rem; }
+.mod-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.82rem; color: var(--text-sec);
+  background: var(--bg4);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.mod-row-bar {
+  height: 4px; border-radius: 100px;
+  background: linear-gradient(90deg, var(--cfp-accent2), var(--cfp-accent));
+  flex-shrink: 0;
+}
+.mod-row-name { flex: 1; }
+.mod-row-h {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cfp-accent);
+  flex-shrink: 0;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══ SOCIAL PROOF BAR ══ */
+.proof-bar {
+  background: var(--cfp-blue-dark);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 1.1rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; flex-wrap: wrap;
+  position: relative; z-index: 2;
+}
+.proof-item {
+  display: flex; align-items: center; gap: 0.65rem;
+  font-size: 0.85rem; color: var(--text-sec);
+}
+.proof-icon { font-size: 1.1rem; }
+.proof-item strong { color: var(--text); font-weight: 600; }
+.proof-divider { width: 1px; height: 24px; background: var(--border); }
+
+/* ══ MARQUEE ══ */
+.marquee-wrap {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden; padding: 0.9rem 0;
+  position: relative; z-index: 2;
+}
+.marquee-track {
+  display: flex;
+  animation: marqueeRun 35s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 0.65rem;
+  padding: 0 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.marquee-sep { color: var(--cfp-accent); font-size: 0.6rem; }
+@keyframes marqueeRun { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ══ SECTION COMMON ══ */
+section { position: relative; z-index: 2; }
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+.section-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cfp-accent);
+  margin-bottom: 1.1rem;
+}
+.section-label::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: linear-gradient(90deg, var(--cfp-accent2), var(--cfp-accent));
+  border-radius: 2px;
+}
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin-bottom: 1.1rem;
+}
+.section-sub {
+  color: var(--text-sec);
+  font-size: 1.05rem;
+  max-width: 580px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.section-header-row {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem;
+}
+
+/* ══ CURRICULUM ══ */
+.curriculum-bg { background: var(--bg); }
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.1rem;
+}
+.module-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+.module-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--cfp-blue-mid), var(--cfp-accent));
+  opacity: 0; transition: opacity 0.3s;
+}
+.module-card:hover { border-color: var(--border-blue); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,119,182,0.1); }
+.module-card:hover::after { opacity: 1; }
+.module-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--cfp-accent);
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+}
+.module-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+.module-desc {
+  font-size: 0.875rem;
+  color: var(--text-sec);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+.module-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+.module-hours {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: var(--font-mono); font-size: 0.75rem;
+  background: rgba(0,180,216,0.08);
+  color: var(--cfp-accent);
+  padding: 0.28rem 0.75rem;
+  border-radius: 100px;
+  border: 1px solid rgba(0,180,216,0.2);
+}
+.module-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag {
+  font-size: 0.68rem; font-family: var(--font-mono);
+  padding: 0.22rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(33,82,160,0.15);
+  color: #7eb8f7;
+  border: 1px solid rgba(33,82,160,0.25);
+}
+
+.hours-summary {
+  margin-top: 2rem;
+  background: linear-gradient(135deg, rgba(0,180,216,0.07), rgba(33,82,160,0.07));
+  border: 1px solid var(--border-blue);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+.hs-left h3 {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;
+}
+.hs-left p { font-size: 0.85rem; color: var(--text-sec); }
+.hs-num {
+  font-family: var(--font-display);
+  font-size: 3.5rem; font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--cfp-accent);
+  line-height: 1;
+}
+.progress-strip {
+  display: flex; height: 10px; border-radius: 100px;
+  overflow: hidden; gap: 2px; margin-top: 1.5rem;
+  background: rgba(255,255,255,0.04);
+}
+.ps { height: 100%; border-radius: 100px; transition: width 1.2s ease; }
+.ps1{background:var(--cfp-accent);width:12.5%}
+.ps2{background:#7eb8f7;width:12.5%}
+.ps3{background:var(--cfp-blue-mid);width:37.5%}
+.ps4{background:var(--cfp-gold);width:16.7%}
+.ps5{background:var(--cfp-green);width:20.8%}
+.prog-legend {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+  margin-top: 0.85rem;
+}
+.pl-item { display: flex; align-items: center; gap: 0.45rem; font-size: 0.78rem; color: var(--text-sec); }
+.pl-dot { width: 8px; height: 8px; border-radius: 3px; flex-shrink: 0; }
+
+/* ══ OUTCOMES ══ */
+.outcomes-bg { background: var(--bg2); }
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.1rem;
+}
+.outcome-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative; overflow: hidden;
+}
+.outcome-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+  background: radial-gradient(ellipse at bottom center, rgba(33,82,160,0.08), transparent);
+  pointer-events: none;
+}
+.outcome-card:hover { border-color: rgba(33,82,160,0.35); transform: translateY(-3px); }
+.outcome-ico { font-size: 2rem; margin-bottom: 1rem; }
+.outcome-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700;
+  margin-bottom: 0.5rem; letter-spacing: -0.01em;
+}
+.outcome-desc { font-size: 0.875rem; color: var(--text-sec); line-height: 1.65; }
+.outcome-tag {
+  display: inline-block;
+  margin-top: 1rem; font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--cfp-green);
+  background: rgba(0,168,120,0.1);
+  border: 1px solid rgba(0,168,120,0.2);
+  padding: 0.22rem 0.65rem;
+  border-radius: 4px;
+}
+
+/* ══ DEMAND CHART SECTION ══ */
+.demand-bg { background: var(--bg); }
+.demand-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+@media(max-width:900px){ .demand-inner{grid-template-columns:1fr;} }
+.demand-bars { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+.demand-row { }
+.demand-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.85rem; margin-bottom: 0.4rem;
+  color: var(--text-sec);
+}
+.demand-label strong { color: var(--text); font-weight: 600; }
+.demand-track {
+  height: 8px; background: rgba(255,255,255,0.06);
+  border-radius: 100px; overflow: hidden;
+}
+.demand-fill {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--cfp-blue-mid), var(--cfp-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+.demand-fill.animated { transform: scaleX(1); }
+.insight-cards { display: flex; flex-direction: column; gap: 1rem; }
+.insight-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex; align-items: flex-start; gap: 1rem;
+}
+.insight-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--cfp-blue-mid), var(--cfp-accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.insight-text h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem;
+}
+.insight-text p { font-size: 0.82rem; color: var(--text-sec); line-height: 1.55; }
+
+/* ══ FACTS CAROUSEL ══ */
+.facts-bg { background: var(--bg2); }
+.facts-slider { border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; background: var(--bg3); position: relative; }
+.facts-track { display: flex; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); }
+.fact-slide { min-width: 100%; padding: 3rem 3.5rem; }
+.fact-num {
+  font-family: var(--font-display);
+  font-size: 5rem; font-weight: 700;
+  letter-spacing: -0.06em;
+  color: rgba(0,180,216,0.12);
+  line-height: 1; margin-bottom: 0.5rem;
+}
+.fact-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem,2.8vw,1.9rem);
+  font-weight: 700; line-height: 1.3;
+  letter-spacing: -0.025em; margin-bottom: 1.5rem;
+}
+.fact-quote em { font-style: normal; color: var(--cfp-accent); }
+.fact-body { font-size: 1rem; color: var(--text-sec); max-width: 680px; line-height: 1.75; }
+.facts-nav {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.25rem 3.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg4);
+}
+.fact-btn {
+  width: 38px; height: 38px; border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent; color: var(--text);
+  cursor: pointer; font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+.fact-btn:hover { border-color: var(--border-blue); background: rgba(0,180,216,0.07); }
+.fact-dots { display: flex; gap: 0.4rem; flex: 1; }
+.fact-dot {
+  width: 6px; height: 6px; border-radius: 100px;
+  background: var(--text-dim); cursor: pointer;
+  transition: background 0.25s, width 0.3s;
+}
+.fact-dot.active { background: var(--cfp-accent); width: 22px; }
+
+/* ══ REQUIREMENTS ══ */
+.req-bg { background: var(--bg); }
+.req-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+@media(max-width:768px){ .req-grid{grid-template-columns:1fr;} }
+.req-box {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+.req-box-head {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700;
+  margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: 0.65rem;
+}
+.req-head-ico {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.95rem;
+  background: rgba(0,180,216,0.1); flex-shrink: 0;
+}
+.req-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.req-list li {
+  font-size: 0.875rem; color: var(--text-sec);
+  display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5;
+}
+.req-arrow { color: var(--cfp-accent); font-size: 0.7rem; margin-top: 4px; flex-shrink: 0; }
+.ects-block {
+  grid-column: 1/-1;
+  background: linear-gradient(135deg, rgba(0,119,182,0.12), rgba(0,180,216,0.07));
+  border: 1px solid rgba(0,180,216,0.2);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem;
+  display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap;
+}
+.ects-num {
+  font-family: var(--font-display);
+  font-size: 4rem; font-weight: 700;
+  letter-spacing: -0.06em;
+  color: var(--cfp-accent); line-height: 1; flex-shrink: 0;
+}
+.ects-detail h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem;
+}
+.ects-detail p { font-size: 0.9rem; color: var(--text-sec); line-height: 1.65; }
+
+/* ══ METHODOLOGY ══ */
+.method-bg { background: var(--bg2); }
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.1rem; counter-reset: step;
+}
+.method-step {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  position: relative;
+  counter-increment: step;
+  transition: border-color 0.3s;
+}
+.method-step::before {
+  content: '0' counter(step);
+  font-family: var(--font-mono);
+  font-size: 1.8rem; font-weight: 500;
+  color: var(--text-dim); display: block; margin-bottom: 1rem;
+  line-height: 1;
+}
+.method-step:hover { border-color: rgba(33,82,160,0.35); }
+.method-step-title {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;
+}
+.method-step-desc { font-size: 0.875rem; color: var(--text-sec); line-height: 1.6; }
+
+/* ══ TECH STACK ══ */
+.tech-bg { background: var(--bg); }
+.tech-pills {
+  display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 2.5rem;
+}
+.tech-pill {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.875rem; font-family: var(--font-mono);
+  color: var(--text-sec);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  cursor: default;
+}
+.tech-pill:hover {
+  border-color: var(--border-blue);
+  color: var(--cfp-accent);
+  background: rgba(0,180,216,0.06);
+}
+
+/* ══ FAQ ══ */
+.faq-bg { background: var(--bg2); }
+.faq-list {
+  margin-top: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q {
+  width: 100%; background: var(--bg3); border: none; color: var(--text);
+  font-family: var(--font-display); font-size: 0.975rem; font-weight: 600;
+  padding: 1.35rem 1.75rem; text-align: left; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  transition: background 0.2s; letter-spacing: -0.01em;
+}
+.faq-q:hover { background: var(--bg4); }
+.faq-q.open { color: var(--cfp-accent); }
+.faq-arr { font-size: 1.1rem; transition: transform 0.3s; color: var(--text-muted); flex-shrink: 0; }
+.faq-q.open .faq-arr { transform: rotate(180deg); color: var(--cfp-accent); }
+.faq-a { background: var(--bg3); max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+.faq-a.open { max-height: 320px; }
+.faq-a-inner { padding: 0 1.75rem 1.5rem; font-size: 0.93rem; color: var(--text-sec); line-height: 1.75; }
+
+/* ══ CTA BANNER ══ */
+.cta-banner {
+  background: linear-gradient(135deg, var(--cfp-blue-dark) 0%, var(--cfp-blue) 50%, var(--cfp-blue-mid) 100%);
+  position: relative; overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+.cta-banner-inner {
+  max-width: 900px; margin: 0 auto;
+  padding: 6rem 2rem; text-align: center;
+  position: relative; z-index: 1;
+}
+.cta-banner-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 700; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 1.25rem;
+}
+.cta-banner-inner p { font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-bottom: 2.5rem; font-weight: 300; }
+.cta-btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  background: #fff; color: var(--cfp-blue);
+  font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+  padding: 0.9rem 2rem; border-radius: 10px; text-decoration: none; border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.3); }
+.btn-outline-white {
+  background: rgba(255,255,255,0.1); color: #fff;
+  font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+  padding: 0.9rem 1.75rem; border-radius: 10px; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-outline-white:hover { background: rgba(255,255,255,0.18); }
+
+/* ══ CONTACT FORM ══ */
+.form-bg { background: var(--bg); }
+.form-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 4rem; align-items: start;
+}
+@media(max-width:900px){ .form-grid{grid-template-columns:1fr;} }
+.form-info-block p { section-tag }
+.form-info-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem; font-weight: 700;
+  letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem;
+}
+.form-info-desc { color: var(--text-sec); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1.75rem; }
+.center-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 1.25rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;
+}
+.center-card-ico {
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--cfp-blue), var(--cfp-accent2));
+  display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+}
+.center-card h4 {
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem;
+}
+.center-card p { font-size: 0.8rem; color: var(--text-sec); }
+.form-card {
+  background: var(--bg3); border: 1px solid rgba(0,180,216,0.15);
+  border-radius: var(--radius-xl); padding: 2.25rem; position: relative; overflow: hidden;
+}
+.form-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--cfp-blue-mid), var(--cfp-accent));
+}
+.form-row { margin-bottom: 1rem; }
+.form-row label {
+  display: block; font-size: 0.73rem; font-family: var(--font-mono);
+  color: var(--text-muted); letter-spacing: 0.07em; margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+.form-row input, .form-row select, .form-row textarea {
+  width: 100%; background: var(--bg4);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.8rem 1rem; color: var(--text);
+  font-family: var(--font-body); font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s; outline: none; -webkit-appearance: none;
+}
+.form-row input::placeholder, .form-row textarea::placeholder { color: var(--text-dim); }
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+  border-color: rgba(0,180,216,0.4);
+  box-shadow: 0 0 0 3px rgba(0,180,216,0.08);
+}
+.form-row select { cursor: pointer; }
+.form-row textarea { resize: vertical; min-height: 80px; }
+.form-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit {
+  width: 100%; padding: 0.95rem;
+  background: linear-gradient(135deg, var(--cfp-blue-mid), var(--cfp-accent2));
+  color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+  border: none; border-radius: 8px; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  margin-top: 0.5rem; letter-spacing: 0.01em;
+}
+.form-submit:hover { transform: translateY(-1px); box-shadow: 0 10px 32px rgba(33,82,160,0.45); }
+.form-legal { font-size: 0.72rem; color: var(--text-dim); text-align: center; margin-top: 0.75rem; line-height: 1.5; }
+.form-success { display: none; text-align: center; padding: 2.5rem 1rem; }
+.form-success-icon { font-size: 3rem; margin-bottom: 1rem; }
+.form-success h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--cfp-green); }
+.form-success p { font-size: 0.9rem; color: var(--text-sec); }
+
+/* ══ MEGA FOOTER ══ */
+.mega-footer-top {
+  background: var(--cfp-blue-dark);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 4rem 2rem 3rem;
+  position: relative; z-index: 2;
+}
+.mega-footer-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+}
+@media(max-width:900px){ .mega-footer-grid{grid-template-columns:1fr 1fr;gap:2rem;} }
+@media(max-width:560px){ .mega-footer-grid{grid-template-columns:1fr;} }
+
+.footer-brand-col {}
+.footer-brand-logo {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.footer-logo-mark {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--cfp-blue-mid), var(--cfp-accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+  color: white; letter-spacing: -0.02em; flex-shrink: 0;
+}
+.footer-logo-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 700; color: var(--text);
+}
+.footer-logo-sub { font-size: 0.7rem; color: var(--text-muted); display: block; }
+.footer-brand-desc {
+  font-size: 0.875rem; color: var(--text-sec); line-height: 1.7; margin-bottom: 1.5rem;
+  max-width: 340px;
+}
+.footer-social { display: flex; gap: 0.6rem; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text-muted); font-size: 0.875rem;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.social-btn:hover { border-color: var(--border-blue); color: var(--cfp-accent); background: rgba(0,180,216,0.07); }
+
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text); margin-bottom: 1.1rem;
+}
+.footer-col-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-col-links a {
+  font-size: 0.875rem; color: var(--text-sec);
+  text-decoration: none; transition: color 0.2s;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.footer-col-links a:hover { color: var(--cfp-accent); }
+.footer-col-links .link-badge {
+  font-size: 0.62rem; font-family: var(--font-mono);
+  background: rgba(244,162,38,0.15); color: var(--cfp-gold);
+  border: 1px solid rgba(244,162,38,0.25);
+  padding: 0.12rem 0.45rem; border-radius: 4px; line-height: 1.3;
+}
+
+/* Footer links grid (wide info bar) */
+.footer-links-bar {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  position: relative; z-index: 2;
+}
+.flb-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 3rem 2rem;
+}
+.flb-title {
+  font-size: 0.72rem; font-family: var(--font-mono);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 1.75rem;
+}
+.flb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+.flb-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 1.25rem 1.35rem;
+  display: flex; align-items: flex-start; gap: 0.85rem;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.flb-card:hover {
+  border-color: var(--border-blue); background: rgba(0,180,216,0.04);
+  transform: translateY(-2px);
+}
+.flb-card-ico {
+  font-size: 1.4rem; flex-shrink: 0; margin-top: 2px;
+}
+.flb-card-text h4 {
+  font-family: var(--font-display); font-size: 0.875rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.2rem; line-height: 1.2;
+}
+.flb-card-text p { font-size: 0.75rem; color: var(--text-sec); line-height: 1.45; }
+
+/* Footer bottom bar */
+.footer-bottom {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 2rem;
+  position: relative; z-index: 2;
+}
+.footer-bottom-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy { font-size: 0.78rem; color: var(--text-dim); }
+.footer-legal { display: flex; gap: 1.5rem; }
+.footer-legal a {
+  font-size: 0.78rem; color: var(--text-dim); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-legal a:hover { color: var(--cfp-accent); }
+.footer-reg { font-size: 0.72rem; color: var(--text-dim); font-family: var(--font-mono); }
+
+/* ══ SCROLL REVEAL ══ */
+.reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ══ CURSOR GLOW ══ */
+.cursor-glow {
+  position: fixed; width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,119,182,0.06) 0%, transparent 70%);
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: left 0.12s, top 0.12s;
+}
+
+/* ══ SCROLL TO TOP ══ */
+.scroll-top {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--cfp-blue-mid);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; text-decoration: none;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.scroll-top.show { opacity: 1; transform: translateY(0); }
+.scroll-top:hover { box-shadow: 0 8px 28px rgba(33,82,160,0.5); }
+
+/* ══ RESPONSIVE HELPERS ══ */
+@media(max-width:768px){
+  nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  .section-inner { padding: 4rem 1.25rem; }
+  .proof-bar { padding: 1rem 1.25rem; gap: 1rem; }
+  .proof-divider { display: none; }
+  .fact-slide { padding: 2rem 1.75rem; }
+  .facts-nav { padding: 1rem 1.75rem; }
+  .topbar { display: none; }
+  .form-cols { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+<a href="#" class="scroll-top" id="scrollTop" aria-label="Volver arriba">↑</a>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="https://campusfp.es" target="_blank" class="topbar-link">🏠 campusfp.es</a>
+    <a href="https://campusfp.es/centros/" target="_blank" class="topbar-link">📍 Nuestros Centros</a>
+    <a href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank" class="topbar-link">💼 Bolsa de Empleo</a>
+  </div>
+  <div class="topbar-right">
+    <span>📞 Llámanos o escríbenos</span>
+    <a href="#contacto" class="topbar-badge">PLAZAS LIMITADAS</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">CFP</div>
+    <div class="nav-logo-text">
+      CampusFP
+      <span class="nav-logo-sub">Posgrado IA &amp; Big Data</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#curriculum">Programa</a></li>
+    <li><a href="#salidas">Salidas</a></li>
+    <li><a href="#demanda">Mercado</a></li>
+    <li><a href="#requisitos">Acceso</a></li>
+    <li><a href="#metodologia">Metodología</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#curriculum" class="btn-nav-ghost">Ver programa</a>
+    <a href="#contacto" class="btn-nav-cta">Solicitar información →</a>
+  </div>
+</nav>
+
+<!-- HERO BG -->
+<div class="hero-bg">
+  <div class="hero-grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span> Posgrado FP Grado Superior · Código IFCES03</div>
+    <h1 class="hero-h1">
+      El futuro es<br>
+      <span class="accent-blue">Inteligencia<br>Artificial</span><br>
+      &amp; <span class="accent-gold">Big Data</span>
+    </h1>
+    <p class="hero-desc">Conviértete en el perfil más demandado del sector tecnológico. 600 horas de formación intensiva, proyectos reales y conexión directa con el mercado laboral.</p>
+    <div class="hero-chips">
+      <div class="hero-chip"><span class="chip-dot"></span> 100% Presencial · Madrid</div>
+      <div class="hero-chip"><span class="chip-dot"></span> FP Dual con empresas</div>
+      <div class="hero-chip"><span class="chip-dot"></span> +22 Créditos ECTS</div>
+      <div class="hero-chip"><span class="chip-dot"></span> Bolsa de empleo activa</div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn-primary-hero">Inscríbete ahora <span class="btn-arrow">→</span></a>
+      <a href="#curriculum" class="btn-secondary-hero">Ver programa completo</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="data-card-outer">
+      <div class="data-card-title">Posgrado en cifras</div>
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="stat-num c-accent" data-count="600" data-suffix="h">600h</div>
+          <div class="stat-label">Formación intensiva</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num c-gold" data-count="142" data-suffix="">142</div>
+          <div class="stat-label">Créditos ECTS acumulados</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num c-green" data-count="20" data-suffix="%">20%</div>
+          <div class="stat-label">+ ingresos con Big Data</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num c-blue" data-count="5" data-suffix="">5</div>
+          <div class="stat-label">Módulos especializados</div>
+        </div>
+      </div>
+      <div class="data-card-title" style="margin-top:0;margin-bottom:.75rem">Distribución del programa</div>
+      <div class="module-preview">
+        <div class="mod-row"><div class="mod-row-bar" style="width:60px"></div><span class="mod-row-name">Modelos de IA</span><span class="mod-row-h">75h</span></div>
+        <div class="mod-row"><div class="mod-row-bar" style="width:60px"></div><span class="mod-row-name">Aprendizaje Automático</span><span class="mod-row-h">75h</span></div>
+        <div class="mod-row"><div class="mod-row-bar" style="width:140px"></div><span class="mod-row-name">Programación IA</span><span class="mod-row-h">225h</span></div>
+        <div class="mod-row"><div class="mod-row-bar" style="width:80px"></div><span class="mod-row-name">Sistemas Big Data</span><span class="mod-row-h">100h</span></div>
+        <div class="mod-row"><div class="mod-row-bar" style="width:100px"></div><span class="mod-row-name">Big Data Aplicado</span><span class="mod-row-h">125h</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SOCIAL PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item"><span class="proof-icon">🏛️</span> Titulación oficial reconocida por el Ministerio de Educación</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><span class="proof-icon">🤝</span> Programa FP Dual con empresas del sector</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><span class="proof-icon">📍</span> <strong>2 centros</strong> en Madrid: Alcalá de Henares y Getafe</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><span class="proof-icon">🎓</span> <strong>+22 ECTS</strong> reconocidos universitarios</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><span class="proof-icon">💼</span> Bolsa de empleo activa con empresas colaboradoras</div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="mTrack">
+    <span class="marquee-item">Python <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">TensorFlow <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Machine Learning <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Apache Spark <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Deep Learning <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Hadoop <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">PyTorch <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Power BI <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Redes Neuronales <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Big Data <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">NLP <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Apache Kafka <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Computer Vision <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Scikit-learn <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Cloud Analytics <span class="marquee-sep">◆</span></span>
+    <!-- duplicate -->
+    <span class="marquee-item">Python <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">TensorFlow <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Machine Learning <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Apache Spark <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Deep Learning <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Hadoop <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">PyTorch <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Power BI <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Redes Neuronales <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Big Data <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">NLP <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Apache Kafka <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Computer Vision <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Scikit-learn <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Cloud Analytics <span class="marquee-sep">◆</span></span>
+  </div>
+</div>
+
+<!-- CURRICULUM -->
+<section class="curriculum-bg" id="curriculum">
+  <div class="section-inner">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-label">Programa académico</div>
+        <h2 class="section-h2">5 módulos.<br>600 horas. Un futuro sólido.</h2>
+        <p class="section-sub">Formación estructurada desde los fundamentos hasta la aplicación real en empresa. Cada módulo diseñado con profesionales del sector.</p>
+      </div>
+    </div>
+    <div class="modules-grid reveal">
+      <div class="module-card">
+        <div class="module-num">Módulo 01 de 05</div>
+        <div class="module-title">Modelos de Inteligencia Artificial</div>
+        <div class="module-desc">Estudia los fundamentos matemáticos y algorítmicos de la IA. Redes neuronales, lógica difusa, sistemas expertos y los paradigmas del aprendizaje inteligente.</div>
+        <div class="module-footer">
+          <div class="module-hours">⏱ 75 horas</div>
+          <div class="module-tags"><span class="tag">Redes Neuronales</span><span class="tag">Lógica Difusa</span></div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 02 de 05</div>
+        <div class="module-title">Sistemas de Aprendizaje Automático</div>
+        <div class="module-desc">Machine Learning supervisado, no supervisado y por refuerzo. Diseño de pipelines de datos, validación cruzada y construcción de modelos escalables y reproducibles.</div>
+        <div class="module-footer">
+          <div class="module-hours">⏱ 75 horas</div>
+          <div class="module-tags"><span class="tag">Scikit-learn</span><span class="tag">ML Pipeline</span></div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 03 de 05 · Núcleo del programa</div>
+        <div class="module-title">Programación de Inteligencia Artificial</div>
+        <div class="module-desc">El bloque más intensivo. Desarrolla soluciones con Python, TensorFlow y PyTorch. Implementa visión por computador, NLP y sistemas de recomendación sobre datasets reales.</div>
+        <div class="module-footer">
+          <div class="module-hours">⏱ 225 horas</div>
+          <div class="module-tags"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">NLP</span><span class="tag">CV</span></div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 04 de 05</div>
+        <div class="module-title">Sistemas de Big Data</div>
+        <div class="module-desc">Diseña y gestiona arquitecturas para el procesamiento masivo de datos. Hadoop, Spark, Kafka y las mejores prácticas de ingeniería de datos a escala empresarial.</div>
+        <div class="module-footer">
+          <div class="module-hours">⏱ 100 horas</div>
+          <div class="module-tags"><span class="tag">Hadoop</span><span class="tag">Spark</span><span class="tag">Kafka</span></div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 05 de 05</div>
+        <div class="module-title">Big Data Aplicado</div>
+        <div class="module-desc">Proyectos reales, visualización avanzada con Power BI y Tableau, analítica predictiva sobre datasets empresariales, ética de datos y cumplimiento legal (RGPD).</div>
+        <div class="module-footer">
+          <div class="module-hours">⏱ 125 horas</div>
+          <div class="module-tags"><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">RGPD</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hours-summary reveal">
+      <div class="hs-left">
+        <h3>Carga lectiva total del programa</h3>
+        <p>Modalidad presencial · Centros Madrid · 1 curso académico</p>
+      </div>
+      <div class="hs-num">600h</div>
+    </div>
+    <div class="reveal">
+      <div class="progress-strip">
+        <div class="ps ps1"></div>
+        <div class="ps ps2"></div>
+        <div class="ps ps3"></div>
+        <div class="ps ps4"></div>
+        <div class="ps ps5"></div>
+      </div>
+      <div class="prog-legend">
+        <div class="pl-item"><div class="pl-dot" style="background:var(--cfp-accent)"></div>Modelos IA · 75h</div>
+        <div class="pl-item"><div class="pl-dot" style="background:#7eb8f7"></div>Aprendizaje Automático · 75h</div>
+        <div class="pl-item"><div class="pl-dot" style="background:var(--cfp-blue-mid)"></div>Programación IA · 225h</div>
+        <div class="pl-item"><div class="pl-dot" style="background:var(--cfp-gold)"></div>Sistemas Big Data · 100h</div>
+        <div class="pl-item"><div class="pl-dot" style="background:var(--cfp-green)"></div>Big Data Aplicado · 125h</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="outcomes-bg" id="salidas">
+  <div class="section-inner">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-label">Salidas profesionales</div>
+        <h2 class="section-h2">Los roles que el<br>mercado necesita</h2>
+        <p class="section-sub">La IA y el Big Data encabezan el ranking de perfiles con mayor escasez de talento en Europa. Tras este posgrado, tienes acceso real a ellos.</p>
+      </div>
+    </div>
+    <div class="outcomes-grid reveal">
+      <div class="outcome-card">
+        <div class="outcome-ico">📊</div>
+        <div class="outcome-title">Data Analyst</div>
+        <div class="outcome-desc">Transforma volúmenes de datos complejos en inteligencia de negocio accionable. Crea dashboards y reportes que guían decisiones ejecutivas en tiempo real.</div>
+        <div class="outcome-tag">Alta demanda · Banca, Retail, Salud</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-ico">🤖</div>
+        <div class="outcome-title">Machine Learning Engineer</div>
+        <div class="outcome-desc">Diseña, entrena y despliega modelos en entornos de producción a escala. El perfil más técnico y mejor remunerado de la inteligencia artificial aplicada.</div>
+        <div class="outcome-tag">Top remuneración · Sector TI</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-ico">🗄️</div>
+        <div class="outcome-title">Big Data Engineer</div>
+        <div class="outcome-desc">Construye y mantiene arquitecturas distribuidas para el procesamiento masivo. Domina la pila Hadoop, Spark y los ecosistemas de datos modernos.</div>
+        <div class="outcome-tag">Imprescindible · Grandes empresas</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-ico">🔬</div>
+        <div class="outcome-title">Data Scientist Junior</div>
+        <div class="outcome-desc">Aplica métodos estadísticos y de ML para extraer conocimiento de los datos. Acceso ideal a carreras en investigación, innovación y estrategia de datos.</div>
+        <div class="outcome-tag">Crecimiento exponencial</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-ico">⚙️</div>
+        <div class="outcome-title">Especialista en IA Aplicada</div>
+        <div class="outcome-desc">Implementa soluciones de IA en procesos industriales, sanitarios o financieros. El puente estratégico entre la tecnología y el negocio.</div>
+        <div class="outcome-tag">Clave en transformación digital</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-ico">📡</div>
+        <div class="outcome-title">Consultor de Analítica</div>
+        <div class="outcome-desc">Asesora empresas en adopción de estrategias de datos. Combina visión técnica profunda con impacto organizacional y de negocio directo.</div>
+        <div class="outcome-tag">Alta autonomía · Proyección profesional</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAND SECTION -->
+<section class="demand-bg" id="demanda">
+  <div class="section-inner">
+    <div class="demand-inner">
+      <div class="reveal">
+        <div class="section-label">Mercado laboral</div>
+        <h2 class="section-h2">Por qué ahora<br>es el momento</h2>
+        <p class="section-sub">Los datos del mercado son inequívocos: la demanda de especialistas en IA y Big Data crece a una velocidad que la oferta formativa no puede cubrir.</p>
+        <div class="demand-bars">
+          <div class="demand-row">
+            <div class="demand-label"><strong>Data Scientist</strong><span>Oferta laboral activa</span></div>
+            <div class="demand-track"><div class="demand-fill" style="--w:0.92"></div></div>
+          </div>
+          <div class="demand-row">
+            <div class="demand-label"><strong>ML Engineer</strong><span>Crecimiento anual proyectado</span></div>
+            <div class="demand-track"><div class="demand-fill" style="--w:0.88"></div></div>
+          </div>
+          <div class="demand-row">
+            <div class="demand-label"><strong>Big Data Engineer</strong><span>Escasez de talento</span></div>
+            <div class="demand-track"><div class="demand-fill" style="--w:0.95"></div></div>
+          </div>
+          <div class="demand-row">
+            <div class="demand-label"><strong>Data Analyst</strong><span>Demanda empresarial</span></div>
+            <div class="demand-track"><div class="demand-fill" style="--w:0.85"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="insight-cards reveal">
+        <div class="insight-card">
+          <div class="insight-icon">📈</div>
+          <div class="insight-text">
+            <h4>+20% de ingresos</h4>
+            <p>Las empresas que adoptan Big Data para tomar decisiones superan a sus competidores en hasta un 20% en ingresos y optimización de costes.</p>
+          </div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">🌍</div>
+          <div class="insight-text">
+            <h4>Déficit de talento en Europa</h4>
+            <p>Se estiman cientos de miles de puestos sin cubrir en IA y datos en Europa. Entrar formado ahora es una ventaja competitiva real y duradera.</p>
+          </div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">🏦</div>
+          <div class="insight-text">
+            <h4>IA en todos los sectores</h4>
+            <p>Banca, sanidad, logística, retail, marketing, industria… La IA no es una tendencia tecnológica: es la infraestructura del negocio moderno.</p>
+          </div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">🎯</div>
+          <div class="insight-text">
+            <h4>Churn Prediction, Fraud Detection, Recomendación</h4>
+            <p>Tres aplicaciones reales de IA que aprenderás a construir desde cero y que valen millones de euros anuales a las empresas que las implementan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACTS SLIDER -->
+<section class="facts-bg">
+  <div class="section-inner">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-label">Casos reales</div>
+        <h2 class="section-h2">El mundo ya<br>funciona con IA</h2>
+      </div>
+    </div>
+    <div class="facts-slider reveal" id="factsSlider">
+      <div class="facts-track" id="factsTrack">
+        <div class="fact-slide">
+          <div class="fact-num">01</div>
+          <div class="fact-quote">Netflix y Spotify no adivinan: <em>calculan</em>. Eso es Machine Learning.</div>
+          <div class="fact-body">El algoritmo ha analizado millones de usuarios como tú. Ha aprendido a identificar patrones en hábitos, likes e interacciones para predecir lo que querrás consumir. Dominar el Machine Learning significa entender y construir estos sistemas que guían decisiones de miles de millones de personas en tiempo real — el tipo de modelos que aprenderás a desarrollar en este posgrado.</div>
+        </div>
+        <div class="fact-slide">
+          <div class="fact-num">02</div>
+          <div class="fact-quote">Las empresas con Big Data superan a sus rivales en hasta un <em>20% de ingresos</em>.</div>
+          <div class="fact-body">No es magia: es el resultado de eliminar la incertidumbre. Al analizar miles de millones de puntos de datos, las organizaciones predicen fallos en la cadena de suministro, personalizan ofertas para cada cliente y optimizan la logística a un nivel impensable hace una década. Este posgrado te enseña a construir exactamente esas arquitecturas de datos.</div>
+        </div>
+        <div class="fact-slide">
+          <div class="fact-num">03</div>
+          <div class="fact-quote">Tu banco sabe si vas a cambiar de entidad <em>antes que tú mismo</em>.</div>
+          <div class="fact-body">Se llama Churn Prediction. La IA analiza miles de transacciones, hábitos de uso y reclamaciones para calcular tu "Puntuación de Riesgo". Si supera el umbral, el banco interviene con ofertas personalizadas. Aprenderás a construir estos modelos predictivos: código real, datasets reales, impacto medible en millones de euros.</div>
+        </div>
+      </div>
+      <div class="facts-nav">
+        <button class="fact-btn" id="factPrev">←</button>
+        <div class="fact-dots" id="factDots">
+          <div class="fact-dot active" data-i="0"></div>
+          <div class="fact-dot" data-i="1"></div>
+          <div class="fact-dot" data-i="2"></div>
+        </div>
+        <button class="fact-btn" id="factNext">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section class="req-bg" id="requisitos">
+  <div class="section-inner">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-label">Requisitos de acceso</div>
+        <h2 class="section-h2">¿Puedo acceder<br>a este posgrado?</h2>
+        <p class="section-sub">Titulaciones con acceso directo y vías alternativas para perfiles con experiencia. Consulta tu caso con nuestros asesores.</p>
+      </div>
+    </div>
+    <div class="req-grid reveal">
+      <div class="req-box">
+        <div class="req-box-head"><div class="req-head-ico">✅</div>Acceso directo con titulación</div>
+        <ul class="req-list">
+          <li><span class="req-arrow">→</span>Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)</li>
+          <li><span class="req-arrow">→</span>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</li>
+          <li><span class="req-arrow">→</span>Técnico Superior en Desarrollo de Aplicaciones Web (DAW)</li>
+          <li><span class="req-arrow">→</span>Técnico Superior en Sistemas de Telecomunicaciones e Informáticos</li>
+          <li><span class="req-arrow">→</span>Técnico Superior en Mecatrónica Industrial</li>
+          <li><span class="req-arrow">→</span>Técnico Superior en Automatización y Robótica Industrial</li>
+        </ul>
+      </div>
+      <div class="req-box">
+        <div class="req-box-head"><div class="req-head-ico">🔓</div>Acceso alternativo (hasta 20% de plazas)</div>
+        <ul class="req-list">
+          <li><span class="req-arrow">→</span>Titulación FP diferente + experiencia acreditada en el área profesional</li>
+          <li><span class="req-arrow">→</span>Titulación FP diferente + prueba de capacidad o entrevista personal</li>
+          <li><span class="req-arrow">→</span>Sin titulación FP con experiencia laboral o conocimientos previos demostrables mediante prueba</li>
+        </ul>
+      </div>
+      <div class="ects-block">
+        <div class="ects-num">+22</div>
+        <div class="ects-detail">
+          <h4>Créditos ECTS reconocidos universitariamente</h4>
+          <p>Este posgrado aporta hasta 22 créditos ECTS adicionales. Sumados a los 120 ECTS de tu Grado Superior, alcanzas hasta <strong>142 créditos ECTS</strong> — un paso decisivo hacia la universidad. La convalidación depende de la institución receptora.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="method-bg" id="metodologia">
+  <div class="section-inner">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-label">Metodología · FP Dual</div>
+        <h2 class="section-h2">Aprender haciendo,<br>no memorizando</h2>
+        <p class="section-sub">La metodología FP Dual de CampusFP combina formación intensiva con proyectos reales para que al terminar ya tengas experiencia demostrable en tu portfolio.</p>
+      </div>
+    </div>
+    <div class="method-grid reveal">
+      <div class="method-step">
+        <div class="method-step-title">Fundamentos sólidos</div>
+        <div class="method-step-desc">Empezamos con la base matemática y algorítmica necesaria para entender realmente lo que se programa, no solo reproducirlo.</div>
+      </div>
+      <div class="method-step">
+        <div class="method-step-title">Práctica en laboratorio</div>
+        <div class="method-step-desc">Cada concepto se aplica inmediatamente sobre datasets reales. Trabajas en el mismo entorno que usan las empresas hoy.</div>
+      </div>
+      <div class="method-step">
+        <div class="method-step-title">Proyectos de empresa real</div>
+        <div class="method-step-desc">Retos planteados por empresas colaboradoras. El resultado es código, modelos y análisis que puedes mostrar en entrevistas.</div>
+      </div>
+      <div class="method-step">
+        <div class="method-step-title">FP Dual: prácticas remuneradas</div>
+        <div class="method-step-desc">El programa conecta con empresas del sector para completar parte de la formación directamente en el puesto de trabajo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech-bg" id="tech">
+  <div class="section-inner">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-label">Stack tecnológico</div>
+        <h2 class="section-h2">Las herramientas<br>que dominarás</h2>
+        <p class="section-sub">Todas las tecnologías con las que trabajarás son las mismas que usan las empresas top del sector. Nada teórico que no tenga aplicación real.</p>
+      </div>
+    </div>
+    <div class="tech-pills reveal">
+      <div class="tech-pill">🐍 Python</div>
+      <div class="tech-pill">🔥 TensorFlow</div>
+      <div class="tech-pill">⚡ PyTorch</div>
+      <div class="tech-pill">🔬 Scikit-learn</div>
+      <div class="tech-pill">🐘 Apache Hadoop</div>
+      <div class="tech-pill">✨ Apache Spark</div>
+      <div class="tech-pill">📨 Apache Kafka</div>
+      <div class="tech-pill">🗃️ SQL / NoSQL</div>
+      <div class="tech-pill">📊 Power BI</div>
+      <div class="tech-pill">📈 Tableau</div>
+      <div class="tech-pill">🐼 Pandas &amp; NumPy</div>
+      <div class="tech-pill">📉 Matplotlib / Seaborn</div>
+      <div class="tech-pill">☁️ Cloud Analytics</div>
+      <div class="tech-pill">🔗 APIs REST</div>
+      <div class="tech-pill">🐙 Git &amp; GitHub</div>
+      <div class="tech-pill">🐳 Docker</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-bg" id="faq">
+  <div class="section-inner">
+    <div class="section-header-row reveal">
+      <div>
+        <div class="section-label">Preguntas frecuentes</div>
+        <h2 class="section-h2">Todo lo que necesitas<br>saber antes de inscribirte</h2>
+      </div>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Qué aprenderé exactamente en este posgrado?<span class="faq-arr">↓</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Aprenderás a aplicar técnicas de inteligencia artificial, machine learning y análisis de Big Data en problemas reales. Trabajarás con datos, modelos predictivos, automatización y visualización, desarrollando proyectos prácticos orientados a empresa desde el primer mes. El código IFCES03 avala el título oficialmente reconocido.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Es muy técnico? ¿Necesito saber programar antes?<span class="faq-arr">↓</span></button>
+        <div class="faq-a"><div class="faq-a-inner">El posgrado está diseñado para Técnicos Superiores con base tecnológica. Python se enseña desde el inicio, por lo que no es imprescindible dominarlo antes. Sí es recomendable tener nociones básicas de programación y lógica de sistemas, que todos los accesos directos garantizan.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Qué diferencia hay entre este posgrado y un máster universitario?<span class="faq-arr">↓</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Este posgrado de FP tiene enfoque 100% práctico y profesionalizante: trabajas con proyectos reales desde el primer día. El precio es significativamente menor y la duración más concentrada, lo que permite incorporarte al mercado laboral antes. Además, los 22 ECTS que aporta son reconocibles en muchas universidades.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Tiene salidas laborales reales?<span class="faq-arr">↓</span></button>
+        <div class="faq-a"><div class="faq-a-inner">La demanda de perfiles en IA y Big Data es una de las más altas del sector TI en Europa, con una brecha de talento creciente. CampusFP cuenta con bolsa de empleo activa y convenios con empresas que buscan activamente estos perfiles. La FP Dual permite incluso comenzar a trabajar antes de terminar.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Dónde se imparte y en qué horario?<span class="faq-arr">↓</span></button>
+        <div class="faq-a"><div class="faq-a-inner">El programa se imparte presencialmente en dos centros de Madrid: CampusFP Alcalá de Henares y CampusFP Getafe. Los horarios concretos y las fechas de inicio se confirman al solicitar información. Solicita plaza y un asesor te contactará en menos de 24 horas.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo acceder sin las titulaciones requeridas?<span class="faq-arr">↓</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sí. Hasta el 20% de plazas están reservadas para perfiles con titulaciones o experiencias distintas a las requeridas. Si tienes experiencia en el sector o conocimientos técnicos relevantes, puedes acceder mediante prueba de capacidad, entrevista o evaluación curricular. Contáctanos y evaluamos tu caso personalmente.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Existen becas o ayudas para este posgrado?<span class="faq-arr">↓</span></button>
+        <div class="faq-a"><div class="faq-a-inner">CampusFP dispone de un programa propio de Becas FP que puede aplicarse a este posgrado. Además, existen ayudas y subvenciones externas para la formación profesional en la Comunidad de Madrid. Consulta con nuestro equipo de admisiones para conocer las opciones disponibles en tu caso concreto.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-banner-inner">
+    <h2>Tu carrera en IA<br>empieza con una decisión</h2>
+    <p>Las plazas son limitadas. El sector no espera. Únete a la próxima generación de especialistas en datos e inteligencia artificial con el respaldo de CampusFP.</p>
+    <div class="cta-btn-group">
+      <a href="#contacto" class="btn-white">Solicitar información ahora →</a>
+      <a href="https://campusfp.es/campus-becas-fp/" target="_blank" class="btn-outline-white">Consultar Becas FP</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="form-bg" id="contacto">
+  <div class="section-inner">
+    <div class="form-grid">
+      <div class="form-info-block reveal">
+        <div class="section-label">Solicita información</div>
+        <div class="form-info-title">Hablemos sobre<br>tu futuro profesional</div>
+        <div class="form-info-desc">Rellena el formulario y un asesor académico de CampusFP se pondrá en contacto contigo en menos de 24 horas para resolver todas tus dudas y guiarte en el proceso de admisión.</div>
+        <div class="center-card">
+          <div class="center-card-ico">🏫</div>
+          <div>
+            <h4>CampusFP Alcalá de Henares</h4>
+            <p>Campus Norte · Madrid</p>
+          </div>
+        </div>
+        <div class="center-card">
+          <div class="center-card-ico">🏫</div>
+          <div>
+            <h4>CampusFP Getafe</h4>
+            <p>Campus Sur · Madrid</p>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--bg3);border:1px solid rgba(0,168,120,0.2);border-radius:var(--radius-md);">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cfp-green);margin-bottom:.5rem;">✓ Respuesta garantizada</div>
+          <div style="font-size:0.875rem;color:var(--text-sec);">Nuestro equipo de admisiones responde en menos de 24 horas en días hábiles. Sin compromisos.</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="form-card" id="formCard">
+          <div id="formWrap">
+            <div class="form-cols">
+              <div class="form-row"><label>Nombre</label><input type="text" id="fname" placeholder="Tu nombre"></div>
+              <div class="form-row"><label>Apellidos</label><input type="text" id="lname" placeholder="Tus apellidos"></div>
+            </div>
+            <div class="form-row"><label>Correo electrónico</label><input type="email" id="femail" placeholder="tu@email.com"></div>
+            <div class="form-row"><label>Teléfono</label><input type="tel" id="fphone" placeholder="+34 600 000 000"></div>
+            <div class="form-row">
+              <label>Titulación actual</label>
+              <select id="ftitle">
+                <option value="">— Selecciona tu titulación —</option>
+                <option>Técnico Superior ASIR</option>
+                <option>Técnico Superior DAM</option>
+                <option>Técnico Superior DAW</option>
+                <option>Técnico Superior Telecomunicaciones</option>
+                <option>Otra titulación FP</option>
+                <option>Sin titulación FP (con experiencia)</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Centro de interés</label>
+              <select id="fcenter">
+                <option value="">— Selecciona un centro —</option>
+                <option>CampusFP Alcalá de Henares</option>
+                <option>CampusFP Getafe</option>
+                <option>Ambos centros</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>¿Cómo nos conociste?</label>
+              <select id="fhow">
+                <option value="">— Selecciona —</option>
+                <option>Redes Sociales</option>
+                <option>Búsqueda en Internet</option>
+                <option>Recomendación de un amigo</option>
+                <option>Anuncios de Google</option>
+                <option>Prensa o medios</option>
+                <option>Pasé por el centro</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-row"><label>Mensaje (opcional)</label><textarea id="fmsg" placeholder="¿Tienes alguna pregunta concreta sobre el acceso, el programa o las becas?"></textarea></div>
+            <button class="form-submit" onclick="submitForm()">Quiero que me contacten →</button>
+            <div class="form-legal">Al enviar este formulario aceptas nuestra Política de Privacidad. Tus datos serán tratados únicamente para gestionar tu solicitud de información sobre el programa.</div>
+          </div>
+          <div class="form-success" id="formSuccess">
+            <div class="form-success-icon">✅</div>
+            <h3>¡Solicitud recibida!</h3>
+            <p>Un asesor de CampusFP se pondrá en contacto contigo en menos de 24 horas. Comprueba también tu carpeta de spam.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEGA FOOTER TOP -->
+<footer>
+  <div class="mega-footer-top">
+    <div class="mega-footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand-logo">
+          <div class="footer-logo-mark">CFP</div>
+          <div class="footer-logo-name">CampusFP<span class="footer-logo-sub">Formación Profesional Reglada</span></div>
+        </div>
+        <div class="footer-brand-desc">CampusFP es uno de los centros de Formación Profesional de referencia en la Comunidad de Madrid, con más de 25 familias profesionales, modelo FP Dual y conexión directa con el mercado laboral.</div>
+        <div class="footer-social">
+          <a href="https://campusfp.es" target="_blank" class="social-btn" title="Web">🌐</a>
+          <a href="#" class="social-btn" title="LinkedIn">in</a>
+          <a href="#" class="social-btn" title="Instagram">ig</a>
+          <a href="#" class="social-btn" title="YouTube">▶</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">El posgrado</div>
+        <ul class="footer-col-links">
+          <li><a href="#curriculum">Programa y módulos</a></li>
+          <li><a href="#salidas">Salidas profesionales</a></li>
+          <li><a href="#requisitos">Requisitos de acceso</a></li>
+          <li><a href="#metodologia">Metodología FP Dual</a></li>
+          <li><a href="#tech">Stack tecnológico</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="#contacto">Solicitar información</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">CampusFP</div>
+        <ul class="footer-col-links">
+          <li><a href="https://campusfp.es/centros/" target="_blank">Nuestros centros</a></li>
+          <li><a href="https://campusfp.es/nuestro-adn.php" target="_blank">Nuestro ADN</a></li>
+          <li><a href="https://campusfp.es/comunidad-campusfp/" target="_blank">Comunidad Campus</a></li>
+          <li><a href="https://campusfp.es/fp-dual-en-campusfp" target="_blank">FP Dual</a></li>
+          <li><a href="https://campusfp.es/erasmus/proyectos-innovacion.php" target="_blank">Proyectos de innovación</a></li>
+          <li><a href="https://campusfp.es/noticias/" target="_blank">Noticias</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Recursos</div>
+        <ul class="footer-col-links">
+          <li><a href="https://campusfp.es/campus-becas-fp/" target="_blank">Becas FP <span class="link-badge">Nuevo</span></a></li>
+          <li><a href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank">Bolsa de empleo</a></li>
+          <li><a href="https://campusfp.es/preguntas-frecuentes-formacion-profesional" target="_blank">FAQ general FP</a></li>
+          <li><a href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank">Movilidades Erasmus+</a></li>
+          <li><a href="https://campusfp.es/insercion-laboral-internacional.php" target="_blank">Inserción laboral</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER LINKS BAR -->
+  <div class="footer-links-bar">
+    <div class="flb-inner">
+      <div class="flb-title">Recursos y servicios de CampusFP</div>
+      <div class="flb-grid">
+        <a href="https://campusfp.es/campus-becas-fp/" target="_blank" class="flb-card">
+          <div class="flb-card-ico">🎓</div>
+          <div class="flb-card-text"><h4>Becas FP</h4><p>Ayudas económicas para acceder a tu formación</p></div>
+        </a>
+        <a href="https://campusfp.es/centros/" target="_blank" class="flb-card">
+          <div class="flb-card-ico">📍</div>
+          <div class="flb-card-text"><h4>Nuestros Centros</h4><p>Alcalá de Henares y Getafe, Madrid</p></div>
+        </a>
+        <a href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank" class="flb-card">
+          <div class="flb-card-ico">💼</div>
+          <div class="flb-card-text"><h4>Bolsa de Empleo</h4><p>Conectamos talento con empresas del sector</p></div>
+        </a>
+        <a href="#salidas" class="flb-card">
+          <div class="flb-card-ico">🚀</div>
+          <div class="flb-card-text"><h4>Salidas Profesionales</h4><p>6 perfiles de alta demanda en IA y Big Data</p></div>
+        </a>
+        <a href="#requisitos" class="flb-card">
+          <div class="flb-card-ico">📋</div>
+          <div class="flb-card-text"><h4>Requisitos de Acceso</h4><p>Titulaciones y vías alternativas al posgrado</p></div>
+        </a>
+        <a href="https://campusfp.es/fp-dual-en-campusfp" target="_blank" class="flb-card">
+          <div class="flb-card-ico">🤝</div>
+          <div class="flb-card-text"><h4>FP Dual</h4><p>Formación + prácticas en empresa real</p></div>
+        </a>
+        <a href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank" class="flb-card">
+          <div class="flb-card-ico">🌍</div>
+          <div class="flb-card-text"><h4>Movilidades Erasmus+</h4><p>Formación y prácticas en Europa</p></div>
+        </a>
+        <a href="https://campusfp.es/insercion-laboral-internacional.php" target="_blank" class="flb-card">
+          <div class="flb-card-ico">🏆</div>
+          <div class="flb-card-text"><h4>Inserción Laboral</h4><p>Apoyo en tu incorporación al mercado</p></div>
+        </a>
+        <a href="https://campusfp.es/informatica-y-comunicaciones/" target="_blank" class="flb-card">
+          <div class="flb-card-ico">💻</div>
+          <div class="flb-card-text"><h4>Informática y Comunicaciones</h4><p>Todos los ciclos del área tecnológica</p></div>
+        </a>
+        <a href="https://campusfp.es/preguntas-frecuentes-formacion-profesional" target="_blank" class="flb-card">
+          <div class="flb-card-ico">❓</div>
+          <div class="flb-card-text"><h4>FAQ sobre FP</h4><p>Resuelve todas tus dudas sobre la FP</p></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER BOTTOM -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <div class="footer-copy">© 2025 CampusFP · Todos los derechos reservados · Centro autorizado por la Comunidad de Madrid</div>
+      <div class="footer-reg">Posgrado IFCES03 · Grado Superior</div>
+      <div class="footer-legal">
+        <a href="https://campusfp.es" target="_blank">Política de Privacidad</a>
+        <a href="https://campusfp.es" target="_blank">Aviso Legal</a>
+        <a href="https://campusfp.es" target="_blank">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+revealEls.forEach(r => revealObs.observe(r));
+
+// demand bars animation
+const demandFills = document.querySelectorAll('.demand-fill');
+const demandObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      demandFills.forEach(f => {
+        const w = getComputedStyle(f).getPropertyValue('--w');
+        f.style.width = (parseFloat(w) * 100) + '%';
+        f.classList.add('animated');
+      });
+      demandObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+if (demandFills.length) demandObs.observe(demandFills[0].closest('section'));
+
+// counter animation
+function animCount(el) {
+  const target = +el.dataset.count;
+  const suffix = el.dataset.suffix || '';
+  let start = null;
+  const dur = 1600;
+  const step = (ts) => {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const statNums = document.querySelectorAll('.stat-num[data-count]');
+const statsObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    statNums.forEach(animCount);
+    statsObs.disconnect();
+  }
+}, { threshold: 0.5 });
+if (statNums.length) statsObs.observe(statNums[0].closest('.data-card-outer'));
+
+// facts slider
+let factCur = 0;
+const fTrack = document.getElementById('factsTrack');
+const fDots = document.querySelectorAll('.fact-dot');
+const fTotal = 3;
+function goFact(i) {
+  factCur = (i + fTotal) % fTotal;
+  fTrack.style.transform = `translateX(-${factCur * 100}%)`;
+  fDots.forEach((d, idx) => d.classList.toggle('active', idx === factCur));
+}
+document.getElementById('factNext').onclick = () => goFact(factCur + 1);
+document.getElementById('factPrev').onclick = () => goFact(factCur - 1);
+fDots.forEach(d => d.addEventListener('click', () => goFact(+d.dataset.i)));
+setInterval(() => goFact(factCur + 1), 6500);
+
+// faq
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q => {
+    q.classList.remove('open');
+    q.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) { btn.classList.add('open'); ans.classList.add('open'); }
+}
+
+// form
+function submitForm() {
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  if (!name || !email) {
+    alert('Por favor, completa al menos tu nombre y correo electrónico.');
+    return;
+  }
+  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+// scroll to top
+const st = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  st.classList.toggle('show', window.scrollY > 500);
+});
+st.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+// nav active links
+const sections = document.querySelectorAll('section[id], header[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const linkObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (link) link.style.color = 'var(--cfp-accent)';
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => linkObs.observe(s));
+</script>
+</body>
+</html>

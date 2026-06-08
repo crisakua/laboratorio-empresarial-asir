@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Máster en Ciberseguridad · CampusFP Alcalá de Henares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #030810;
+    --bg2: #060f1c;
+    --bg3: #0a1628;
+    --cyan: #00f5ff;
+    --cyan2: #00bcd4;
+    --green: #00ff88;
+    --red: #ff2d55;
+    --orange: #ff6b35;
+    --text: #c8d8e8;
+    --text-dim: #5a7a9a;
+    --border: rgba(0,245,255,0.12);
+    --glow: 0 0 20px rgba(0,245,255,0.3);
+    --glow-strong: 0 0 40px rgba(0,245,255,0.5);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CURSOR */
+  #cursor {
+    position: fixed; width: 20px; height: 20px;
+    border: 1px solid var(--cyan); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: width .15s, height .15s, background .15s;
+    mix-blend-mode: screen;
+  }
+  #cursor-dot {
+    position: fixed; width: 4px; height: 4px;
+    background: var(--cyan); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+  }
+  body:hover #cursor { background: rgba(0,245,255,0.05); }
+
+  /* CANVAS BG */
+  #matrix-canvas {
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    pointer-events: none; z-index: 0; opacity: 0.07;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 4rem;
+    background: rgba(3,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem; color: var(--cyan);
+    letter-spacing: .2em; text-decoration: none;
+  }
+  .nav-logo span { color: var(--green); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none;
+    font-size: .85rem; letter-spacing: .1em;
+    font-family: 'Rajdhani', sans-serif; font-weight: 600;
+    text-transform: uppercase;
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom:-4px; left:0; right:0;
+    height: 1px; background: var(--cyan);
+    transform: scaleX(0); transition: transform .2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: transparent; border: 1px solid var(--cyan);
+    color: var(--cyan); padding: .5rem 1.5rem;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700;
+    font-size: .85rem; letter-spacing: .1em;
+    text-transform: uppercase; cursor: pointer;
+    transition: all .2s; text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .nav-cta:hover { background: var(--cyan); color: var(--bg); box-shadow: var(--glow); }
+
+  /* HERO */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 4rem;
+    overflow: hidden; z-index: 1;
+  }
+  .hero-grid {
+    position: absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-scroll 20s linear infinite;
+  }
+  @keyframes grid-scroll { to { background-position: 0 50px; } }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    border: 1px solid var(--green); padding: .3rem 1rem;
+    font-family: 'Share Tech Mono', monospace; font-size: .75rem;
+    color: var(--green); letter-spacing: .2em;
+    margin-bottom: 2rem; position: relative; z-index: 2;
+    animation: fade-in .8s ease both;
+  }
+  .badge-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse-green 1.5s infinite; }
+  @keyframes pulse-green { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+
+  .hero h1 {
+    font-family: 'Exo 2', sans-serif; font-weight: 900;
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 1.05; position: relative; z-index: 2;
+    animation: fade-up .8s ease .2s both;
+  }
+  .hero h1 .line1 { color: #fff; display: block; }
+  .hero h1 .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--cyan), var(--green));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    max-width: 600px; margin: 1.5rem auto 0;
+    font-size: 1.1rem; color: var(--text-dim); line-height: 1.7;
+    position: relative; z-index: 2;
+    animation: fade-up .8s ease .4s both;
+  }
+  .hero-sub strong { color: var(--text); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3rem;
+    position: relative; z-index: 2;
+    animation: fade-up .8s ease .6s both;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2.2rem; color: var(--cyan);
+    display: block; text-shadow: var(--glow);
+  }
+  .stat-label { font-size: .75rem; color: var(--text-dim); letter-spacing: .1em; text-transform: uppercase; }
+
+  .hero-btns {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    position: relative; z-index: 2;
+    animation: fade-up .8s ease .8s both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--cyan2), var(--cyan));
+    color: var(--bg); border: none; padding: .9rem 2.5rem;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700;
+    font-size: 1rem; letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: all .2s;
+  }
+  .btn-primary:hover { box-shadow: var(--glow-strong); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; border: 1px solid var(--text-dim);
+    color: var(--text); padding: .9rem 2.5rem;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700;
+    font-size: 1rem; letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: all .2s;
+  }
+  .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* SCROLL INDICATOR */
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .5rem;
+    font-size: .7rem; letter-spacing: .2em; color: var(--text-dim);
+    font-family: 'Share Tech Mono', monospace;
+    animation: fade-in 1.5s ease 1.2s both;
+  }
+  .scroll-line { width: 1px; height: 50px; background: linear-gradient(var(--cyan), transparent); animation: scroll-anim 2s infinite; }
+  @keyframes scroll-anim { 0%{opacity:0;transform:scaleY(0);transform-origin:top} 50%{opacity:1;transform:scaleY(1)} 100%{opacity:0;transform:scaleY(1);transform-origin:bottom} }
+
+  /* THREAT TICKER */
+  .ticker-wrap {
+    position: relative; z-index: 1;
+    background: rgba(255,45,85,0.05); border-top: 1px solid rgba(255,45,85,0.2);
+    border-bottom: 1px solid rgba(255,45,85,0.2); padding: .6rem 0;
+    overflow: hidden;
+  }
+  .ticker-label {
+    position: absolute; left:0; top:0; bottom:0;
+    background: var(--red); color: #fff;
+    padding: 0 1rem; display: flex; align-items: center;
+    font-family: 'Share Tech Mono', monospace; font-size: .75rem;
+    letter-spacing: .1em; z-index: 1; white-space: nowrap;
+  }
+  .ticker-inner {
+    display: flex; gap: 4rem;
+    animation: ticker-scroll 30s linear infinite;
+    padding-left: 160px;
+  }
+  .ticker-item {
+    white-space: nowrap; font-family: 'Share Tech Mono', monospace;
+    font-size: .75rem; color: var(--red);
+  }
+  .ticker-item::before { content: '⚠ '; }
+  @keyframes ticker-scroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  .section-header {
+    text-align: center; margin-bottom: 4rem;
+  }
+  .section-tag {
+    font-family: 'Share Tech Mono', monospace; font-size: .75rem;
+    color: var(--cyan); letter-spacing: .3em; text-transform: uppercase;
+    margin-bottom: .75rem; display: block;
+  }
+  .section-title {
+    font-family: 'Exo 2', sans-serif; font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 3rem); color: #fff;
+    line-height: 1.2;
+  }
+  .section-title em { font-style: normal; color: var(--cyan); }
+  .section-desc {
+    margin-top: 1rem; color: var(--text-dim);
+    max-width: 600px; margin-left: auto; margin-right: auto;
+    line-height: 1.7;
+  }
+
+  /* MÓDULOS */
+  #modulos { padding: 6rem 4rem; }
+  .modules-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+  }
+  .module-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: all .3s; cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+  .module-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .module-card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: var(--glow); }
+  .module-card:hover::before { opacity: 1; }
+  .module-icon {
+    font-size: 2rem; margin-bottom: 1rem; display: block;
+  }
+  .module-hours {
+    font-family: 'Share Tech Mono', monospace; font-size: .7rem;
+    color: var(--cyan); letter-spacing: .1em;
+    background: rgba(0,245,255,0.08); padding: .2rem .6rem;
+    float: right; margin-top: .3rem;
+  }
+  .module-title {
+    font-family: 'Exo 2', sans-serif; font-weight: 700;
+    font-size: 1.1rem; color: #fff; margin-bottom: .75rem;
+    clear: both;
+  }
+  .module-topics { list-style: none; }
+  .module-topics li {
+    font-size: .85rem; color: var(--text-dim); padding: .3rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: center; gap: .5rem;
+    transition: color .2s;
+  }
+  .module-card:hover .module-topics li { color: var(--text); }
+  .module-topics li::before { content: '›'; color: var(--cyan); font-size: 1rem; }
+  .module-expand {
+    margin-top: 1rem; font-size: .8rem; color: var(--cyan);
+    font-family: 'Rajdhani', sans-serif; font-weight: 600;
+    letter-spacing: .05em; cursor: pointer; display: none;
+  }
+
+  /* WHY SECTION */
+  #por-que { padding: 6rem 4rem; background: var(--bg2); }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; max-width: 1100px; margin: 0 auto;
+    align-items: center;
+  }
+  .why-visual {
+    position: relative; height: 400px;
+  }
+  .why-ring {
+    position: absolute; border: 1px solid;
+    border-radius: 50%; animation: spin linear infinite;
+  }
+  .ring1 { width:300px;height:300px; top:50px; left:50px; border-color: rgba(0,245,255,0.15); animation-duration: 20s; }
+  .ring2 { width:200px;height:200px; top:100px; left:100px; border-color: rgba(0,255,136,0.2); animation-duration: 15s; animation-direction: reverse; }
+  .ring3 { width:120px;height:120px; top:140px; left:140px; border-color: rgba(255,45,85,0.3); animation-duration: 10s; }
+  .ring-center {
+    position: absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, var(--cyan), transparent);
+    border-radius: 50%; opacity: .6;
+    animation: pulse-cyan 2s infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse-cyan { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6} 50%{transform:translate(-50%,-50%) scale(1.3);opacity:.9} }
+  .ring-label {
+    position: absolute; font-family: 'Share Tech Mono', monospace;
+    font-size: .7rem; color: var(--cyan); white-space: nowrap;
+  }
+  .rl1 { top:20px; left:80px; }
+  .rl2 { top:200px; left:0; color: var(--green); }
+  .rl3 { bottom: 60px; right: 30px; color: var(--red); }
+  .rl4 { top:80px; right:20px; }
+
+  .why-points { display: flex; flex-direction: column; gap: 1.5rem; }
+  .why-point {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding: 1.5rem; background: var(--bg3);
+    border: 1px solid var(--border);
+    transition: border-color .3s;
+  }
+  .why-point:hover { border-color: var(--cyan); }
+  .why-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5rem; color: var(--cyan); opacity:.3;
+    flex-shrink: 0; line-height: 1;
+  }
+  .why-point h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
+  .why-point p { font-size: .875rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* SALIDAS LABORALES */
+  #salidas { padding: 6rem 4rem; }
+  .jobs-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+  }
+  .job-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    padding: 2.5rem 1.5rem; text-align: center;
+    position: relative; overflow: hidden; transition: all .3s;
+  }
+  .job-card::after {
+    content: ''; position: absolute; bottom:0; left:0; right:0;
+    height: 3px; background: var(--gradient, linear-gradient(135deg, var(--cyan), var(--green)));
+    transform: scaleX(0); transition: transform .3s;
+  }
+  .job-card:hover::after { transform: scaleX(1); }
+  .job-card:hover { transform: translateY(-6px); }
+  .job-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+  .job-title { font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: .5rem; }
+  .job-salary {
+    font-family: 'Share Tech Mono', monospace; font-size: .8rem;
+    color: var(--green);
+  }
+  .job-desc { margin-top: .75rem; font-size: .8rem; color: var(--text-dim); line-height: 1.5; }
+
+  /* REQUISITOS */
+  #requisitos { padding: 6rem 4rem; background: var(--bg2); }
+  .req-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; max-width: 1100px; margin: 0 auto;
+  }
+  .req-box {
+    background: var(--bg3); border: 1px solid var(--border); padding: 2rem;
+  }
+  .req-box h3 {
+    font-family: 'Exo 2', sans-serif; font-weight: 700;
+    font-size: 1.1rem; color: var(--cyan); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .75rem;
+  }
+  .req-box h3 .icon { font-size: 1.3rem; }
+  .req-list { list-style: none; }
+  .req-list li {
+    padding: .75rem 0; border-bottom: 1px solid var(--border);
+    font-size: .9rem; color: var(--text-dim);
+    display: flex; align-items: center; gap: .75rem;
+    transition: color .2s;
+  }
+  .req-list li:hover { color: var(--text); }
+  .req-list li .check { color: var(--green); font-size: 1rem; flex-shrink:0; }
+  .credits-block {
+    background: linear-gradient(135deg, rgba(0,245,255,0.05), rgba(0,255,136,0.05));
+    border: 1px solid rgba(0,245,255,0.2); padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .credits-row { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; }
+  .credits-label { font-size: .85rem; color: var(--text-dim); }
+  .credits-val {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem; color: var(--cyan);
+  }
+
+  /* STATS BAR */
+  #cifras { padding: 5rem 4rem; text-align: center; }
+  .cifras-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; max-width: 1000px; margin: 0 auto;
+  }
+  .cifra-item { padding: 2rem; }
+  .cifra-num {
+    font-family: 'Exo 2', sans-serif; font-weight: 900;
+    font-size: 3rem; line-height: 1;
+    background: linear-gradient(135deg, var(--cyan), var(--green));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .cifra-label { font-size: .8rem; color: var(--text-dim); margin-top: .5rem; letter-spacing: .05em; }
+  .cifra-divider {
+    width: 1px; background: var(--border);
+    align-self: stretch; margin: 1rem 0;
+  }
+
+  /* METODOLOGÍA */
+  #metodologia { padding: 6rem 4rem; }
+  .method-timeline {
+    max-width: 800px; margin: 0 auto;
+    position: relative;
+  }
+  .method-timeline::before {
+    content: ''; position: absolute; left: 30px; top:0; bottom:0;
+    width: 1px; background: linear-gradient(to bottom, var(--cyan), transparent);
+  }
+  .method-step {
+    display: flex; gap: 2rem; margin-bottom: 3rem;
+    padding-left: 0; align-items: flex-start;
+  }
+  .step-num {
+    width: 60px; height: 60px; flex-shrink:0;
+    border: 1px solid var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.2rem; color: var(--cyan);
+    background: var(--bg2); position: relative; z-index: 1;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+  .step-content { flex: 1; padding-top: .5rem; }
+  .step-content h3 {
+    font-family: 'Exo 2', sans-serif; font-weight: 700;
+    font-size: 1.1rem; color: #fff; margin-bottom: .5rem;
+  }
+  .step-content p { font-size: .9rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* FAQ */
+  #faq { padding: 6rem 4rem; background: var(--bg2); }
+  .faq-list { max-width: 800px; margin: 0 auto; }
+  .faq-item {
+    border: 1px solid var(--border); margin-bottom: 1rem;
+    overflow: hidden; transition: border-color .2s;
+  }
+  .faq-item.open { border-color: var(--cyan); }
+  .faq-q {
+    padding: 1.25rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; font-weight: 600; font-size: .95rem;
+    color: var(--text); transition: color .2s; user-select: none;
+  }
+  .faq-item.open .faq-q { color: var(--cyan); }
+  .faq-toggle {
+    width: 24px; height: 24px; flex-shrink:0;
+    border: 1px solid currentColor; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1rem; transition: transform .3s;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height .4s ease;
+    padding: 0 1.5rem;
+    font-size: .875rem; color: var(--text-dim); line-height: 1.7;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 1.5rem 1.25rem; }
+
+  /* FORM */
+  #contacto { padding: 6rem 4rem; }
+  .form-wrap {
+    max-width: 700px; margin: 0 auto;
+    background: var(--bg2); border: 1px solid var(--border); padding: 3rem;
+    position: relative;
+  }
+  .form-wrap::before {
+    content: ''; position: absolute; top:-1px; left:0;
+    width: 80px; height: 2px; background: var(--cyan);
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .form-group { display: flex; flex-direction: column; gap: .4rem; }
+  .form-group.full { grid-column: 1/-1; }
+  label {
+    font-family: 'Share Tech Mono', monospace; font-size: .72rem;
+    color: var(--cyan); letter-spacing: .15em; text-transform: uppercase;
+  }
+  input, select, textarea {
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--text); padding: .75rem 1rem;
+    font-family: 'Exo 2', sans-serif; font-size: .9rem;
+    outline: none; transition: border-color .2s; width: 100%;
+    appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,245,255,0.08); }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    grid-column: 1/-1; margin-top: .5rem;
+  }
+  .btn-submit {
+    width: 100%; background: linear-gradient(135deg, var(--cyan2), var(--cyan));
+    color: var(--bg); border: none; padding: 1rem;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700;
+    font-size: 1.1rem; letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; transition: all .2s;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  }
+  .btn-submit:hover { box-shadow: var(--glow-strong); transform: translateY(-2px); }
+  .form-note {
+    grid-column: 1/-1; font-size: .78rem; color: var(--text-dim);
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .form-note::before { content: '🔒'; }
+  #form-success {
+    display: none; text-align: center; padding: 2rem;
+    color: var(--green); font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg); border-top: 1px solid var(--border);
+    padding: 3rem 4rem; position: relative; z-index: 1;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem; max-width: 1100px; margin: 0 auto;
+  }
+  .footer-brand p { font-size: .875rem; color: var(--text-dim); line-height: 1.6; margin-top: .75rem; }
+  .footer-col h4 {
+    font-family: 'Share Tech Mono', monospace; font-size: .75rem;
+    color: var(--cyan); letter-spacing: .2em; margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: .5rem; }
+  .footer-col ul li a {
+    color: var(--text-dim); text-decoration: none; font-size: .875rem;
+    transition: color .2s;
+  }
+  .footer-col ul li a:hover { color: var(--cyan); }
+  .footer-bottom {
+    border-top: 1px solid var(--border); margin-top: 2rem; padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: .75rem; color: var(--text-dim); font-family: 'Share Tech Mono', monospace;
+    max-width: 1100px; margin-left: auto; margin-right: auto;
+  }
+  .accreditations { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .accred-badge {
+    border: 1px solid var(--border); padding: .3rem .7rem;
+    font-size: .65rem; letter-spacing: .1em; color: var(--text-dim);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fade-in { from{opacity:0} to{opacity:1} }
+  @keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    #modulos, #por-que, #salidas, #requisitos, #cifras, #metodologia, #faq, #contacto { padding: 4rem 1.5rem; }
+    .why-grid, .req-layout, .footer-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .cifras-grid { grid-template-columns: repeat(2,1fr); }
+    footer { padding: 2rem 1.5rem; }
+    .hero-btns { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+<div id="cursor"></div>
+<div id="cursor-dot"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">CAMPUS<span>FP</span></a>
+  <ul class="nav-links">
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#salidas">Salidas</a></li>
+    <li><a href="#requisitos">Requisitos</a></li>
+    <li><a href="#metodologia">Metodología</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Solicitar info</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    ALCALÁ DE HENARES · PLAZA DISPONIBLE 2025–2026
+  </div>
+  <h1>
+    <span class="line1">Máster FP en</span>
+    <span class="line2">Ciberseguridad</span>
+  </h1>
+  <p class="hero-sub">
+    Formación oficial de posgrado orientada a <strong>la alta empleabilidad tecnológica</strong>.
+    Aprende a proteger sistemas, detectar amenazas y convertirte en el profesional
+    más demandado del sector digital.
+  </p>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">720h</span>
+      <span class="stat-label">Horas formativas</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">43</span>
+      <span class="stat-label">Créditos ECTS</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">6</span>
+      <span class="stat-label">Módulos especializados</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">95%</span>
+      <span class="stat-label">Inserción laboral</span>
+    </div>
+  </div>
+  <div class="hero-btns">
+    <a href="#contacto" class="btn-primary">Solicitar información</a>
+    <a href="#modulos" class="btn-secondary">Ver el programa</a>
+  </div>
+  <div class="scroll-indicator">
+    SCROLL
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-label">⚡ AMENAZAS ACTIVAS</div>
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item">Ransomware WannaCry 2.0 detectado en 47 países</span>
+    <span class="ticker-item">El 43% de empresas españolas ha sufrido un ciberataque</span>
+    <span class="ticker-item">Demanda de especialistas en ciberseguridad crece un 30% anual</span>
+    <span class="ticker-item">El 55% de empresas aumentará su presupuesto en ciberseguridad</span>
+    <span class="ticker-item">Solo el 20% de empresas españolas es "madura" en ciberseguridad</span>
+    <span class="ticker-item">El error humano es la causa nº1 de incidentes de seguridad</span>
+    <span class="ticker-item">Más de 3,5 millones de puestos sin cubrir en ciberseguridad a nivel mundial</span>
+    <span class="ticker-item">Ransomware WannaCry 2.0 detectado en 47 países</span>
+    <span class="ticker-item">El 43% de empresas españolas ha sufrido un ciberataque</span>
+    <span class="ticker-item">Demanda de especialistas en ciberseguridad crece un 30% anual</span>
+    <span class="ticker-item">El 55% de empresas aumentará su presupuesto en ciberseguridad</span>
+    <span class="ticker-item">Solo el 20% de empresas españolas es "madura" en ciberseguridad</span>
+    <span class="ticker-item">El error humano es la causa nº1 de incidentes de seguridad</span>
+    <span class="ticker-item">Más de 3,5 millones de puestos sin cubrir en ciberseguridad a nivel mundial</span>
+  </div>
+</div>
+
+<!-- CIFRAS -->
+<section id="cifras">
+  <div class="cifras-grid">
+    <div class="cifra-item reveal">
+      <div class="cifra-num" data-target="30">0</div>
+      <div class="cifra-label">% de crecimiento anual en demanda de profesionales</div>
+    </div>
+    <div class="cifra-item reveal">
+      <div class="cifra-num" data-target="3500000">0</div>
+      <div class="cifra-label">Puestos sin cubrir en ciberseguridad a nivel mundial</div>
+    </div>
+    <div class="cifra-item reveal">
+      <div class="cifra-num" data-target="43">0</div>
+      <div class="cifra-label">% de empresas españolas que ha sufrido un ciberataque</div>
+    </div>
+    <div class="cifra-item reveal">
+      <div class="cifra-num" data-target="55">0</div>
+      <div class="cifra-label">% de empresas que aumentará su inversión en seguridad</div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section id="modulos">
+  <div class="section-header reveal">
+    <span class="section-tag">// programa formativo</span>
+    <h2 class="section-title">Seis módulos. <em>Una especialización completa.</em></h2>
+    <p class="section-desc">720 horas de formación intensiva y práctica diseñadas por expertos del sector para convertirte en un profesional de la ciberseguridad listo para el mercado laboral.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="module-card reveal">
+      <span class="module-icon">🚨</span>
+      <span class="module-hours">80 horas</span>
+      <div class="module-title">01 · Incidentes de Ciberseguridad</div>
+      <ul class="module-topics">
+        <li>Planes de prevención y concienciación</li>
+        <li>Auditoría de incidentes</li>
+        <li>Investigación y análisis</li>
+        <li>Implementación de medidas</li>
+        <li>Detección y documentación</li>
+      </ul>
+    </div>
+    <div class="module-card reveal">
+      <span class="module-icon">🛡️</span>
+      <span class="module-hours">210 horas</span>
+      <div class="module-title">02 · Bastionado de Redes y Sistemas</div>
+      <ul class="module-topics">
+        <li>Diseño de planes de securización</li>
+        <li>Control de acceso y autenticación</li>
+        <li>Administración de credenciales</li>
+        <li>Redes de computadores seguras</li>
+        <li>Configuración de sistemas</li>
+      </ul>
+    </div>
+    <div class="module-card reveal">
+      <span class="module-icon">🚀</span>
+      <span class="module-hours">140 horas</span>
+      <div class="module-title">03 · Puesta en Producción Segura</div>
+      <ul class="module-topics">
+        <li>Pruebas en apps web y móvil</li>
+        <li>Nivel de seguridad requerido</li>
+        <li>Corrección de vulnerabilidades web</li>
+        <li>Seguridad en apps móviles</li>
+        <li>Despliegue seguro de software</li>
+      </ul>
+    </div>
+    <div class="module-card reveal">
+      <span class="module-icon">🔍</span>
+      <span class="module-hours">110 horas</span>
+      <div class="module-title">04 · Análisis Forense Informático</div>
+      <ul class="module-topics">
+        <li>Metodologías de análisis forense</li>
+        <li>Forense en dispositivos móviles</li>
+        <li>Forense en entornos Cloud</li>
+        <li>Forense en IoT</li>
+        <li>Elaboración de informes técnicos</li>
+      </ul>
+    </div>
+    <div class="module-card reveal">
+      <span class="module-icon">💻</span>
+      <span class="module-hours">140 horas</span>
+      <div class="module-title">05 · Hacking Ético</div>
+      <ul class="module-topics">
+        <li>Herramientas de monitorización</li>
+        <li>Ataque y defensa en redes WiFi</li>
+        <li>Pentesting en redes y sistemas</li>
+        <li>Consolidación de sistemas comprometidos</li>
+        <li>Ataque y defensa en apps web</li>
+      </ul>
+    </div>
+    <div class="module-card reveal">
+      <span class="module-icon">⚖️</span>
+      <span class="module-hours">40 horas</span>
+      <div class="module-title">06 · Normativa de Ciberseguridad</div>
+      <ul class="module-topics">
+        <li>Cumplimiento normativo</li>
+        <li>Responsabilidad penal digital</li>
+        <li>RGPD y protección de datos</li>
+        <li>Normativa nacional e internacional</li>
+        <li>Esquema Nacional de Seguridad (ENS)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ -->
+<section id="por-que">
+  <div class="section-header reveal">
+    <span class="section-tag">// por qué elegirnos</span>
+    <h2 class="section-title">La ciberseguridad es el <em>presente</em>, no el futuro</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-visual reveal">
+      <div class="why-ring ring1"></div>
+      <div class="why-ring ring2"></div>
+      <div class="why-ring ring3"></div>
+      <div class="ring-center"></div>
+      <span class="ring-label rl1">[ NETWORK LAYER ]</span>
+      <span class="ring-label rl2">[ FORENSICS ]</span>
+      <span class="ring-label rl3">[ ETHICAL HACKING ]</span>
+      <span class="ring-label rl4">[ COMPLIANCE ]</span>
+    </div>
+    <div class="why-points reveal">
+      <div class="why-point">
+        <div class="why-num">01</div>
+        <div>
+          <h3>Titulación oficial del Ministerio de Educación</h3>
+          <p>Formación reglada con reconocimiento oficial. No es un curso privado: es un posgrado de FP acreditado por la Comunidad de Madrid.</p>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-num">02</div>
+        <div>
+          <h3>43 créditos ECTS convalidables</h3>
+          <p>Equivalente a un año universitario. Posibilidad de solicitar reconocimiento de créditos en grados universitarios.</p>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-num">03</div>
+        <div>
+          <h3>Formación 100% presencial y práctica</h3>
+          <p>Laboratorios reales, entornos de simulación y proyectos con empresas del sector tecnológico de la región.</p>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-num">04</div>
+        <div>
+          <h3>FP Dual: aprende mientras trabajas</h3>
+          <p>Metodología dual que combina formación en el centro con prácticas remuneradas en empresas tecnológicas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALIDAS LABORALES -->
+<section id="salidas">
+  <div class="section-header reveal">
+    <span class="section-tag">// salidas profesionales</span>
+    <h2 class="section-title">Tu próximo rol en el <em>sector más demandado</em></h2>
+    <p class="section-desc">Al completar el máster accederás a los perfiles más buscados y mejor remunerados del sector tecnológico.</p>
+  </div>
+  <div class="jobs-grid">
+    <div class="job-card reveal" style="--gradient: linear-gradient(135deg,#00f5ff,#00bcd4)">
+      <span class="job-icon">🕵️</span>
+      <div class="job-title">Experto/a en Ciberseguridad</div>
+      <div class="job-salary">30.000 – 55.000€/año</div>
+      <div class="job-desc">Diseño e implementación de estrategias de seguridad en organizaciones de cualquier tamaño.</div>
+    </div>
+    <div class="job-card reveal" style="--gradient: linear-gradient(135deg,#00ff88,#00bcd4)">
+      <span class="job-icon">📋</span>
+      <div class="job-title">Auditor/a de Ciberseguridad</div>
+      <div class="job-salary">35.000 – 60.000€/año</div>
+      <div class="job-desc">Evaluación y auditoría de sistemas, cumplimiento normativo y análisis de riesgos.</div>
+    </div>
+    <div class="job-card reveal" style="--gradient: linear-gradient(135deg,#ff6b35,#ff2d55)">
+      <span class="job-icon">🧠</span>
+      <div class="job-title">Consultor/a de Seguridad</div>
+      <div class="job-salary">40.000 – 70.000€/año</div>
+      <div class="job-desc">Asesoramiento a empresas en la definición e implementación de políticas de seguridad.</div>
+    </div>
+    <div class="job-card reveal" style="--gradient: linear-gradient(135deg,#9c27b0,#00f5ff)">
+      <span class="job-icon">⚡</span>
+      <div class="job-title">Hacker Ético / Pentester</div>
+      <div class="job-salary">35.000 – 75.000€/año</div>
+      <div class="job-desc">Detección proactiva de vulnerabilidades mediante pruebas de penetración controladas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUISITOS -->
+<section id="requisitos">
+  <div class="section-header reveal">
+    <span class="section-tag">// acceso al programa</span>
+    <h2 class="section-title">¿Puedes <em>acceder</em>?</h2>
+    <p class="section-desc">El máster está dirigido a titulados de grado superior en informática o electrónica que quieren especializarse en seguridad.</p>
+  </div>
+  <div class="req-layout">
+    <div class="req-box reveal">
+      <h3><span class="icon">📄</span> Títulos que dan acceso</h3>
+      <ul class="req-list">
+        <li><span class="check">✓</span> Técnico Sup. en Administración de Sistemas Informáticos en Red</li>
+        <li><span class="check">✓</span> Técnico Sup. en Desarrollo de Aplicaciones Multiplataforma</li>
+        <li><span class="check">✓</span> Técnico Sup. en Desarrollo de Aplicaciones Web</li>
+        <li><span class="check">✓</span> Técnico Sup. en Sistemas de Telecomunicaciones e Informáticos</li>
+        <li><span class="check">✓</span> Técnico Superior en Mantenimiento Electrónico</li>
+      </ul>
+    </div>
+    <div class="req-box reveal">
+      <h3><span class="icon">🎓</span> Equivalencia académica</h3>
+      <p style="font-size:.875rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.5rem">La fórmula CampusFP te permite acumular créditos equivalentes a un grado universitario completo:</p>
+      <div class="credits-block">
+        <div class="credits-row">
+          <span class="credits-label">Doble grado superior (ASIR + DAW)</span>
+          <span class="credits-val">180 ECTS</span>
+        </div>
+        <div class="credits-row">
+          <span class="credits-label">Máster FP Ciberseguridad</span>
+          <span class="credits-val">43 ECTS</span>
+        </div>
+        <div class="credits-row">
+          <span class="credits-label">Máster FP Big Data</span>
+          <span class="credits-val">22 ECTS</span>
+        </div>
+        <div class="credits-row" style="border-top:1px solid var(--cyan);margin-top:.5rem;padding-top:.5rem">
+          <span class="credits-label" style="color:var(--text)"><strong>Total acumulado</strong></span>
+          <span class="credits-val" style="color:var(--green);font-size:1.3rem">245 ECTS</span>
+        </div>
+      </div>
+      <p style="font-size:.72rem;color:var(--text-dim);margin-top:.75rem">*La convalidación universitaria depende de la universidad receptora.</p>
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGÍA -->
+<section id="metodologia">
+  <div class="section-header reveal">
+    <span class="section-tag">// metodología</span>
+    <h2 class="section-title">Aprender haciendo. <em>Siempre.</em></h2>
+  </div>
+  <div class="method-timeline">
+    <div class="method-step reveal">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Formación teórico-práctica en aula</h3>
+        <p>Cada módulo combina fundamentos teóricos con laboratorios prácticos donde trabajas en entornos reales y simulados de ataque y defensa.</p>
+      </div>
+    </div>
+    <div class="method-step reveal">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>FP Dual: prácticas en empresa</h3>
+        <p>La metodología dual de CampusFP te permite realizar prácticas en empresas tecnológicas del corredor del Henares y Madrid, aplicando lo aprendido en situaciones reales.</p>
+      </div>
+    </div>
+    <div class="method-step reveal">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Proyectos reales de ciberseguridad</h3>
+        <p>Realizarás auditorías, pentesting y análisis forense sobre infraestructuras reales bajo la supervisión de profesionales del sector.</p>
+      </div>
+    </div>
+    <div class="method-step reveal">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Certificaciones y empleabilidad</h3>
+        <p>El equipo de bolsa de empleo de CampusFP te acompañará en tu inserción laboral con orientación profesional, preparación de entrevistas y contactos directos con empresas.</p>
+      </div>
+    </div>
+    <div class="method-step reveal">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h3>Comunidad y networking</h3>
+        <p>Únete a una comunidad de más de 3.000 alumnos, accede a eventos exclusivos, charlas con profesionales y oportunidades de networking en el sector de la ciberseguridad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-header reveal">
+    <span class="section-tag">// preguntas frecuentes</span>
+    <h2 class="section-title">Lo que todo el mundo <em>pregunta</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <div class="faq-q">¿Qué diferencia este máster de un curso privado de ciberseguridad? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Este es un Curso de Especialización oficial regulado por el Ministerio de Educación y Formación Profesional, con acreditación de la Comunidad de Madrid. A diferencia de cursos privados, obtiene una titulación oficial reconocida, con créditos ECTS, y convalidable con estudios universitarios. Además, forma parte del sistema de FP Dual, lo que garantiza prácticas en empresa.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">¿Cuánto dura el máster y cuál es la carga horaria? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">El programa tiene una duración de un curso lectivo (aproximadamente 9-10 meses) con una carga total de 720 horas distribuidas en 6 módulos. La modalidad es presencial en el centro de Alcalá de Henares, con horario compatible para trabajadores.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">¿Puedo acceder si tengo el título de DAW o DAM? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Sí. Los titulados en Desarrollo de Aplicaciones Web (DAW) y Desarrollo de Aplicaciones Multiplataforma (DAM) están entre los perfiles con acceso directo al máster. También pueden acceder graduados en ASIR, Sistemas de Telecomunicaciones y Mantenimiento Electrónico.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">¿Qué empleos puedo obtener al finalizar? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Los egresados pueden acceder a puestos como experto en ciberseguridad, auditor de seguridad, consultor de ciberseguridad y hacker ético o pentester. El sector tecnológico en Madrid y el corredor del Henares tiene una alta demanda de estos perfiles, con salarios que oscilan entre 30.000 y 75.000€ anuales según experiencia.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">¿Los créditos ECTS son realmente reconocidos por las universidades? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">El máster otorga 43 créditos ECTS que pueden ser reconocidos por universidades españolas en sus grados afines. La convalidación depende de cada universidad receptora, pero la tendencia legislativa va en la dirección de facilitar estos reconocimientos. CampusFP te asesora en el proceso de convalidación.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">¿Hay becas o ayudas disponibles? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Sí. CampusFP dispone de su propio programa de becas, además de las ayudas autonómicas y estatales para estudios de FP. También hay opciones de fraccionamiento del pago y descuentos para familias con varios alumnos matriculados. Consulta disponibilidad en el formulario de contacto.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-header reveal">
+    <span class="section-tag">// solicita información</span>
+    <h2 class="section-title">Da el primer paso hacia tu <em>carrera en ciberseguridad</em></h2>
+    <p class="section-desc">Rellena el formulario y un asesor académico de CampusFP Alcalá de Henares se pondrá en contacto contigo en menos de 24 horas.</p>
+  </div>
+  <div class="form-wrap reveal">
+    <div id="form-container">
+      <div class="form-grid" id="contact-form">
+        <div class="form-group">
+          <label for="nombre">Nombre *</label>
+          <input type="text" id="nombre" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label for="apellidos">Apellidos *</label>
+          <input type="text" id="apellidos" placeholder="Tus apellidos">
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input type="email" id="email" placeholder="correo@ejemplo.com">
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" placeholder="+34 600 000 000">
+        </div>
+        <div class="form-group">
+          <label for="estudios">Estudios actuales *</label>
+          <select id="estudios">
+            <option value="">Selecciona tu titulación</option>
+            <option>Técnico Sup. Administración de Sistemas (ASIR)</option>
+            <option>Técnico Sup. Desarrollo de Aplicaciones Web (DAW)</option>
+            <option>Técnico Sup. Desarrollo de Aplicaciones Multiplataforma (DAM)</option>
+            <option>Técnico Sup. Sistemas de Telecomunicaciones</option>
+            <option>Técnico Sup. Mantenimiento Electrónico</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="turno">Turno preferido</label>
+          <select id="turno">
+            <option value="">Selecciona turno</option>
+            <option>Mañana</option>
+            <option>Tarde</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="mensaje">Consulta (opcional)</label>
+          <textarea id="mensaje" placeholder="¿Tienes alguna pregunta específica?"></textarea>
+        </div>
+        <div class="form-group full form-note">
+          Tus datos se tratarán conforme a la Política de Privacidad de CampusFP. No compartimos tu información con terceros.
+        </div>
+        <div class="form-group full form-submit">
+          <button class="btn-submit" onclick="handleSubmit()">Solicitar información gratuita →</button>
+        </div>
+      </div>
+    </div>
+    <div id="form-success">
+      <div style="font-size:3rem;margin-bottom:1rem">✅</div>
+      <div style="font-size:1.2rem;margin-bottom:.5rem">¡Solicitud enviada!</div>
+      <div style="font-size:.875rem;color:var(--text-dim)">Un asesor de CampusFP Alcalá de Henares se pondrá en contacto contigo en menos de 24 horas.</div>
+    </div>
+  </div>
+
+  <!-- CONTACT INFO -->
+  <div style="max-width:700px;margin:2rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+    <div style="text-align:center;padding:1.5rem;background:var(--bg2);border:1px solid var(--border)">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">📍</div>
+      <div style="font-size:.8rem;color:var(--text-dim)">CampusFP Alcalá de Henares<br>Madrid, España</div>
+    </div>
+    <div style="text-align:center;padding:1.5rem;background:var(--bg2);border:1px solid var(--border)">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">📞</div>
+      <div style="font-size:.8rem;color:var(--text-dim)">91 183 31 22</div>
+    </div>
+    <div style="text-align:center;padding:1.5rem;background:var(--bg2);border:1px solid var(--border)">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">✉️</div>
+      <div style="font-size:.8rem;color:var(--text-dim)">secretaria@campusfp.es</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="font-size:1.3rem">CAMPUS<span>FP</span></div>
+      <p>Centro acreditado para impartir el Máster de FP en Ciberseguridad en Alcalá de Henares. Formación profesional de excelencia con metodología dual y alta inserción laboral.</p>
+      <div class="accreditations" style="margin-top:1rem">
+        <span class="accred-badge">MINISTERIO EDUCACIÓN</span>
+        <span class="accred-badge">ERASMUS+</span>
+        <span class="accred-badge">PEARSON HND</span>
+        <span class="accred-badge">BRITISH COUNCIL</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Programa</h4>
+      <ul>
+        <li><a href="#modulos">Módulos formativos</a></li>
+        <li><a href="#salidas">Salidas profesionales</a></li>
+        <li><a href="#requisitos">Requisitos de acceso</a></li>
+        <li><a href="#metodologia">Metodología FP Dual</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CampusFP</h4>
+      <ul>
+        <li><a href="https://campusfp.es" target="_blank">Web oficial</a></li>
+        <li><a href="https://campusfp.es/centros/" target="_blank">Nuestros centros</a></li>
+        <li><a href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank">Bolsa de empleo</a></li>
+        <li><a href="https://campusfp.es/campus-becas-fp/" target="_blank">Becas FP</a></li>
+        <li><a href="https://campusfp.es/politica-de-privacidad.php" target="_blank">Privacidad</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 CampusFP · Alcalá de Henares, Madrid</span>
+    <span style="font-family:'Share Tech Mono',monospace;color:var(--cyan);font-size:.7rem">[ SECURE CONNECTION ESTABLISHED ]</span>
+  </div>
+</footer>
+
+<script>
+// CUSTOM CURSOR
+const cursor = document.getElementById('cursor');
+const dot = document.getElementById('cursor-dot');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  dot.style.left = e.clientX + 'px';
+  dot.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.module-card,.faq-q,.job-card,.why-point').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width='36px'; cursor.style.height='36px'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width='20px'; cursor.style.height='20px'; });
+});
+
+// MATRIX RAIN
+const canvas = document.getElementById('matrix-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+const chars = '01アイウエオカキクケコサシスセソタチツテト'.split('');
+const fontSize = 12;
+let cols = Math.floor(canvas.width / fontSize);
+let drops = Array(cols).fill(1);
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(3,8,16,0.05)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = '#00f5ff';
+  ctx.font = fontSize + 'px Share Tech Mono';
+  for (let i=0; i<drops.length; i++) {
+    const ch = chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(ch, i*fontSize, drops[i]*fontSize);
+    if (drops[i]*fontSize > canvas.height && Math.random()>.975) drops[i]=0;
+    drops[i]++;
+  }
+}
+setInterval(drawMatrix, 50);
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+
+// COUNTER ANIMATION
+function animateCounter(el, target, suffix='') {
+  let start = 0;
+  const isLarge = target > 10000;
+  const duration = 2000;
+  const step = duration / 60;
+  const increment = target / (duration / step);
+  const timer = setInterval(() => {
+    start += increment;
+    if (start >= target) { start = target; clearInterval(timer); }
+    if (isLarge) {
+      el.textContent = (start/1000000).toFixed(1) + 'M+';
+    } else {
+      el.textContent = Math.floor(start) + suffix;
+    }
+  }, step);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      if (target > 10000) {
+        animateCounter(el, target);
+      } else {
+        animateCounter(el, target, target <= 100 ? '%' : '');
+      }
+      counterObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.cifra-num[data-target]').forEach(el => counterObs.observe(el));
+
+// FAQ
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// FORM
+function handleSubmit() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const estudios = document.getElementById('estudios').value;
+  if (!nombre || !email || !estudios) {
+    alert('Por favor, rellena los campos obligatorios: nombre, correo electrónico y estudios.');
+    return;
+  }
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+
+// NAV ACTIVE
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.background = window.scrollY > 50 ? 'rgba(3,8,16,0.97)' : 'rgba(3,8,16,0.85)';
+});
+</script>
+</body>
+</html>

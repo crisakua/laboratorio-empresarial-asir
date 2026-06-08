@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASIR · Grado Superior en Administración de Sistemas Informáticos en Red | CampusFP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0a1628;
+  --navy2:   #112240;
+  --blue:    #1a3a6e;
+  --mid:     #2563bc;
+  --sky:     #3b82f6;
+  --accent:  #f97316;
+  --accent2: #fb923c;
+  --green:   #10b981;
+  --white:   #ffffff;
+  --offwhite:#f8fafc;
+  --light:   #f1f5f9;
+  --border:  #e2e8f0;
+  --text:    #1e293b;
+  --muted:   #64748b;
+  --sans:    'Outfit', sans-serif;
+  --mono:    'JetBrains Mono', monospace;
+  --r:       10px;
+  --rl:      16px;
+  --shadow:  0 4px 24px rgba(10,22,40,0.09);
+  --shadowhv:0 8px 40px rgba(10,22,40,0.15);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); font-size: 16px; color: var(--text); background: var(--white); overflow-x: hidden; line-height: 1.7; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; }
+
+/* ─── TOP BAR ─── */
+.topbar {
+  background: var(--navy);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.topbar a { color: rgba(255,255,255,0.7); transition: color .2s; }
+.topbar a:hover { color: var(--accent); }
+.topbar-right { display: flex; gap: 1.5rem; }
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgba(10,22,40,0.07);
+}
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 2rem;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.logo-mark {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--mid), var(--sky));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 900; font-size: 1rem; letter-spacing: -0.05em;
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.logo-text strong { font-size: 1.05rem; font-weight: 800; color: var(--navy); }
+.logo-text span { font-size: 0.68rem; color: var(--muted); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+.nav-links { display: flex; gap: 0.25rem; list-style: none; }
+.nav-links a {
+  font-size: 0.83rem; font-weight: 600; color: var(--muted);
+  padding: 0.5rem 0.9rem; border-radius: 6px;
+  transition: all .2s;
+}
+.nav-links a:hover { color: var(--mid); background: var(--light); }
+.nav-cta {
+  background: var(--accent) !important;
+  color: white !important;
+  padding: 0.55rem 1.4rem !important;
+  border-radius: 8px !important;
+}
+.nav-cta:hover { background: var(--accent2) !important; transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 50%, var(--blue) 100%);
+  color: white;
+  position: relative; overflow: hidden;
+  padding: 6rem 2rem 5rem;
+}
+.hero-pattern {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.04) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+.hero-blob {
+  position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
+}
+.blob1 { width: 600px; height: 600px; background: rgba(37,99,188,0.35); top: -200px; right: -100px; }
+.blob2 { width: 400px; height: 400px; background: rgba(249,115,22,0.15); bottom: -150px; left: 10%; }
+.hero-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3);
+  padding: 0.35rem 0.9rem; border-radius: 100px; margin-bottom: 1.25rem;
+}
+.hero-eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--accent); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900; line-height: 1.05; letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-sub {
+  font-size: 1.05rem; color: rgba(255,255,255,0.75); line-height: 1.8;
+  margin-bottom: 2.5rem; font-weight: 400;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.btn-hero-primary {
+  background: var(--accent); color: white; font-family: var(--sans);
+  font-size: 0.95rem; font-weight: 700; padding: 0.9rem 2.2rem;
+  border: none; border-radius: 10px; cursor: pointer; transition: all .2s;
+  box-shadow: 0 4px 20px rgba(249,115,22,0.4);
+}
+.btn-hero-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(249,115,22,0.45); }
+.btn-hero-ghost {
+  background: rgba(255,255,255,0.1); color: white; font-family: var(--sans);
+  font-size: 0.95rem; font-weight: 600; padding: 0.9rem 2.2rem;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; cursor: pointer; transition: all .2s;
+}
+.btn-hero-ghost:hover { background: rgba(255,255,255,0.18); }
+.hero-stats { display: flex; gap: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.12); }
+.hstat { display: flex; flex-direction: column; gap: 0.15rem; }
+.hstat-num { font-size: 1.9rem; font-weight: 900; color: white; letter-spacing: -0.03em; }
+.hstat-num span { color: var(--accent); }
+.hstat-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Hero right panel */
+.hero-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+}
+.hero-card-title { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1.25rem; }
+.cert-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+  transition: background .2s;
+}
+.cert-row:hover { background: rgba(255,255,255,0.12); }
+.cert-dot { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.cert-info { display: flex; flex-direction: column; }
+.cert-name { font-size: 0.85rem; font-weight: 700; color: white; }
+.cert-brand { font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 400; }
+.cert-free-tag {
+  margin-left: auto; font-size: 0.68rem; font-weight: 700;
+  background: rgba(16,185,129,0.2); color: #6ee7b7;
+  border: 1px solid rgba(16,185,129,0.3); padding: 0.2rem 0.55rem; border-radius: 4px;
+  letter-spacing: 0.05em; white-space: nowrap;
+}
+.hero-card-footer {
+  margin-top: 1.25rem; padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.8rem; color: rgba(255,255,255,0.5); text-align: center;
+}
+.hero-card-footer b { color: var(--green); }
+
+/* ─── TRUST BAR ─── */
+.trust-bar {
+  background: var(--offwhite);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+}
+.trust-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  gap: 3rem; flex-wrap: wrap;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.82rem; font-weight: 600; color: var(--muted);
+}
+.trust-item svg { color: var(--mid); }
+.trust-divider { width: 1px; height: 24px; background: var(--border); }
+
+/* ─── SECTION COMMONS ─── */
+.section { padding: 5.5rem 2rem; }
+.section-alt { background: var(--offwhite); }
+.container { max-width: 1280px; margin: 0 auto; }
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 0.75rem;
+}
+.section-eyebrow::before { content:''; width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
+.section-title {
+  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  font-weight: 900; letter-spacing: -0.025em; line-height: 1.15;
+  color: var(--navy); margin-bottom: 1rem;
+}
+.section-title span { color: var(--mid); }
+.section-title em { font-style: normal; color: var(--accent); }
+.section-desc { font-size: 1rem; color: var(--muted); max-width: 620px; line-height: 1.85; }
+.section-header { margin-bottom: 3.5rem; }
+
+/* ─── TICKER ─── */
+.ticker-wrap {
+  background: var(--navy); overflow: hidden;
+  padding: 0.85rem 0; border-top: 3px solid var(--accent);
+}
+.ticker-track { display: flex; white-space: nowrap; animation: scroll 35s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.6);
+  padding: 0 2rem; letter-spacing: 0.04em;
+}
+.ticker-item .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.ticker-item b { color: white; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ─── WHO FOR ─── */
+.who-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.who-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--rl);
+  padding: 2rem 1.75rem;
+  transition: all .25s;
+  position: relative; overflow: hidden;
+}
+.who-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--mid), var(--sky));
+  transform: scaleX(0); transform-origin: left; transition: transform .3s;
+}
+.who-card:hover { border-color: var(--sky); box-shadow: var(--shadowhv); transform: translateY(-4px); }
+.who-card:hover::after { transform: scaleX(1); }
+.who-icon-wrap {
+  width: 52px; height: 52px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(26,58,110,0.08), rgba(59,130,246,0.12));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; margin-bottom: 1.25rem; border: 1px solid rgba(59,130,246,0.15);
+}
+.who-card h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+.who-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
+
+/* ─── MODULES ─── */
+.modules-wrap {
+  display: grid; grid-template-columns: 340px 1fr; gap: 2.5rem; align-items: start;
+}
+.year-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+.ytab {
+  flex: 1; text-align: center;
+  font-size: 0.85rem; font-weight: 700; padding: 0.65rem 1rem;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  background: var(--white); color: var(--muted); cursor: pointer; transition: all .2s;
+}
+.ytab.active { background: var(--navy); color: white; border-color: var(--navy); }
+.module-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.mod-item {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.85rem 1.1rem; border-radius: 10px;
+  border: 1.5px solid var(--border); background: var(--white);
+  cursor: pointer; transition: all .2s;
+}
+.mod-item:hover, .mod-item.active { border-color: var(--mid); background: rgba(37,99,188,0.04); box-shadow: 0 2px 12px rgba(37,99,188,0.1); }
+.mod-num { font-family: var(--mono); font-size: 0.7rem; color: var(--mid); font-weight: 500; min-width: 24px; }
+.mod-name { font-size: 0.85rem; font-weight: 700; flex: 1; color: var(--navy); }
+.mod-hrs { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+.mod-arrow { color: var(--border); font-size: 0.9rem; transition: color .2s; }
+.mod-item.active .mod-arrow, .mod-item:hover .mod-arrow { color: var(--mid); }
+
+/* Module detail panel */
+.mod-detail {
+  position: sticky; top: 80px;
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--rl); padding: 2.25rem; min-height: 380px;
+  box-shadow: var(--shadow);
+}
+.mod-detail-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 300px; color: var(--muted); gap: 1rem; text-align: center;
+}
+.mod-detail-empty-icon { font-size: 3rem; opacity: .3; }
+.mod-detail-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--mid); background: rgba(37,99,188,0.08); padding: 0.3rem 0.75rem; border-radius: 4px; margin-bottom: 0.75rem;
+}
+.mod-detail h3 { font-size: 1.25rem; font-weight: 900; color: var(--navy); margin-bottom: 1rem; line-height: 1.3; }
+.mod-detail p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag {
+  font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.75rem;
+  background: var(--light); color: var(--blue); border-radius: 6px; border: 1px solid var(--border);
+  transition: all .15s;
+}
+.tag:hover { background: rgba(37,99,188,0.1); border-color: var(--sky); }
+
+/* ─── CAREER CARDS ─── */
+.careers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.career-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--rl); padding: 1.75rem; transition: all .25s;
+  display: flex; flex-direction: column;
+}
+.career-card:hover { border-color: var(--mid); box-shadow: var(--shadowhv); transform: translateY(-5px); }
+.career-icon-wrap {
+  width: 52px; height: 52px; border-radius: 12px; margin-bottom: 1.25rem;
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+}
+.career-card h3 { font-size: 0.95rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+.career-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; flex: 1; margin-bottom: 1.25rem; }
+.salary-range {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 0.9rem; background: var(--offwhite); border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.salary-range .euro { font-size: 1rem; font-weight: 900; color: var(--navy); font-family: var(--mono); }
+.salary-range .yr { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+.demand-pill {
+  font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px;
+  background: rgba(16,185,129,0.1); color: #059669; border: 1px solid rgba(16,185,129,0.25);
+  margin-left: auto; white-space: nowrap;
+}
+
+/* ─── SALARY SECTION ─── */
+.salary-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.salary-bars { display: flex; flex-direction: column; gap: 1.5rem; }
+.sbar-row { display: flex; flex-direction: column; gap: 0.5rem; }
+.sbar-header { display: flex; justify-content: space-between; align-items: center; }
+.sbar-label { font-size: 0.88rem; font-weight: 700; color: var(--navy); }
+.sbar-val { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: var(--mid); }
+.sbar-track { height: 10px; background: var(--light); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+.sbar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--mid), var(--sky)); transform: scaleX(0); transform-origin: left; transition: transform 1.3s cubic-bezier(.16,1,.3,1); }
+.sbar-fill.go { transform: scaleX(1); }
+.salary-aside {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: 20px; padding: 2.5rem; color: white;
+  box-shadow: 0 20px 60px rgba(10,22,40,0.25);
+}
+.salary-aside .big { font-size: 4rem; font-weight: 900; letter-spacing: -0.04em; color: white; line-height: 1; }
+.salary-aside .big span { color: var(--accent); }
+.salary-aside .label { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-bottom: 2rem; font-weight: 500; }
+.salary-fact { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+.salary-fact-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .1rem; }
+.salary-fact-text { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.salary-fact-text b { color: white; }
+
+/* ─── CERTIFICATIONS ─── */
+.certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.cert-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--rl); padding: 1.75rem; transition: all .25s; text-align: center;
+}
+.cert-card:hover { border-color: var(--sky); box-shadow: var(--shadow); transform: translateY(-4px); }
+.cert-logo-box {
+  width: 64px; height: 64px; border-radius: 14px; margin: 0 auto 1.25rem;
+  display: flex; align-items: center; justify-content: center; font-size: 2rem;
+  border: 1.5px solid var(--border);
+}
+.cert-card h4 { font-size: 0.95rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+.cert-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+.cert-included-badge {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 100px;
+  background: rgba(16,185,129,0.1); color: #059669; border: 1px solid rgba(16,185,129,0.25);
+}
+
+/* ─── ROADMAP ─── */
+.roadmap-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  position: relative; margin-top: 3.5rem;
+}
+.roadmap-connector {
+  position: absolute; top: 40px; left: calc(12.5% + 20px); right: calc(12.5% + 20px);
+  height: 2px; background: linear-gradient(90deg, var(--mid), var(--accent)); z-index: 0;
+}
+.rmap-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 1.25rem; position: relative; z-index: 1; }
+.rmap-num {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--white); border: 3px solid var(--mid);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 1.5rem;
+  box-shadow: 0 0 0 6px rgba(37,99,188,0.08);
+}
+.rmap-step:nth-child(2) .rmap-num { border-color: var(--sky); box-shadow: 0 0 0 6px rgba(59,130,246,0.08); }
+.rmap-step:nth-child(3) .rmap-num { border-color: var(--green); box-shadow: 0 0 0 6px rgba(16,185,129,0.08); }
+.rmap-step:nth-child(4) .rmap-num { border-color: var(--accent); box-shadow: 0 0 0 6px rgba(249,115,22,0.08); }
+.rmap-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.4rem; }
+.rmap-step h4 { font-size: 0.95rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+.rmap-step p { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+
+/* ─── INFO CARDS GRID (beca, centros, etc.) ─── */
+.info-cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.info-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--rl); padding: 1.75rem;
+  transition: all .25s; cursor: pointer; position: relative; overflow: hidden;
+}
+.info-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--mid), var(--sky));
+  transform: scaleX(0); transform-origin: left; transition: transform .3s;
+}
+.info-card:hover::before { transform: scaleX(1); }
+.info-card:hover { border-color: var(--sky); box-shadow: var(--shadowhv); transform: translateY(-4px); }
+.info-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+.info-card h4 { font-size: 0.9rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+.info-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+.info-card-link {
+  font-size: 0.8rem; font-weight: 700; color: var(--mid);
+  display: flex; align-items: center; gap: 0.35rem;
+  transition: gap .2s;
+}
+.info-card:hover .info-card-link { gap: 0.6rem; }
+
+/* ─── REQUISITOS ─── */
+.req-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.req-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.req-item {
+  display: flex; align-items: flex-start; gap: 0.85rem;
+  padding: 1rem 1.25rem; border-radius: 10px;
+  background: var(--white); border: 1.5px solid var(--border);
+}
+.req-check {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(37,99,188,0.1); color: var(--mid);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 800; margin-top: .1rem;
+}
+.req-item-text h5 { font-size: 0.88rem; font-weight: 800; color: var(--navy); margin-bottom: 0.2rem; }
+.req-item-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+.access-box {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: 20px; padding: 2.5rem; color: white;
+}
+.access-box h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.75rem; }
+.access-box p { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 2rem; }
+.access-steps { display: flex; flex-direction: column; gap: 1rem; }
+.access-step { display: flex; align-items: center; gap: 1rem; }
+.step-circle {
+  width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: var(--accent); flex-shrink: 0;
+}
+.access-step span { font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+
+/* ─── FAQ ─── */
+.faq-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.faq-item {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--rl); overflow: hidden;
+}
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 1.4rem; cursor: pointer; transition: background .2s;
+}
+.faq-q:hover { background: var(--offwhite); }
+.faq-q-text { font-size: 0.88rem; font-weight: 700; color: var(--navy); flex: 1; padding-right: 1rem; line-height: 1.4; }
+.faq-toggle {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--light); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 300; color: var(--mid);
+  transition: all .25s; line-height: 1;
+}
+.faq-item.open .faq-toggle { background: var(--mid); color: white; transform: rotate(45deg); border-color: var(--mid); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s cubic-bezier(.4,0,.2,1), padding .25s;
+  padding: 0 1.4rem;
+}
+.faq-item.open .faq-a { max-height: 300px; padding: 0 1.4rem 1.25rem; }
+.faq-a p { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+
+/* ─── TESTIMONIALS ─── */
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.testi-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--rl); padding: 1.75rem; transition: all .25s;
+}
+.testi-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+.stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 0.05em; margin-bottom: 1rem; }
+.testi-text { font-size: 0.9rem; color: var(--text); line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 0.75rem; }
+.testi-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 800; color: white; flex-shrink: 0;
+}
+.testi-name { font-size: 0.88rem; font-weight: 800; color: var(--navy); }
+.testi-role { font-size: 0.75rem; color: var(--muted); }
+
+/* ─── CTA SECTION ─── */
+.cta-section {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
+  color: white; padding: 6rem 2rem; text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
+  background-size: 36px 36px;
+}
+.cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 1rem; position: relative; z-index: 1; }
+.cta-section h2 em { font-style: normal; color: var(--accent); }
+.cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 2.5rem; position: relative; z-index: 1; }
+.cta-form {
+  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+  position: relative; z-index: 1; margin-bottom: 1.25rem;
+}
+.cta-inp {
+  font-family: var(--sans); font-size: 0.95rem; padding: 0.85rem 1.25rem;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: white; border-radius: 10px; outline: none; width: 240px; transition: border-color .2s;
+}
+.cta-inp::placeholder { color: rgba(255,255,255,0.45); }
+.cta-inp:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.14); }
+.cta-privacy { font-size: 0.76rem; color: rgba(255,255,255,0.45); position: relative; z-index: 1; }
+.cta-success-msg {
+  display: none; position: relative; z-index: 1;
+  margin-top: 1.5rem; padding: 1rem 2rem;
+  background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 10px; color: #6ee7b7; font-size: 0.9rem; font-weight: 600;
+  max-width: 480px; margin-left: auto; margin-right: auto;
+}
+
+/* ─── SUPER FOOTER ─── */
+.superfooter { background: var(--offwhite); border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
+.superfooter-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr; gap: 3rem;
+  padding-bottom: 3rem; border-bottom: 1px solid var(--border);
+}
+.sf-brand .logo-mark { margin-bottom: 1rem; }
+.sf-brand p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; max-width: 260px; margin-bottom: 1.5rem; }
+.sf-socials { display: flex; gap: 0.5rem; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 8px; border: 1.5px solid var(--border);
+  background: var(--white); display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; color: var(--muted); transition: all .2s; cursor: pointer;
+}
+.social-btn:hover { border-color: var(--mid); color: var(--mid); background: rgba(37,99,188,0.05); }
+.sf-col h5 {
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--navy); margin-bottom: 1rem;
+}
+.sf-col a {
+  display: block; font-size: 0.85rem; color: var(--muted);
+  margin-bottom: 0.6rem; transition: color .2s;
+}
+.sf-col a:hover { color: var(--mid); }
+.sf-bottom {
+  max-width: 1280px; margin: 1.5rem auto 0;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.sf-bottom p { font-size: 0.78rem; color: var(--muted); }
+.sf-badges { display: flex; align-items: center; gap: 1.25rem; }
+.sf-badge {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem; font-weight: 700; color: var(--muted);
+  background: var(--white); border: 1px solid var(--border);
+  padding: 0.35rem 0.75rem; border-radius: 6px;
+}
+
+/* ─── REVEAL ANIM ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.up { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-card { max-width: 560px; }
+  .who-grid, .careers-grid { grid-template-columns: repeat(2,1fr); }
+  .certs-grid { grid-template-columns: repeat(2,1fr); }
+  .modules-wrap { grid-template-columns: 1fr; }
+  .mod-detail { position: static; }
+  .salary-layout { grid-template-columns: 1fr; }
+  .info-cards-grid { grid-template-columns: repeat(2,1fr); }
+  .req-layout { grid-template-columns: 1fr; }
+  .faq-cols { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: repeat(2,1fr); }
+  .roadmap-steps { grid-template-columns: repeat(2,1fr); gap: 2rem; }
+  .roadmap-connector { display: none; }
+  .superfooter-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:700px) {
+  .topbar { display: none; }
+  nav .nav-links { display: none; }
+  .hero { padding: 4.5rem 1.5rem 3.5rem; }
+  .section { padding: 3.5rem 1.5rem; }
+  .who-grid, .careers-grid, .certs-grid, .info-cards-grid, .testimonials-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.25rem; flex-wrap: wrap; }
+  .roadmap-steps { grid-template-columns: 1fr; }
+  .superfooter-grid { grid-template-columns: 1fr; }
+  .sf-bottom { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>📍 Centros en Alcalá de Henares · Getafe · Humanes-Fuenlabrada · Móstoles</span>
+  <div class="topbar-right">
+    <a href="tel:+34911833122">📞 91 183 31 22</a>
+    <a href="mailto:secretaria@campusfp.es">✉ secretaria@campusfp.es</a>
+    <a href="#contacto">Solicitar información →</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="logo-mark">FP</div>
+      <div class="logo-text">
+        <strong>CampusFP</strong>
+        <span>Formación Profesional</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#ciclo">El ciclo</a></li>
+      <li><a href="#modulos">Módulos</a></li>
+      <li><a href="#salidas">Salidas</a></li>
+      <li><a href="#centros">Centros</a></li>
+      <li><a href="#becas">Becas</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contacto" class="nav-cta">Solicitar información</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">CFGS · Informática y Comunicaciones</div>
+      <h1>Administra el<br>mundo digital.<br>Desde <em>dentro.</em></h1>
+      <p class="hero-sub">El Grado Superior en Administración de Sistemas Informáticos en Red (ASIR) te forma para gestionar redes, servidores, ciberseguridad y cloud en cualquier empresa. Alta demanda, excelentes salarios y futuro garantizado.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-hero-primary">Quiero estudiar ASIR</a>
+        <a href="#modulos" class="btn-hero-ghost">Ver temario completo</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-num">2<span>años</span></span><span class="hstat-label">Duración</span></div>
+        <div class="hstat"><span class="hstat-num">500<span>h</span></span><span class="hstat-label">Prácticas empresa</span></div>
+        <div class="hstat"><span class="hstat-num">7<span>+</span></span><span class="hstat-label">Certificaciones</span></div>
+        <div class="hstat"><span class="hstat-num">96<span>%</span></span><span class="hstat-label">Inserción laboral</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-card">
+        <div class="hero-card-title">Certificaciones incluidas en el ciclo</div>
+        <div class="cert-row">
+          <div class="cert-dot" style="background:rgba(0,174,239,0.15);">🔵</div>
+          <div class="cert-info"><span class="cert-name">CCST IT Support</span><span class="cert-brand">Cisco · Redes profesionales</span></div>
+          <span class="cert-free-tag">GRATIS</span>
+        </div>
+        <div class="cert-row">
+          <div class="cert-dot" style="background:rgba(0,174,239,0.15);">🛡️</div>
+          <div class="cert-info"><span class="cert-name">CCST Cybersecurity</span><span class="cert-brand">Cisco · Ciberseguridad</span></div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-dot" style="background:rgba(0,120,212,0.15);">☁️</div>
+          <div class="cert-info"><span class="cert-name">Azure Fundamentals AZ-900</span><span class="cert-brand">Microsoft · Cloud computing</span></div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-dot" style="background:rgba(0,120,212,0.15);">🔐</div>
+          <div class="cert-info"><span class="cert-name">Security SC-900</span><span class="cert-brand">Microsoft · Identidad y cumplimiento</span></div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-dot" style="background:rgba(0,120,212,0.15);">🤖</div>
+          <div class="cert-info"><span class="cert-name">Azure AI Fundamentals</span><span class="cert-brand">Microsoft · IA en sistemas</span></div>
+        </div>
+        <div class="hero-card-footer"><b>✓ La primera certificación es totalmente gratuita</b></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="dot"></span><b>Linux</b> Administración de Servidores</span>
+    <span class="ticker-item"><span class="dot"></span><b>Cisco</b> Networking & Ciberseguridad</span>
+    <span class="ticker-item"><span class="dot"></span><b>Microsoft Azure</b> Cloud Computing</span>
+    <span class="ticker-item"><span class="dot"></span><b>Active Directory</b> Windows Server</span>
+    <span class="ticker-item"><span class="dot"></span><b>Docker & Kubernetes</b> Contenedores</span>
+    <span class="ticker-item"><span class="dot"></span><b>Bases de datos</b> MySQL · Oracle</span>
+    <span class="ticker-item"><span class="dot"></span><b>VPN & Firewalls</b> Seguridad perimetral</span>
+    <span class="ticker-item"><span class="dot"></span><b>FP Dual</b> Prácticas en empresa real</span>
+    <span class="ticker-item"><span class="dot"></span><b>Linux</b> Administración de Servidores</span>
+    <span class="ticker-item"><span class="dot"></span><b>Cisco</b> Networking & Ciberseguridad</span>
+    <span class="ticker-item"><span class="dot"></span><b>Microsoft Azure</b> Cloud Computing</span>
+    <span class="ticker-item"><span class="dot"></span><b>Active Directory</b> Windows Server</span>
+    <span class="ticker-item"><span class="dot"></span><b>Docker & Kubernetes</b> Contenedores</span>
+    <span class="ticker-item"><span class="dot"></span><b>Bases de datos</b> MySQL · Oracle</span>
+    <span class="ticker-item"><span class="dot"></span><b>VPN & Firewalls</b> Seguridad perimetral</span>
+    <span class="ticker-item"><span class="dot"></span><b>FP Dual</b> Prácticas en empresa real</span>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Centro autorizado Ministerio de Educación
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+      Acreditado por Pearson · HND
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      4 centros en la Comunidad de Madrid
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.91 14.91"/></svg>
+      Programa Erasmus+ · Movilidades internacionales
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      FP Dual · Empresas colaboradoras top
+    </div>
+  </div>
+</div>
+
+<!-- WHO IS IT FOR -->
+<section class="section" id="ciclo">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">¿Es para mí?</p>
+      <h2 class="section-title">ASIR está hecho para ti si...</h2>
+      <p class="section-desc">No necesitas experiencia previa. Solo ganas de entender cómo funciona la tecnología que sostiene el mundo digital.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card reveal">
+        <div class="who-icon-wrap">🖥️</div>
+        <h3>Te apasiona la tecnología</h3>
+        <p>Siempre has querido saber qué hay detrás de las redes, los servidores y la infraestructura que hace funcionar internet y las empresas.</p>
+      </div>
+      <div class="who-card reveal">
+        <div class="who-icon-wrap">🔐</div>
+        <h3>Te interesa la ciberseguridad</h3>
+        <p>Los ataques, las defensas, los cortafuegos... quieres aprender a proteger infraestructuras digitales y convertirte en un escudo técnico.</p>
+      </div>
+      <div class="who-card reveal">
+        <div class="who-icon-wrap">🧩</div>
+        <h3>Disfrutas resolviendo problemas</h3>
+        <p>Cuando algo falla, tu instinto es investigar el porqué. Buscas entender el sistema completo, no solo usar la superficie.</p>
+      </div>
+      <div class="who-card reveal">
+        <div class="who-icon-wrap">☁️</div>
+        <h3>El cloud te atrae</h3>
+        <p>AWS, Azure, Google Cloud... la computación en la nube es el presente y el futuro, y quieres ser quien la administre.</p>
+      </div>
+      <div class="who-card reveal">
+        <div class="who-icon-wrap">📈</div>
+        <h3>Buscas empleo con proyección</h3>
+        <p>No quieres un trabajo cualquiera. Quieres un perfil escaso, bien retribuido y con crecimiento garantizado a medio y largo plazo.</p>
+      </div>
+      <div class="who-card reveal">
+        <div class="who-icon-wrap">🎓</div>
+        <h3>Quieres seguir formándote</h3>
+        <p>ASIR te abre la puerta a especializaciones en Ciberseguridad e IA, y a la universidad con créditos ECTS convalidados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="section section-alt" id="modulos">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Plan de estudios</p>
+      <h2 class="section-title">Todo lo que vas a <span>aprender</span></h2>
+      <p class="section-desc">Más de 2.000 horas de formación práctica repartidas en dos cursos. Haz clic en cada módulo para ver los detalles.</p>
+    </div>
+    <div class="modules-wrap">
+      <div>
+        <div class="year-tabs">
+          <button class="ytab active" onclick="switchYear(1,this)">1.er Curso</button>
+          <button class="ytab" onclick="switchYear(2,this)">2.º Curso</button>
+        </div>
+        <div class="module-list" id="module-list"></div>
+      </div>
+      <div class="mod-detail" id="mod-detail">
+        <div class="mod-detail-empty">
+          <span class="mod-detail-empty-icon">📋</span>
+          <p style="font-size:.9rem;color:var(--muted);">Selecciona un módulo para ver la descripción completa y las habilidades que adquirirás.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER PATHS -->
+<section class="section" id="salidas">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Salidas profesionales</p>
+      <h2 class="section-title">Dónde vas a <em>trabajar</em></h2>
+      <p class="section-desc">El perfil ASIR es uno de los más demandados del sector IT. El mercado laboral está de tu lado desde el primer día.</p>
+    </div>
+    <div class="careers-grid">
+      <div class="career-card reveal">
+        <div class="career-icon-wrap" style="background:rgba(37,99,188,0.1);">🖧</div>
+        <h3>Administrador de Sistemas</h3>
+        <p>Gestiona servidores, usuarios, permisos y servicios en empresas de cualquier tamaño y sector. El perfil más demandado.</p>
+        <div class="salary-range"><span class="euro">28k – 45k€</span><span class="yr">/ año</span><span class="demand-pill">Alta demanda</span></div>
+      </div>
+      <div class="career-card reveal">
+        <div class="career-icon-wrap" style="background:rgba(239,68,68,0.08);">🔒</div>
+        <h3>Técnico de Ciberseguridad</h3>
+        <p>Protege infraestructuras, detecta vulnerabilidades y responde ante incidentes de seguridad en tiempo real.</p>
+        <div class="salary-range"><span class="euro">30k – 55k€</span><span class="yr">/ año</span><span class="demand-pill">Muy alta demanda</span></div>
+      </div>
+      <div class="career-card reveal">
+        <div class="career-icon-wrap" style="background:rgba(59,130,246,0.1);">☁️</div>
+        <h3>Cloud Engineer</h3>
+        <p>Despliega y administra recursos en Azure, AWS o Google Cloud. El perfil con mayor crecimiento salarial del sector.</p>
+        <div class="salary-range"><span class="euro">35k – 60k€</span><span class="yr">/ año</span><span class="demand-pill">Muy alta demanda</span></div>
+      </div>
+      <div class="career-card reveal">
+        <div class="career-icon-wrap" style="background:rgba(16,185,129,0.1);">🌐</div>
+        <h3>Técnico de Redes</h3>
+        <p>Diseña, configura y mantiene la infraestructura de red de empresas, ISPs e instituciones públicas.</p>
+        <div class="salary-range"><span class="euro">26k – 42k€</span><span class="yr">/ año</span><span class="demand-pill">Alta demanda</span></div>
+      </div>
+      <div class="career-card reveal">
+        <div class="career-icon-wrap" style="background:rgba(249,115,22,0.1);">🗄️</div>
+        <h3>Administrador de Bases de Datos</h3>
+        <p>Administra, optimiza y asegura las bases de datos que sustentan los sistemas de información empresariales.</p>
+        <div class="salary-range"><span class="euro">30k – 50k€</span><span class="yr">/ año</span><span class="demand-pill">Alta demanda</span></div>
+      </div>
+      <div class="career-card reveal">
+        <div class="career-icon-wrap" style="background:rgba(124,58,237,0.08);">🛠️</div>
+        <h3>Soporte Técnico Senior</h3>
+        <p>Resuelve incidencias complejas, lidera equipos de soporte y gestiona la infraestructura IT de organizaciones.</p>
+        <div class="salary-range"><span class="euro">22k – 38k€</span><span class="yr">/ año</span><span class="demand-pill">Alta demanda</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALARY -->
+<section class="section section-alt" id="salarios">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Salarios y mercado laboral</p>
+      <h2 class="section-title">La FP mejor <span>retribuida</span></h2>
+      <p class="section-desc">Más de 120.000 puestos IT sin cubrir en España. Tu perfil cotiza al alza desde el primer día en el mercado.</p>
+    </div>
+    <div class="salary-layout">
+      <div class="salary-bars reveal" id="sbars">
+        <div class="sbar-row">
+          <div class="sbar-header"><span class="sbar-label">Cloud Engineer</span><span class="sbar-val">~55.000 €/año</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="0.92"></div></div>
+        </div>
+        <div class="sbar-row">
+          <div class="sbar-header"><span class="sbar-label">Especialista en Ciberseguridad</span><span class="sbar-val">~48.000 €/año</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="0.80"></div></div>
+        </div>
+        <div class="sbar-row">
+          <div class="sbar-header"><span class="sbar-label">Sysadmin Senior</span><span class="sbar-val">~42.000 €/año</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="0.70"></div></div>
+        </div>
+        <div class="sbar-row">
+          <div class="sbar-header"><span class="sbar-label">DBA · Bases de datos</span><span class="sbar-val">~38.000 €/año</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="0.63"></div></div>
+        </div>
+        <div class="sbar-row">
+          <div class="sbar-header"><span class="sbar-label">Técnico de Redes</span><span class="sbar-val">~34.000 €/año</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="0.57"></div></div>
+        </div>
+        <div class="sbar-row">
+          <div class="sbar-header"><span class="sbar-label">Soporte IT</span><span class="sbar-val">~26.000 €/año</span></div>
+          <div class="sbar-track"><div class="sbar-fill" data-w="0.43"></div></div>
+        </div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:1rem;">Fuentes: INCIBE, SEPE, Adecco IT Report 2024, InfoJobs.</p>
+      </div>
+      <div class="salary-aside reveal">
+        <div class="big">96<span>%</span></div>
+        <p class="label">inserción laboral en el primer año tras finalizar</p>
+        <div class="salary-fact">
+          <span class="salary-fact-icon">📉</span>
+          <p class="salary-fact-text"><b>+120.000 puestos IT</b> sin cubrir en España en 2024. El sector crece un 12% anual.</p>
+        </div>
+        <div class="salary-fact">
+          <span class="salary-fact-icon">🚀</span>
+          <p class="salary-fact-text">El perfil de <b>administrador de sistemas</b> es el 3.º más demandado en ofertas de empleo tecnológico en España.</p>
+        </div>
+        <div class="salary-fact">
+          <span class="salary-fact-icon">🌍</span>
+          <p class="salary-fact-text"><b>Erasmus+</b> y movilidades internacionales: trabaja y aprende en Europa durante tu formación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certificaciones">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Certificaciones internacionales</p>
+      <h2 class="section-title">Sal al mercado con <em>credenciales reales</em></h2>
+      <p class="section-desc">Además del título oficial de Técnico Superior, obtendrás hasta 7 certificaciones reconocidas internacionalmente. La primera, completamente gratuita.</p>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card reveal">
+        <div class="cert-logo-box" style="background:rgba(0,174,239,0.08);">🔵</div>
+        <h4>Cisco CCST IT Support</h4>
+        <p>Soporte técnico profesional certificado por Cisco. Reconocida por los grandes empleadores del sector.</p>
+        <div class="cert-included-badge">✓ Incluida · 1.ª gratis</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-logo-box" style="background:rgba(0,174,239,0.08);">🛡️</div>
+        <h4>Cisco CCST Cybersecurity</h4>
+        <p>Ciberseguridad práctica con sello de fabricante Cisco. Demandada en todas las empresas con infraestructura IT.</p>
+        <div class="cert-included-badge">✓ Incluida</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-logo-box" style="background:rgba(0,120,212,0.08);">☁️</div>
+        <h4>Microsoft AZ-900</h4>
+        <p>Azure Fundamentals: la certificación de entrada al mundo cloud de Microsoft más solicitada en empresas.</p>
+        <div class="cert-included-badge">✓ Incluida</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-logo-box" style="background:rgba(0,120,212,0.08);">🔐</div>
+        <h4>Microsoft SC-900</h4>
+        <p>Seguridad, cumplimiento e identidad digital. Imprescindible para perfiles orientados a ciberseguridad y compliance.</p>
+        <div class="cert-included-badge">✓ Incluida</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-logo-box" style="background:rgba(0,120,212,0.08);">🤖</div>
+        <h4>Microsoft AI-900</h4>
+        <p>Azure AI Fundamentals: inteligencia artificial aplicada a la gestión y automatización de sistemas.</p>
+        <div class="cert-included-badge">✓ Incluida</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-logo-box" style="background:rgba(0,50,160,0.08);">🌐</div>
+        <h4>Pearson Network Security</h4>
+        <p>Seguridad en redes certificada e integrada en el plan de estudios. Reconocida internacionalmente.</p>
+        <div class="cert-included-badge">✓ Incluida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section section-alt" id="roadmap">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Tu hoja de ruta</p>
+      <h2 class="section-title">Del aula al <span>primer empleo</span></h2>
+      <p class="section-desc">Cuatro etapas bien definidas que te llevan, en dos años, desde la primera clase hasta tu vida profesional.</p>
+    </div>
+    <div style="position:relative;" class="reveal">
+      <div class="roadmap-connector"></div>
+      <div class="roadmap-steps">
+        <div class="rmap-step">
+          <div class="rmap-num">📚</div>
+          <p class="rmap-tag">1.er año</p>
+          <h4>Fundamentos sólidos</h4>
+          <p>Hardware, redes, sistemas operativos, bases de datos y primeras prácticas en empresa (60 h).</p>
+        </div>
+        <div class="rmap-step">
+          <div class="rmap-num">⚙️</div>
+          <p class="rmap-tag">2.º año</p>
+          <h4>Especialización avanzada</h4>
+          <p>Seguridad, cloud, alta disponibilidad, servicios de red y 7 certificaciones internacionales.</p>
+        </div>
+        <div class="rmap-step">
+          <div class="rmap-num">🏢</div>
+          <p class="rmap-tag">FP Dual · 500 h</p>
+          <h4>Empresa real</h4>
+          <p>Trabaja en empresas del sector durante la formación. Haz contactos y gana experiencia real.</p>
+        </div>
+        <div class="rmap-step">
+          <div class="rmap-num">🚀</div>
+          <p class="rmap-tag">Al finalizar</p>
+          <h4>Título + empleo</h4>
+          <p>Título oficial ASIR, 7+ certificaciones y acceso directo al mercado IT con el mejor perfil posible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO CARDS: becas, centros, etc. -->
+<section class="section" id="centros">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Todo lo que necesitas saber</p>
+      <h2 class="section-title">Más que un título: <em>un ecosistema</em></h2>
+      <p class="section-desc">En CampusFP no solo estudias — tienes acceso a becas, bolsa de empleo, movilidades internacionales y mucho más.</p>
+    </div>
+    <div class="info-cards-grid">
+      <div class="info-card reveal">
+        <div class="info-card-icon">🎓</div>
+        <h4>Becas FP</h4>
+        <p>Becas de matrícula, ayudas al estudio y financiación flexible para que el dinero no sea un obstáculo para tu futuro.</p>
+        <span class="info-card-link">Ver becas disponibles →</span>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">📍</div>
+        <h4>Nuestros centros</h4>
+        <p>4 centros en Madrid: Alcalá de Henares, Getafe, Humanes-Fuenlabrada y Móstoles. Elige el más cercano a ti.</p>
+        <span class="info-card-link">Ver ubicaciones →</span>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">💼</div>
+        <h4>Bolsa de empleo</h4>
+        <p>Acceso a ofertas exclusivas de empresas colaboradoras como Indra, Accenture, BBVA IT y Cognizant.</p>
+        <span class="info-card-link">Ver ofertas →</span>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">🌍</div>
+        <h4>Erasmus+ y Movilidades</h4>
+        <p>Realiza parte de tus prácticas en Europa con el programa Erasmus+. Formación internacional y experiencia global.</p>
+        <span class="info-card-link">Más información →</span>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">🤝</div>
+        <h4>FP Dual</h4>
+        <p>Aprende trabajando en empresas reales del sector IT. La modalidad dual te da experiencia y contactos desde el primer año.</p>
+        <span class="info-card-link">Cómo funciona →</span>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">🔗</div>
+        <h4>Empresas colaboradoras</h4>
+        <p>Indra, BBVA IT, Accenture, Cognizant, Inetum... más de 30 empresas tech donde puedes hacer tus prácticas.</p>
+        <span class="info-card-link">Ver partners →</span>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">📈</div>
+        <h4>Inserción laboral</h4>
+        <p>96% de inserción en el primer año. Nuestro equipo de orientación te acompaña hasta que encuentres tu primer empleo.</p>
+        <span class="info-card-link">Nuestros resultados →</span>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-card-icon">🎯</div>
+        <h4>Progresión académica</h4>
+        <p>Continúa hacia especializaciones en Ciberseguridad o IA, o accede a la universidad con créditos ECTS convalidados.</p>
+        <span class="info-card-link">Ver opciones →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUISITOS -->
+<section class="section section-alt" id="becas">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Requisitos de acceso</p>
+      <h2 class="section-title">¿Cómo puedo <span>acceder?</span></h2>
+    </div>
+    <div class="req-layout">
+      <div>
+        <p style="font-size:.95rem;color:var(--muted);margin-bottom:2rem;line-height:1.85;">Para matricularte en ASIR necesitas cumplir alguno de los siguientes requisitos. Hay varias vías de acceso para que nadie se quede sin su oportunidad:</p>
+        <div class="req-list">
+          <div class="req-item reveal">
+            <div class="req-check">✓</div>
+            <div class="req-item-text">
+              <h5>Bachillerato (cualquier modalidad)</h5>
+              <p>Acceso directo con Bachiller LOGSE, BUP o equivalente académico.</p>
+            </div>
+          </div>
+          <div class="req-item reveal">
+            <div class="req-check">✓</div>
+            <div class="req-item-text">
+              <h5>Título universitario o FP Superior</h5>
+              <p>Cualquier grado universitario, diplomatura, licenciatura o Técnico Superior equivalente.</p>
+            </div>
+          </div>
+          <div class="req-item reveal">
+            <div class="req-check">✓</div>
+            <div class="req-item-text">
+              <h5>FP de Grado Medio</h5>
+              <p>Título de Técnico de Formación Profesional o Técnico de Artes Plásticas y Diseño.</p>
+            </div>
+          </div>
+          <div class="req-item reveal">
+            <div class="req-check">✓</div>
+            <div class="req-item-text">
+              <h5>Prueba de acceso para mayores de 19 años</h5>
+              <p>Si no tienes titulación de bachillerato, puedes acceder superando la prueba oficial de la Comunidad de Madrid.</p>
+            </div>
+          </div>
+          <div class="req-item reveal">
+            <div class="req-check">✓</div>
+            <div class="req-item-text">
+              <h5>Curso preparatorio de acceso a GS</h5>
+              <p>Curso gratuito en centros autorizados que te prepara específicamente para el acceso a ciclos de Grado Superior.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="access-box reveal">
+        <h3>¿No sabes si cumples los requisitos?</h3>
+        <p>Nuestro equipo de orientación académica estudia tu caso de forma personalizada y te indica cuál es la mejor vía de acceso para ti. Sin compromiso.</p>
+        <div class="access-steps">
+          <div class="access-step"><div class="step-circle">01</div><span>Rellena el formulario de información</span></div>
+          <div class="access-step"><div class="step-circle">02</div><span>Un asesor te contacta en 24 horas</span></div>
+          <div class="access-step"><div class="step-circle">03</div><span>Sesión de orientación personalizada y gratuita</span></div>
+          <div class="access-step"><div class="step-circle">04</div><span>Formalización de matrícula y comenzamos</span></div>
+        </div>
+        <a href="#contacto" class="btn-hero-primary" style="display:inline-block;margin-top:2rem;font-size:.9rem;padding:.75rem 1.75rem;">Hablar con un asesor</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Testimonios de alumnos</p>
+      <h2 class="section-title">Lo que dicen quienes ya <em>lo hicieron</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Cuando acabé ASIR en CampusFP tenía dos ofertas de trabajo esperándome. La FP Dual fue clave: salí con experiencia real, no solo con un título."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,var(--mid),var(--sky));">AC</div>
+          <div><p class="testi-name">Alejandro Castillo</p><p class="testi-role">Sysadmin en Indra · Promoción 2023</p></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Las certificaciones Cisco y Azure que obtuve durante el ciclo marcaron la diferencia en las entrevistas. Me preguntaban por ellas antes que por el propio título."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,var(--accent),#fbbf24);">MR</div>
+          <div><p class="testi-name">María Romero</p><p class="testi-role">Cloud Engineer en BBVA IT · Promoción 2022</p></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Vine sin experiencia en informática. Dos años después soy técnico de ciberseguridad. El equipo docente de CampusFP es increíblemente cercano y profesional."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,var(--green),#34d399);">DM</div>
+          <div><p class="testi-name">Diego Morales</p><p class="testi-role">Técnico de Ciberseguridad en Accenture · Promoción 2024</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-alt" id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Preguntas frecuentes</p>
+      <h2 class="section-title">Todo lo que necesitas <span>saber</span></h2>
+      <p class="section-desc">Las dudas más comunes que nos llegan cada año antes de la matrícula.</p>
+    </div>
+    <div class="faq-cols reveal">
+      <div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Necesito saber programar para entrar en ASIR?</span><div class="faq-toggle">+</div></div>
+          <div class="faq-a"><p>No. ASIR se centra en sistemas, redes e infraestructura — no en programación de aplicaciones. Sí aprenderás a escribir scripts en Bash y PowerShell, pero no se requiere experiencia previa en ningún lenguaje. Empezarás desde cero.</p></div>
+        </div>
+        <div class="faq-item" style="margin-top:.75rem;">
+          <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Puedo acceder a la universidad después de ASIR?</span><div class="faq-toggle">+</div></div>
+          <div class="faq-a"><p>Sí. Con el título de Técnico Superior puedes acceder directamente a la universidad con convalidación de créditos ECTS en grados como Ingeniería Informática, Ingeniería de Telecomunicaciones o Ciencia de Datos. También puedes continuar con cursos de especialización en Ciberseguridad o IA dentro de la propia FP.</p></div>
+        </div>
+        <div class="faq-item" style="margin-top:.75rem;">
+          <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Qué diferencia hay entre ASIR, DAW y DAM?</span><div class="faq-toggle">+</div></div>
+          <div class="faq-a"><p>ASIR se centra en la infraestructura: redes, sistemas operativos, servidores, seguridad y cloud. DAW (Desarrollo de Aplicaciones Web) y DAM (Desarrollo de Aplicaciones Multiplataforma) se enfocan en programación y desarrollo de software. Los tres son Grado Superior de la misma familia con módulos convalidables entre ellos.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Qué es la FP Dual y cómo funciona?</span><div class="faq-toggle">+</div></div>
+          <div class="faq-a"><p>La FP Dual combina formación en el centro educativo con trabajo real en empresa. Tendrás 500 horas de prácticas formativas en empresas del sector tecnológico (60 h en 1.º y 440 h en 2.º). Esto te permite hacer contactos reales y, en muchos casos, conseguir empleo directo al finalizar.</p></div>
+        </div>
+        <div class="faq-item" style="margin-top:.75rem;">
+          <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Las certificaciones Cisco y Microsoft están incluidas?</span><div class="faq-toggle">+</div></div>
+          <div class="faq-a"><p>Sí. Las certificaciones se integran dentro del propio ciclo formativo. La primera es totalmente gratuita. Las demás forman parte de la formación complementaria incluida en la matrícula. Son certificaciones internacionales reconocidas por la industria que añaden valor real a tu currículum desde el primer día.</p></div>
+        </div>
+        <div class="faq-item" style="margin-top:.75rem;">
+          <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Hay becas disponibles para estudiar ASIR?</span><div class="faq-toggle">+</div></div>
+          <div class="faq-a"><p>Sí. CampusFP dispone de un programa propio de becas de matrícula y facilidades de pago. Además, puedes acceder a becas del Ministerio de Educación y de la Comunidad de Madrid. Nuestro equipo de orientación te informa de todas las opciones disponibles en tu caso concreto.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <h2>Empieza tu carrera en IT.<br>El sector <em>te está esperando.</em></h2>
+  <p>Sin compromiso. Te enviamos toda la información sobre el ciclo, plazos de matrícula, becas y requisitos de acceso en menos de 24 horas.</p>
+  <div class="cta-form">
+    <input class="cta-inp" type="text" placeholder="Nombre y apellidos" id="f-name" />
+    <input class="cta-inp" type="email" placeholder="Correo electrónico" id="f-email" />
+    <input class="cta-inp" type="tel" placeholder="Teléfono (opcional)" id="f-tel" style="width:180px;" />
+    <button class="btn-hero-primary" onclick="sendForm()">Solicitar información</button>
+  </div>
+  <p class="cta-privacy">Sin spam · Tus datos se tratan conforme al RGPD · Puedes darte de baja en cualquier momento</p>
+  <div class="cta-success-msg" id="form-ok">✓ Solicitud recibida. Un asesor de CampusFP se pondrá en contacto contigo en menos de 24 horas laborables.</div>
+</section>
+
+<!-- SUPER FOOTER -->
+<footer class="superfooter">
+  <div class="superfooter-grid">
+    <div class="sf-brand">
+      <div class="logo-mark" style="margin-bottom:1rem;">FP</div>
+      <p>CampusFP es un centro de Formación Profesional en la Comunidad de Madrid, autorizado por el Ministerio de Educación, con más de 20 años de trayectoria en la formación de profesionales del sector.</p>
+      <div class="sf-socials">
+        <div class="social-btn" title="Facebook">f</div>
+        <div class="social-btn" title="Instagram">in</div>
+        <div class="social-btn" title="LinkedIn">li</div>
+        <div class="social-btn" title="TikTok">tt</div>
+        <div class="social-btn" title="Twitter/X">x</div>
+      </div>
+    </div>
+    <div class="sf-col">
+      <h5>El ciclo ASIR</h5>
+      <a href="#modulos">Plan de estudios</a>
+      <a href="#certificaciones">Certificaciones</a>
+      <a href="#roadmap">Tu hoja de ruta</a>
+      <a href="#salidas">Salidas profesionales</a>
+      <a href="#salarios">Salarios del sector</a>
+    </div>
+    <div class="sf-col">
+      <h5>CampusFP</h5>
+      <a href="#centros">Nuestros centros</a>
+      <a href="#becas">Becas FP</a>
+      <a href="#">Bolsa de empleo</a>
+      <a href="#">FP Dual</a>
+      <a href="#">Erasmus+</a>
+      <a href="#">Comunidad Campus</a>
+    </div>
+    <div class="sf-col">
+      <h5>Formación</h5>
+      <a href="#">Grado Medio</a>
+      <a href="#">Grado Superior</a>
+      <a href="#">Cursos de especialización</a>
+      <a href="#">Certificados profesionales</a>
+      <a href="#">FP Internacional</a>
+    </div>
+    <div class="sf-col">
+      <h5>Contacto</h5>
+      <a href="tel:+34911833122">📞 91 183 31 22</a>
+      <a href="mailto:secretaria@campusfp.es">✉ secretaria@campusfp.es</a>
+      <a href="#">Alcalá de Henares</a>
+      <a href="#">Getafe</a>
+      <a href="#">Humanes – Fuenlabrada</a>
+      <a href="#">Móstoles</a>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <p>© 2025 CampusFP · Todos los derechos reservados · <a href="#" style="color:var(--mid);">Política de privacidad</a> · <a href="#" style="color:var(--mid);">Aviso legal</a> · <a href="#" style="color:var(--mid);">Cookies</a></p>
+    <div class="sf-badges">
+      <div class="sf-badge">🏛️ Centro autorizado Comunidad de Madrid</div>
+      <div class="sf-badge">📘 Acreditado Pearson · HND</div>
+      <div class="sf-badge">🌍 Erasmus+</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── MODULES DATA ── */
+const mods = {
+  1:[
+    {n:'01',name:'Fundamentos de hardware',h:'105 h',desc:'Arquitectura de equipos informáticos, componentes hardware (CPU, RAM, almacenamiento, placa base, periféricos), ensamblado, diagnóstico de averías y selección de hardware para entornos empresariales. Aprenderás a dimensionar correctamente la infraestructura física de una organización.',skills:['Arquitectura PC','CPUs','RAM & almacenamiento','PCIe & buses','Diagnóstico HW','BIOS/UEFI']},
+    {n:'02',name:'Gestión de bases de datos',h:'200 h',desc:'Diseño, implementación y administración de bases de datos relacionales. Lenguaje SQL completo (DDL, DML, DCL), normalización de esquemas, integridad referencial, triggers, procedimientos almacenados y optimización de consultas con MySQL.',skills:['SQL','MySQL','Normalización','ERD','Triggers','Procedimientos','Transacciones']},
+    {n:'03',name:'Implantación de sistemas operativos',h:'245 h',desc:'Instalación, configuración y administración de Windows Server y distribuciones Linux (Ubuntu Server, CentOS). Gestión de usuarios, grupos, permisos, particionado (LVM), servicios del sistema y administración básica de Active Directory.',skills:['Linux','Windows Server','Active Directory','LVM','Bash','Systemd','Permisos Unix']},
+    {n:'04',name:'Lenguajes de marcas y gestión de información',h:'110 h',desc:'HTML5, XML, JSON, expresiones regulares y sistemas de gestión documental. Procesamiento y transformación de datos estructurados con XPath y XSLT. Fundamentos de la gestión de la información en entornos empresariales.',skills:['HTML5','XML','JSON','XPath','XSLT','RegEx','Markdown']},
+    {n:'05',name:'Planificación y administración de redes',h:'190 h',desc:'Modelo OSI y pila TCP/IP en profundidad. Diseño de redes LAN, WAN e inalámbricas. Subnetting, enrutamiento estático y dinámico (OSPF, RIP), switches, VLANs, Spanning Tree y configuración de dispositivos Cisco IOS.',skills:['TCP/IP','Subnetting','VLANs','Cisco IOS','OSPF','STP','Wi-Fi']},
+    {n:'06',name:'Módulo profesional optativo',h:'50 h',desc:'Módulo de especialización adaptado a las necesidades del mercado local. Contenidos variables según sede: virtualización avanzada, scripting Python, introducción a DevOps o administración de entornos cloud.',skills:['Variable según sede','Virtualización','Python básico','DevOps intro']},
+    {n:'P1',name:'Proyecto intermodular (1.º)',h:'25 h',desc:'Proyecto integrador de primer curso. Simula un escenario empresarial real donde aplicas todos los conocimientos adquiridos de forma transversal.',skills:['Trabajo en equipo','Documentación','Presentación']},
+  ],
+  2:[
+    {n:'08',name:'Administración de SGBD',h:'110 h',desc:'Gestión avanzada de sistemas gestores de bases de datos: Oracle 19c y SQL Server. Replicación maestro-esclavo, copias de seguridad (backup/restore), importación/exportación, gestión de usuarios, permisos granulares y monitorización de rendimiento.',skills:['Oracle 19c','SQL Server','Replicación','Backup/Restore','RMAN','Auditoría']},
+    {n:'09',name:'Administración de sistemas operativos',h:'150 h',desc:'Gestión avanzada de Windows Server 2022 y Linux. Active Directory profundo, Políticas de Grupo (GPOs), automatización con PowerShell y Bash, administración remota (SSH, RDP, WinRM), LDAP y gestión de infraestructuras complejas.',skills:['PowerShell','Active Directory','GPO','SSH','WinRM','Automatización','PAM']},
+    {n:'10',name:'Implantación de aplicaciones web',h:'100 h',desc:'Instalación y configuración de servidores web Apache y Nginx. CMS (WordPress, Joomla), balanceo de carga, proxy inverso, certificados SSL/TLS, despliegue de aplicaciones PHP y Python, y contenedores básicos con Docker.',skills:['Apache','Nginx','SSL/TLS','Docker básico','PHP','Proxy inverso','CMS']},
+    {n:'11',name:'Seguridad y alta disponibilidad',h:'160 h',desc:'Criptografía simétrica y asimétrica, PKI, firewalls (iptables, pfSense), IDS/IPS, VLAN seguras, clustering de alta disponibilidad, RAID, planes de contingencia y cumplimiento normativo (RGPD, ENS, ISO 27001).',skills:['Firewall','IDS/IPS','PKI','Clustering','RAID','VPN','ISO 27001']},
+    {n:'12',name:'Servicios de red e internet',h:'160 h',desc:'Despliegue y administración de DNS, DHCP, FTP/SFTP, correo electrónico (Postfix, Dovecot), VPN (OpenVPN, WireGuard), VoIP (Asterisk), servicios de directorio LDAP y monitorización de red con Zabbix/Nagios.',skills:['DNS','DHCP','SMTP','VPN','LDAP','Zabbix','VoIP']},
+    {n:'13',name:'Inglés profesional GS',h:'50 h',desc:'Comunicación técnica en inglés orientada al entorno IT: documentación técnica, soporte a usuarios internacionales, presentaciones de proyectos y vocabulario especializado del sector tecnológico.',skills:['Technical English','IT Vocabulary','Documentación','Soporte internacional']},
+    {n:'15',name:'Digitalización aplicada a sectores',h:'30 h',desc:'Transformación digital en las organizaciones, industria 4.0, IoT, automatización de procesos y el impacto de la inteligencia artificial en la administración de sistemas.',skills:['Industria 4.0','IoT','Automatización','IA aplicada','Transformación digital']},
+  ]
+};
+
+let curYear=1, curMod=null;
+
+function renderMods(y){
+  const list=document.getElementById('module-list');
+  list.innerHTML='';
+  mods[y].forEach(m=>{
+    const el=document.createElement('div');
+    el.className='mod-item';
+    el.innerHTML=`<span class="mod-num">${m.n}</span><span class="mod-name">${m.name}</span><span class="mod-hrs">${m.h}</span><span class="mod-arrow">›</span>`;
+    el.onclick=()=>showMod(m,el);
+    list.appendChild(el);
+  });
+  document.getElementById('mod-detail').innerHTML=`<div class="mod-detail-empty"><span class="mod-detail-empty-icon">📋</span><p style="font-size:.9rem;color:var(--muted);">Selecciona un módulo para ver la descripción completa.</p></div>`;
+}
+
+function showMod(m,el){
+  document.querySelectorAll('.mod-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('mod-detail').innerHTML=`
+    <div class="mod-detail-badge">${curYear===1?'1.er Curso':'2.º Curso'} · ${m.h}</div>
+    <h3>${m.name}</h3>
+    <p>${m.desc}</p>
+    <div class="tags">${m.skills.map(s=>`<span class="tag">${s}</span>`).join('')}</div>
+  `;
+}
+
+function switchYear(y,btn){
+  curYear=y;
+  document.querySelectorAll('.ytab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderMods(y);
+}
+
+renderMods(1);
+
+/* ── FAQ ── */
+function toggleFaq(el){
+  el.parentElement.classList.toggle('open');
+}
+
+/* ── FORM ── */
+function sendForm(){
+  const name=document.getElementById('f-name').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  if(!name||!email){alert('Por favor, introduce tu nombre y correo electrónico.');return;}
+  document.getElementById('form-ok').style.display='block';
+}
+
+/* ── SCROLL REVEAL ── */
+const revealIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('up');}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>revealIO.observe(el));
+
+/* ── SALARY BARS ── */
+const sbarsEl=document.getElementById('sbars');
+const barIO=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    setTimeout(()=>{
+      document.querySelectorAll('.sbar-fill').forEach(b=>{
+        b.style.width=(parseFloat(b.dataset.w)*100)+'%';
+        b.classList.add('go');
+      });
+    },200);
+    barIO.disconnect();
+  }
+},{threshold:.3});
+if(sbarsEl) barIO.observe(sbarsEl);
+</script>
+</body>
+</html>
