@@ -1,6 +1,6 @@
 # Laboratorio Empresarial ASIR
 
-![Arquitectura General](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/arquitectura.png?raw=true)
+![Arquitectura General](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/screenshots/arquitectura.png?raw=true)
 
 ## Proyecto de Infraestructura y Administración de Sistemas
 
