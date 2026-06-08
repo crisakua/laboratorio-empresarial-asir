@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grado Medio en Sistemas Microinformáticos y Redes (SMIR) | CampusFP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:        #E31E24;
+    --red-dark:   #B71519;
+    --navy:       #0B1F3A;
+    --blue:       #0D6EFD;
+    --blue-mid:   #0A58CA;
+    --blue-light: #3D8BFF;
+    --blue-glow:  rgba(13,110,253,0.18);
+    --cyan:       #00C6FF;
+    --white:      #FFFFFF;
+    --off-white:  #F5F7FA;
+    --light-gray: #E9ECF2;
+    --mid-gray:   #8A94A6;
+    --dark-gray:  #3D4451;
+    --text:       #141820;
+    --shadow:     0 4px 28px rgba(11,31,58,0.09);
+    --shadow-md:  0 8px 40px rgba(11,31,58,0.14);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(14px);
+    border-bottom: 3px solid var(--red);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+    height: 68px; box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+  .nav-logo-badge { background: var(--red); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.15rem; letter-spacing: 0.04em; padding: 6px 14px; border-radius: 4px; }
+  .nav-logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: var(--navy); line-height: 1.2; }
+  .nav-logo-sub { font-weight: 400; font-size: 0.77rem; color: var(--mid-gray); display: block; }
+  .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+  .nav-links a { text-decoration: none; color: var(--dark-gray); font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { background: var(--red); color: white !important; padding: 9px 22px; border-radius: 4px; font-weight: 700 !important; }
+  .nav-cta:hover { background: var(--red-dark) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh; padding-top: 68px;
+    background: var(--navy);
+    position: relative; display: flex; align-items: center; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 50%, rgba(13,110,253,0.22) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 15% 80%, rgba(227,30,36,0.12) 0%, transparent 60%),
+      linear-gradient(160deg, #0B1F3A 0%, #091729 100%);
+  }
+  /* animated grid */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(13,110,253,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,110,253,0.07) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  }
+  .hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(180deg, var(--red) 0%, var(--blue) 100%); }
+  /* floating code decoration */
+  .hero-deco {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    font-family: 'Courier New', monospace; font-size: 0.75rem;
+    color: rgba(13,110,253,0.25); line-height: 2; white-space: pre;
+    pointer-events: none; display: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 5rem;
+    display: grid; grid-template-columns: 1fr 400px; gap: 5rem; align-items: center;
+  }
+
+  .hero-eyebrow { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; animation: fadeUp .5s ease both; }
+  .pill { display: inline-flex; align-items: center; gap: 7px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.77rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 13px; border-radius: 3px; }
+  .pill-red { background: var(--red); color: white; }
+  .pill-blue { background: rgba(13,110,253,0.2); color: #7BB8FF; border: 1px solid rgba(13,110,253,0.3); }
+  .pill-outline { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.12); }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: blink 1.4s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+  .hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2.8rem, 5vw, 5rem); line-height: .97; color: white; letter-spacing: -.01em; margin-bottom: .5rem; animation: fadeUp .5s .1s ease both; }
+  .hero-title .red { color: var(--red); }
+  .hero-title .blue { color: var(--cyan); }
+  .hero-brand-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.5rem); color: rgba(255,255,255,.45); letter-spacing: .18em; text-transform: uppercase; margin-bottom: 1.6rem; animation: fadeUp .5s .18s ease both; }
+  .hero-desc { font-size: 1.06rem; line-height: 1.78; color: rgba(255,255,255,.75); max-width: 560px; margin-bottom: 2.2rem; animation: fadeUp .5s .26s ease both; }
+
+  .hero-certs { display: flex; gap: .7rem; flex-wrap: wrap; margin-bottom: 2.4rem; animation: fadeUp .5s .32s ease both; }
+  .cert-chip { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 30px; padding: 6px 14px; font-size: .78rem; font-weight: 600; color: rgba(255,255,255,.8); letter-spacing: .03em; }
+  .cert-chip .badge { background: var(--blue); color: white; font-size: .64rem; font-weight: 800; padding: 2px 7px; border-radius: 10px; letter-spacing: .05em; }
+  .cert-chip .badge.free { background: #16a34a; }
+
+  .hero-stats { display: flex; gap: 0; border: 1px solid rgba(255,255,255,.1); border-radius: 8px; overflow: hidden; margin-bottom: 2.4rem; animation: fadeUp .5s .38s ease both; }
+  .stat { flex: 1; text-align: center; padding: .9rem 1rem; border-right: 1px solid rgba(255,255,255,.08); }
+  .stat:last-child { border-right: none; }
+  .stat-n { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.9rem; color: white; line-height: 1; }
+  .stat-n sup { font-size: 1rem; color: var(--cyan); }
+  .stat-l { font-size: .7rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .07em; margin-top: 3px; display: block; }
+
+  .hero-actions { display: flex; gap: .9rem; flex-wrap: wrap; animation: fadeUp .5s .44s ease both; }
+  .btn-red { background: var(--red); color: white; padding: 14px 28px; border-radius: 5px; font-weight: 700; font-size: .95rem; text-decoration: none; font-family: 'Barlow Semi Condensed', sans-serif; letter-spacing: .03em; transition: all .22s; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; }
+  .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(227,30,36,.4); }
+  .btn-blue { background: rgba(13,110,253,.15); color: #7BB8FF; padding: 14px 28px; border-radius: 5px; font-weight: 600; font-size: .95rem; text-decoration: none; font-family: 'Barlow Semi Condensed', sans-serif; letter-spacing: .03em; transition: all .22s; border: 1.5px solid rgba(13,110,253,.35); display: inline-flex; align-items: center; gap: 8px; }
+  .btn-blue:hover { background: rgba(13,110,253,.25); border-color: var(--blue-light); }
+
+  /* hero card */
+  .hero-card { background: white; border-radius: 14px; padding: 1.8rem; box-shadow: 0 24px 64px rgba(0,0,0,.45); animation: fadeUp .6s .3s ease both; }
+  .hc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.3rem; padding-bottom: 1rem; border-bottom: 2px solid var(--light-gray); }
+  .hc-icon { width: 38px; height: 38px; background: var(--red); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .hc-header h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; color: var(--navy); text-transform: uppercase; letter-spacing: .03em; line-height: 1.2; }
+  .hc-header span { font-size: .73rem; color: var(--mid-gray); display: block; }
+  .fg { margin-bottom: .8rem; }
+  .fg label { display: block; font-size: .72rem; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; }
+  .fg input, .fg select { width: 100%; padding: 10px 12px; border: 1.5px solid var(--light-gray); border-radius: 6px; font-size: .9rem; font-family: 'Barlow', sans-serif; color: var(--text); background: var(--off-white); outline: none; transition: border-color .2s; }
+  .fg input:focus, .fg select:focus { border-color: var(--blue); background: white; }
+  .fr { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .card-btn { width: 100%; padding: 12px; background: var(--red); color: white; border: none; border-radius: 6px; font-size: .97rem; font-weight: 700; cursor: pointer; font-family: 'Barlow Semi Condensed', sans-serif; letter-spacing: .04em; transition: background .2s; margin-top: .35rem; }
+  .card-btn:hover { background: var(--red-dark); }
+  .card-note { font-size: .69rem; color: var(--mid-gray); text-align: center; margin-top: .6rem; line-height: 1.5; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ─── STRIP ─── */
+  .strip { background: var(--red); padding: 1rem 2rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+  .strip-item { display: flex; align-items: center; gap: 9px; color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .9rem; letter-spacing: .07em; text-transform: uppercase; }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .sl { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .77rem; letter-spacing: .16em; text-transform: uppercase; color: var(--red); margin-bottom: .7rem; display: flex; align-items: center; gap: 9px; }
+  .sl::before { content:''; display:block; width:26px; height:3px; background:var(--red); }
+  .st { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.9rem,3.8vw,3rem); color: var(--navy); line-height: 1.05; margin-bottom: 1.1rem; }
+  .sd { font-size: 1.04rem; line-height: 1.8; color: var(--dark-gray); max-width: 640px; }
+
+  /* ─── CERTS SECTION ─── */
+  #certs { background: var(--off-white); }
+  .certs-intro { max-width: 700px; margin-bottom: 3rem; }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.2rem; }
+  .cert-card { background: white; border-radius: 12px; padding: 1.8rem; border: 1.5px solid var(--light-gray); transition: all .22s; position: relative; overflow: hidden; }
+  .cert-card:hover { border-color: var(--blue); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .cert-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background: var(--blue); }
+  .cert-card.cisco::before { background: #049FD9; }
+  .cert-card.pearson::before { background: #6B45C8; }
+  .cert-card.ms::before { background: #00A4EF; }
+  .cert-card.genai::before { background: #16a34a; }
+  .cert-logo { height: 36px; margin-bottom: 1rem; display: flex; align-items: center; }
+  .cert-logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.1rem; letter-spacing: .04em; }
+  .cert-logo-text.cisco { color: #049FD9; }
+  .cert-logo-text.pearson { color: #6B45C8; }
+  .cert-logo-text.ms { color: #00A4EF; }
+  .cert-logo-text.genai { color: #16a34a; }
+  .cert-card h3 { font-weight: 800; font-size: 1rem; color: var(--navy); margin-bottom: .4rem; line-height: 1.3; }
+  .cert-card p { font-size: .83rem; color: var(--dark-gray); line-height: 1.6; }
+  .cert-free-tag { display: inline-block; margin-top: .9rem; background: rgba(22,163,74,.1); color: #16a34a; font-size: .72rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+  .cert-paid-tag { display: inline-block; margin-top: .9rem; background: var(--blue-glow); color: var(--blue-light); font-size: .72rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+  .certs-note { margin-top: 2rem; background: linear-gradient(135deg, var(--navy) 0%, #142A4A 100%); border-radius: 12px; padding: 1.8rem 2rem; display: flex; align-items: center; gap: 1.5rem; }
+  .certs-note-icon { font-size: 2.2rem; flex-shrink: 0; }
+  .certs-note p { color: rgba(255,255,255,.8); font-size: .92rem; line-height: 1.7; }
+  .certs-note strong { color: white; }
+
+  /* ─── SOBRE ─── */
+  #sobre { background: white; }
+  .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .sobre-visual { position: relative; }
+  .sobre-img { width: 100%; height: 360px; border-radius: 14px; background: linear-gradient(140deg, var(--navy) 0%, #112040 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; overflow: hidden; position: relative; }
+  .sobre-img::after { content:''; position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=50') center/cover; opacity:.1; }
+  /* terminal window effect */
+  .terminal { position: relative; z-index:1; background: rgba(0,0,0,.6); border-radius: 10px; padding: 1.2rem 1.5rem; font-family: 'Courier New', monospace; font-size: .78rem; line-height: 1.9; min-width: 260px; border: 1px solid rgba(13,110,253,.3); }
+  .terminal-bar { display: flex; gap: 6px; margin-bottom: .8rem; }
+  .tb { width: 10px; height: 10px; border-radius: 50%; }
+  .tb1 { background:#FF5F57; } .tb2 { background:#FFBD2E; } .tb3 { background:#28C840; }
+  .t-line { color: rgba(255,255,255,.7); }
+  .t-line .green { color: #4ade80; }
+  .t-line .blue { color: #7BB8FF; }
+  .t-line .cyan { color: var(--cyan); }
+  .sobre-float { position: absolute; bottom:-18px; right:-18px; background: var(--blue); color: white; padding: 1.1rem 1.4rem; border-radius: 10px; box-shadow: 0 8px 32px rgba(13,110,253,.4); text-align: center; }
+  .sf-big { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.2rem; line-height: 1; }
+  .sf-sm { font-size: .7rem; opacity: .85; text-transform: uppercase; letter-spacing: .05em; }
+  .skills-pills { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.8rem; }
+  .skill-pill { background: var(--off-white); border: 1.5px solid var(--light-gray); border-radius: 30px; padding: 6px 15px; font-size: .82rem; font-weight: 600; color: var(--dark-gray); transition: all .2s; display: flex; align-items: center; gap: 6px; }
+  .skill-pill:hover { border-color: var(--blue); color: var(--blue-mid); background: var(--blue-glow); }
+  .skill-pill .sp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+
+  /* ─── MÓDULOS ─── */
+  #modulos { background: var(--off-white); }
+  .mods-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; gap: 1.5rem; flex-wrap: wrap; }
+  .ytabs { display: flex; gap: .5rem; }
+  .ytab { padding: 8px 22px; border-radius: 5px; font-weight: 600; font-size: .88rem; border: none; cursor: pointer; transition: all .2s; font-family: 'Barlow Semi Condensed', sans-serif; }
+  .ytab.active { background: var(--red); color: white; }
+  .ytab:not(.active) { background: var(--light-gray); color: var(--dark-gray); }
+  .ytab:not(.active):hover { background: #d5dae6; }
+  .ypanel { display: none; }
+  .ypanel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px,1fr)); gap: 1rem; }
+  .mod-card { background: white; border-radius: 9px; padding: 1.3rem; border: 1.5px solid var(--light-gray); transition: all .2s; display: flex; gap: 1rem; align-items: flex-start; }
+  .mod-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .mod-n { background: var(--navy); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: .97rem; min-width: 42px; height: 42px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .mod-info h4 { font-weight: 700; font-size: .92rem; color: var(--navy); margin-bottom: .22rem; line-height: 1.3; }
+  .mod-h { font-size: .77rem; color: var(--blue-mid); font-weight: 700; }
+  .mod-d { font-size: .77rem; color: var(--mid-gray); margin-top: .25rem; line-height: 1.45; }
+  .ffe-card { background: var(--navy); color: white; border-radius: 9px; padding: 1.5rem; grid-column: 1/-1; display: flex; align-items: center; gap: 1.5rem; margin-top: .5rem; border-left: 5px solid var(--blue); }
+  .ffe-card svg { flex-shrink: 0; }
+  .ffe-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; margin-bottom: .25rem; color: var(--cyan); }
+  .ffe-card p { font-size: .86rem; opacity: .7; }
+
+  /* ─── SALIDAS ─── */
+  #salidas { background: var(--navy); }
+  #salidas .st { color: white; }
+  #salidas .sd { color: rgba(255,255,255,.6); }
+  .salidas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.4rem; margin-top: 3rem; }
+  .sal-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 11px; padding: 1.7rem; transition: all .25s; }
+  .sal-card:hover { background: rgba(255,255,255,.09); transform: translateY(-3px); border-color: rgba(13,110,253,.4); }
+  .sal-icon { width: 48px; height: 48px; border-radius: 10px; background: var(--blue-glow); border: 1px solid rgba(13,110,253,.2); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+  .sal-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.15rem; color: white; margin-bottom: .45rem; }
+  .sal-card p { font-size: .83rem; color: rgba(255,255,255,.57); line-height: 1.65; }
+  .sal-tag { display: inline-block; margin-top: .9rem; background: var(--blue-glow); color: var(--cyan); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; }
+
+  /* ─── RUTA ─── */
+  #ruta { background: var(--off-white); }
+  .ruta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; align-items: start; margin-top: 3rem; }
+  .ruta-desc { font-size: 1rem; line-height: 1.8; color: var(--dark-gray); margin-bottom: 2rem; }
+  .ruta-steps { display: flex; flex-direction: column; }
+  .ruta-step { display: flex; gap: 1.2rem; }
+  .rs-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .rs-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.1rem; color: white; flex-shrink: 0; border: 3px solid var(--blue); }
+  .rs-dot.current { background: var(--red); border-color: var(--red); }
+  .rs-connector { width: 2px; flex: 1; background: linear-gradient(180deg, var(--blue) 0%, rgba(13,110,253,.2) 100%); min-height: 30px; margin: 4px 0; }
+  .rs-body { padding-bottom: 1.8rem; }
+  .rs-body h4 { font-weight: 700; color: var(--navy); font-size: .97rem; margin-bottom: .3rem; }
+  .rs-body p { font-size: .84rem; color: var(--dark-gray); line-height: 1.6; }
+  .rs-tag { display: inline-block; margin-top: .4rem; background: var(--light-gray); color: var(--dark-gray); font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 3px 9px; border-radius: 3px; }
+  .rs-tag.active { background: rgba(227,30,36,.1); color: var(--red); }
+  /* sup cards */
+  .sup-cards { display: flex; flex-direction: column; gap: .9rem; }
+  .sup-card { background: white; border-radius: 9px; padding: 1.2rem; border: 1.5px solid var(--light-gray); display: flex; gap: .9rem; align-items: center; transition: all .2s; }
+  .sup-card:hover { border-color: var(--blue); box-shadow: var(--shadow); }
+  .sc-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .sc-body h4 { font-weight: 700; color: var(--navy); font-size: .92rem; margin-bottom: .2rem; }
+  .sc-body p { font-size: .8rem; color: var(--mid-gray); line-height: 1.4; }
+  .sc-badge { display: inline-block; margin-top: .3rem; background: rgba(13,110,253,.1); color: var(--blue-mid); font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em; }
+
+  /* ─── DUAL ─── */
+  #dual { background: white; }
+  .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .dual-steps { display: flex; flex-direction: column; gap: 1.4rem; }
+  .ds { display: flex; gap: 1.1rem; }
+  .ds-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.9rem; color: var(--red); line-height: 1; flex-shrink: 0; min-width: 30px; }
+  .ds-body h4 { font-weight: 700; color: var(--navy); margin-bottom: .25rem; font-size: .97rem; }
+  .ds-body p { font-size: .87rem; color: var(--dark-gray); line-height: 1.65; }
+  .dual-panel { background: var(--navy); border-radius: 14px; padding: 2.2rem; border-left: 5px solid var(--blue); }
+  .dp-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1rem; color: var(--cyan); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 1.8rem; padding-bottom: .9rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .dp-stat { padding-bottom: 1.2rem; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .dp-stat:last-child { border:none; margin:0; padding:0; }
+  .dp-n { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.4rem; color: white; line-height: 1; }
+  .dp-n span { color: var(--cyan); }
+  .dp-l { font-size: .83rem; color: rgba(255,255,255,.52); margin-top: 4px; line-height: 1.5; }
+
+  /* ─── EMPRESAS ─── */
+  #empresas { background: var(--off-white); }
+  .empresas-intro { max-width: 600px; margin-bottom: 2.5rem; }
+  .logos-track-wrap { overflow: hidden; position: relative; }
+  .logos-track-wrap::before, .logos-track-wrap::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; }
+  .logos-track-wrap::before { left:0; background:linear-gradient(90deg,var(--off-white),transparent); }
+  .logos-track-wrap::after { right:0; background:linear-gradient(-90deg,var(--off-white),transparent); }
+  .logos-track { display: flex; gap: 2.5rem; align-items: center; animation: scroll-logos 22s linear infinite; width: max-content; }
+  @keyframes scroll-logos { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .logo-chip { background: white; border-radius: 8px; padding: .7rem 1.5rem; border: 1.5px solid var(--light-gray); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; color: var(--dark-gray); letter-spacing: .04em; white-space: nowrap; }
+
+  /* ─── PERFIL ─── */
+  #perfil { background: white; }
+  .perfil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin-top: 2.8rem; }
+  .pf-card { display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem; background: var(--off-white); border-radius: 9px; border: 1.5px solid var(--light-gray); transition: border-color .2s; }
+  .pf-card:hover { border-color: var(--blue); }
+  .pf-e { font-size: 1.65rem; flex-shrink: 0; }
+  .pf-card h4 { font-weight: 700; color: var(--navy); margin-bottom: .25rem; font-size: .93rem; }
+  .pf-card p { font-size: .83rem; color: var(--dark-gray); line-height: 1.55; }
+
+  /* ─── REQUISITOS ─── */
+  #requisitos { background: var(--off-white); }
+  .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2.8rem; }
+  .req-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+  .req-list li { display: flex; gap: 11px; align-items: flex-start; font-size: .93rem; line-height: 1.55; color: var(--dark-gray); padding: .9rem 1.1rem; background: white; border-radius: 8px; border-left: 4px solid var(--red); box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+  .rch { width: 21px; height: 21px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .rch svg { width: 11px; height: 11px; }
+  .prog-box { background: var(--navy); border-radius: 12px; padding: 1.8rem; }
+  .prog-box h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; margin-bottom: 1.4rem; color: var(--cyan); }
+  .pi { background: rgba(255,255,255,.06); border-radius: 8px; padding: .9rem 1.1rem; font-size: .87rem; color: rgba(255,255,255,.8); }
+  .pi strong { color: white; display: block; margin-bottom: .15rem; font-size: .92rem; }
+  .pcon { width: 2px; background: var(--blue); height: 20px; margin: 0 auto; opacity: .5; }
+
+  /* ─── BECAS ─── */
+  #becas { background: white; }
+  .becas-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; margin-top: 2.8rem; }
+  .beca-card { background: var(--off-white); border-radius: 11px; padding: 1.7rem; border-top: 4px solid var(--red); text-align: center; transition: transform .2s, box-shadow .2s; }
+  .beca-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .beca-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.12rem; color: var(--navy); margin-bottom: .55rem; }
+  .beca-card p { font-size: .85rem; color: var(--dark-gray); line-height: 1.65; }
+  .beca-link { display: inline-block; margin-top: 1rem; color: var(--red); font-weight: 700; font-size: .86rem; text-decoration: none; border-bottom: 2px solid transparent; transition: border-color .2s; }
+  .beca-link:hover { border-color: var(--red); }
+
+  /* ─── CENTROS ─── */
+  #centros { background: var(--off-white); }
+  .centros-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.2rem; margin-top: 2.8rem; }
+  .cen-card { background: white; border-radius: 11px; padding: 1.5rem; border: 1.5px solid var(--light-gray); transition: all .22s; display: flex; gap: .9rem; align-items: flex-start; }
+  .cen-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .cen-num { background: var(--navy); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: .85rem; padding: .4rem .7rem; border-radius: 5px; flex-shrink: 0; }
+  .cen-info h4 { font-weight: 700; color: var(--navy); font-size: .95rem; margin-bottom: .25rem; }
+  .cen-info p { font-size: .8rem; color: var(--mid-gray); line-height: 1.5; }
+  .cen-tag { display: inline-block; margin-top: .5rem; background: rgba(13,110,253,.09); color: var(--blue-mid); font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: .05em; }
+
+  /* ─── FAQ ─── */
+  #faq { background: white; }
+  .faq-wrap { max-width: 800px; margin: 2.8rem auto 0; }
+  .faq-item { border-bottom: 1px solid var(--light-gray); }
+  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 1.3rem 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 1rem; font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 600; font-size: .99rem; color: var(--navy); }
+  .faq-q .arr { color: var(--red); font-size: 1.4rem; transition: transform .25s; flex-shrink: 0; }
+  .faq-q.open .arr { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s; font-size: .93rem; line-height: 1.75; color: var(--dark-gray); }
+  .faq-a.open { max-height: 280px; padding-bottom: 1.3rem; }
+
+  /* ─── QUICK LINKS ─── */
+  .ql-section { background: var(--navy); padding: 3.5rem 2rem; }
+  .ql-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 1.3rem; }
+  .ql-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07); border-radius: 10px; padding: 1.4rem; text-align: center; cursor: pointer; transition: all .25s; text-decoration: none; color: white; display: block; }
+  .ql-card:hover { background: rgba(13,110,253,.12); border-color: rgba(13,110,253,.35); transform: translateY(-2px); }
+  .ql-icon { font-size: 1.9rem; margin-bottom: .7rem; }
+  .ql-card h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .94rem; letter-spacing: .03em; margin-bottom: .25rem; }
+  .ql-card p { font-size: .73rem; color: rgba(255,255,255,.42); line-height: 1.5; }
+
+  /* ─── CTA BAND ─── */
+  .cta-band { background: var(--red); padding: 4.5rem 2rem; text-align: center; }
+  .cta-band h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.9rem,4vw,2.9rem); color: white; margin-bottom: .75rem; }
+  .cta-band p { color: rgba(255,255,255,.85); font-size: 1.06rem; margin-bottom: 2rem; }
+  .btn-white { background: white; color: var(--red); padding: 14px 34px; border-radius: 5px; font-weight: 800; font-size: 1.02rem; text-decoration: none; display: inline-block; font-family: 'Barlow Semi Condensed', sans-serif; transition: all .2s; }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+
+  /* ─── FOOTER ─── */
+  footer { background: #07131F; padding: 3rem 2rem 2rem; }
+  .fi { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+  .fb-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.45rem; color: white; margin-bottom: .7rem; display: flex; align-items: center; gap: 9px; }
+  .fb-logo span { background: var(--red); padding: 4px 10px; border-radius: 3px; }
+  .footer-brand p { font-size: .83rem; color: rgba(255,255,255,.38); line-height: 1.7; max-width: 280px; margin-bottom: 1.1rem; }
+  .slinks { display: flex; gap: .7rem; }
+  .slink { width: 34px; height: 34px; border-radius: 6px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.52); text-decoration: none; font-size: .76rem; font-weight: 700; transition: all .2s; }
+  .slink:hover { background: var(--red); color: white; }
+  .fc h5 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.32); margin-bottom: .9rem; }
+  .fc a { display: block; text-decoration: none; color: rgba(255,255,255,.62); font-size: .85rem; margin-bottom: .55rem; transition: color .2s; }
+  .fc a:hover { color: var(--red); }
+  .fb-bottom { max-width: 1200px; margin: 2.2rem auto 0; padding-top: 1.3rem; border-top: 1px solid rgba(255,255,255,.06); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .fb-bottom p { font-size: .77rem; color: rgba(255,255,255,.25); }
+  .fb-badges { display: flex; gap: .7rem; }
+  .fb-badge { background: rgba(255,255,255,.05); border-radius: 3px; padding: 4px 11px; font-size: .68rem; color: rgba(255,255,255,.32); text-transform: uppercase; letter-spacing: .04em; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 920px) {
+    .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-card { display: none; }
+    .sobre-grid, .dual-grid, .req-grid, .ruta-grid, .fi { grid-template-columns: 1fr; }
+    .becas-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .sobre-float { display: none; }
+    .perfil-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .becas-grid { grid-template-columns: 1fr; }
+    section { padding: 4rem 1.2rem; }
+    .strip { gap: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-badge">Campus<strong>FP</strong></div>
+    <div class="nav-logo-text">Informática y Comunicaciones<span class="nav-logo-sub">Centro Autorizado · Madrid</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#certs">Certificaciones</a>
+    <a href="#modulos">Contenidos</a>
+    <a href="#salidas">Salidas</a>
+    <a href="#ruta">Ruta Tech</a>
+    <a href="#centros">Centros</a>
+    <a href="#contacto" class="nav-cta">Solicitar Info</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-accent"></div>
+
+  <div class="hero-content">
+    <div>
+      <div class="hero-eyebrow">
+        <div class="pill pill-red"><span class="dot"></span>Grado Medio</div>
+        <div class="pill pill-blue">Informática y Comunicaciones</div>
+        <div class="pill pill-outline">IT Support Engineer</div>
+      </div>
+
+      <h1 class="hero-title">
+        Sistemas<br>Micro&shy;informáticos<br>y <span class="blue">Redes</span>
+      </h1>
+      <p class="hero-brand-name">SMIR · CampusFP</p>
+      <p class="hero-desc">
+        Monta equipos, configura redes, protege sistemas. El ciclo que te lanza al sector tech más demandado del mercado con certificaciones reales de Cisco, Microsoft y Pearson incluidas.
+      </p>
+
+      <!-- certificaciones -->
+      <div class="hero-certs">
+        <div class="cert-chip"><span class="badge free">GRATIS</span> Cisco CCST IT Support</div>
+        <div class="cert-chip"><span class="badge" style="background:#6B45C8">Pearson</span> Networking IT Specialist</div>
+        <div class="cert-chip"><span class="badge" style="background:#00A4EF">Microsoft</span> Azure AI Fundamentals</div>
+        <div class="cert-chip"><span class="badge" style="background:#16a34a">IA</span> Generative AI — Pearson</div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-n">2.000<sup>h</sup></span><span class="stat-l">Formación total</span></div>
+        <div class="stat"><span class="stat-n">500<sup>h</sup></span><span class="stat-l">En empresa real</span></div>
+        <div class="stat"><span class="stat-n">8</span><span class="stat-l">Centros Madrid</span></div>
+        <div class="stat"><span class="stat-n">4+</span><span class="stat-l">Certificaciones</span></div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-red">▶ Solicitar información gratuita</a>
+        <a href="#ruta" class="btn-blue">Ver ruta tech →</a>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="hero-card" id="contacto">
+      <div class="hc-header">
+        <div class="hc-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <h3>Empieza en la tech<br>sin coste</h3>
+          <span>Respuesta garantizada en &lt;24h</span>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
+        <div class="fg"><label>Apellidos</label><input type="text" placeholder="Tus apellidos"></div>
+      </div>
+      <div class="fg"><label>Correo electrónico</label><input type="email" placeholder="correo@email.com"></div>
+      <div class="fg"><label>Teléfono</label><input type="tel" placeholder="6XX XXX XXX"></div>
+      <div class="fg">
+        <label>Centro de interés</label>
+        <select>
+          <option value="">Elige tu centro</option>
+          <option>CampusFP Atocha</option>
+          <option>CampusFP Getafe</option>
+          <option>CampusFP Leganés</option>
+          <option>CampusFP Móstoles</option>
+          <option>CampusFP Humanes – Fuenlabrada</option>
+          <option>CampusFP Alcalá de Henares</option>
+          <option>CampusFP Arganda del Rey</option>
+          <option>CampusFP Vistalegre</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Estudios realizados</label>
+        <select>
+          <option value="">Nivel de estudios</option>
+          <option>ESO / Graduado Escolar</option>
+          <option>Bachillerato</option>
+          <option>FP Grado Medio</option>
+          <option>Otros</option>
+        </select>
+      </div>
+      <button class="card-btn" onclick="alert('¡Gracias! Un asesor te contactará pronto.')">Recibir información gratuita →</button>
+      <p class="card-note">Sin compromiso · 1ª certificación incluida gratis<br>Datos protegidos según RGPD</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.91L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Título Oficial GM
+  </div>
+  <div class="strip-item">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+    Cisco + Microsoft + Pearson
+  </div>
+  <div class="strip-item">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    FP Dual · 500h empresa
+  </div>
+  <div class="strip-item">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    8 Centros en Madrid
+  </div>
+  <div class="strip-item">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    Alta Empleabilidad Tech
+  </div>
+</div>
+
+<!-- CERTIFICACIONES -->
+<section id="certs">
+  <div class="container">
+    <div class="certs-intro">
+      <div class="sl">Ventaja competitiva</div>
+      <h2 class="st">Certificaciones internacionales incluidas</h2>
+      <p class="sd">En CampusFP el título de FP no es suficiente. El ciclo SMIR incorpora certificaciones de los fabricantes tecnológicos más reconocidos del mundo para que tu CV destaque desde el primer día.</p>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card cisco">
+        <div class="cert-logo"><span class="cert-logo-text cisco">CISCO</span></div>
+        <h3>CCST IT Support</h3>
+        <p>Certificación oficial de Cisco para soporte técnico informático. Valida competencias en diagnóstico de hardware, software y conectividad ante cualquier empleador tech.</p>
+        <span class="cert-free-tag">✓ 1ª certificación gratuita</span>
+      </div>
+      <div class="cert-card pearson">
+        <div class="cert-logo"><span class="cert-logo-text pearson">PEARSON</span></div>
+        <h3>Networking IT Specialist</h3>
+        <p>Certificación Pearson en redes profesionales. Acredita tus conocimientos en arquitectura de redes, protocolos TCP/IP, DNS, DHCP y administración de infraestructura.</p>
+        <span class="cert-paid-tag">Certificación de fabricante</span>
+      </div>
+      <div class="cert-card ms">
+        <div class="cert-logo"><span class="cert-logo-text ms">MICROSOFT</span></div>
+        <h3>Azure AI Fundamentals</h3>
+        <p>Certificación Azure de Microsoft que acredita conocimientos en inteligencia artificial aplicada a entornos cloud y gestión de sistemas. Una habilidad crítica en IT actual.</p>
+        <span class="cert-paid-tag">Certificación de fabricante</span>
+      </div>
+      <div class="cert-card genai">
+        <div class="cert-logo"><span class="cert-logo-text genai">PEARSON AI</span></div>
+        <h3>Generative AI Specialist</h3>
+        <p>Aprende a integrar y utilizar herramientas de IA generativa en el entorno profesional IT. La automatización de procesos ya es parte del trabajo diario en sistemas.</p>
+        <span class="cert-paid-tag">Certificación de fabricante</span>
+      </div>
+    </div>
+    <div class="certs-note">
+      <div class="certs-note-icon">🎯</div>
+      <p><strong>La 1ª certificación es totalmente gratuita para todos los alumnos de CampusFP.</strong> Accedes al mercado laboral con credenciales internacionales acreditadas antes incluso de terminar el ciclo. Una ventaja real frente a otros candidatos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE EL CICLO -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-visual">
+        <div class="sobre-img">
+          <div class="terminal">
+            <div class="terminal-bar"><div class="tb tb1"></div><div class="tb tb2"></div><div class="tb tb3"></div></div>
+            <div class="t-line"><span class="green">$</span> ping <span class="blue">192.168.1.1</span></div>
+            <div class="t-line"><span class="cyan">PING</span> 192.168.1.1: 64 bytes</div>
+            <div class="t-line"><span class="green">64 bytes</span> — ttl=64 time=1.2ms</div>
+            <div class="t-line"><span class="green">$</span> ipconfig /all</div>
+            <div class="t-line"><span class="blue">Adapter</span>: Ethernet 0</div>
+            <div class="t-line"><span class="blue">IPv4</span>: 192.168.1.100</div>
+            <div class="t-line"><span class="blue">DNS</span>: 8.8.8.8 | 8.8.4.4</div>
+            <div class="t-line"><span class="green">$</span> <span style="animation:blink 1s infinite;display:inline-block">█</span></div>
+          </div>
+        </div>
+        <div class="sobre-float">
+          <span class="sf-big">95%</span>
+          <span class="sf-sm">Inserción<br>laboral</span>
+        </div>
+      </div>
+      <div>
+        <div class="sl">El ciclo</div>
+        <h2 class="st">El IT Support Engineer que toda empresa necesita</h2>
+        <p class="sd">SMIR forma al profesional que mantiene en marcha la infraestructura digital de cualquier organización. Equipos, redes, sistemas operativos, seguridad y servicios: el perfil más demandado en el sector tecnológico con menos oferta que demanda.</p>
+        <div class="skills-pills">
+          <div class="skill-pill"><div class="sp-dot"></div>Montaje de equipos</div>
+          <div class="skill-pill"><div class="sp-dot"></div>Redes locales</div>
+          <div class="skill-pill"><div class="sp-dot"></div>Windows &amp; Linux</div>
+          <div class="skill-pill"><div class="sp-dot"></div>Seguridad informática</div>
+          <div class="skill-pill"><div class="sp-dot"></div>TCP/IP · DNS · DHCP</div>
+          <div class="skill-pill"><div class="sp-dot"></div>Soporte técnico</div>
+          <div class="skill-pill"><div class="sp-dot"></div>Servidores en red</div>
+          <div class="skill-pill"><div class="sp-dot"></div>Aplicaciones web</div>
+          <div class="skill-pill"><div class="sp-dot"></div>Ciberseguridad básica</div>
+          <div class="skill-pill"><div class="sp-dot"></div>Inteligencia Artificial</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section id="modulos">
+  <div class="container">
+    <div class="mods-header">
+      <div>
+        <div class="sl">Plan de estudios</div>
+        <h2 class="st">Contenidos del ciclo</h2>
+      </div>
+      <div class="ytabs">
+        <button class="ytab active" onclick="showYear(1,this)">1º Curso</button>
+        <button class="ytab" onclick="showYear(2,this)">2º Curso</button>
+      </div>
+    </div>
+
+    <div class="ypanel active" id="year1">
+      <div class="mod-card">
+        <div class="mod-n">01</div>
+        <div class="mod-info">
+          <h4>Aplicaciones ofimáticas</h4>
+          <div class="mod-h">235 horas</div>
+          <div class="mod-d">Suite ofimática completa, hojas de cálculo, bases de datos y herramientas de productividad digital para entornos profesionales.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">02</div>
+        <div class="mod-info">
+          <h4>Montaje y mantenimiento de equipos</h4>
+          <div class="mod-h">200 horas</div>
+          <div class="mod-d">Ensamblaje de PC, diagnóstico de hardware, fuentes de alimentación, refrigeración, tarjetas gráficas y resolución de averías.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">03</div>
+        <div class="mod-info">
+          <h4>Redes locales</h4>
+          <div class="mod-h">240 horas</div>
+          <div class="mod-d">Diseño e instalación de redes LAN. Cableado estructurado, switches, routers, protocolos TCP/IP, topologías y análisis de red.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">04</div>
+        <div class="mod-info">
+          <h4>Sistemas operativos monopuesto</h4>
+          <div class="mod-h">175 horas</div>
+          <div class="mod-d">Instalación y configuración de Windows y Linux. Gestión de usuarios, permisos, procesos, drivers y resolución de incidencias.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">05</div>
+        <div class="mod-info">
+          <h4>Módulo profesional optativo</h4>
+          <div class="mod-h">50 horas</div>
+          <div class="mod-d">Complemento formativo específico orientado al perfil tecnológico y las salidas profesionales del ciclo.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">06</div>
+        <div class="mod-info">
+          <h4>Itinerario personal para la empleabilidad I</h4>
+          <div class="mod-h">100 horas</div>
+          <div class="mod-d">Orientación profesional, CV, entrevistas técnicas, habilidades transversales y competencias para el sector IT.</div>
+        </div>
+      </div>
+      <div class="ffe-card">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#00C6FF" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div>
+          <h4>Fase de Formación en Empresa — 1er Curso</h4>
+          <p>60 horas en empresas tecnológicas reales. Soporte IT, instalación de sistemas y redes en entornos profesionales desde el primer año.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ypanel" id="year2">
+      <div class="mod-card">
+        <div class="mod-n">07</div>
+        <div class="mod-info">
+          <h4>Aplicaciones web</h4>
+          <div class="mod-h">135 horas</div>
+          <div class="mod-d">HTML, CSS, JavaScript básico e instalación de servicios web. Configuración de servidores Apache/Nginx y despliegue de aplicaciones.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">08</div>
+        <div class="mod-info">
+          <h4>Seguridad informática</h4>
+          <div class="mod-h">85 horas</div>
+          <div class="mod-d">Ataques DoS/DDoS, malware, cifrado, firewalls, copias de seguridad y protección de sistemas. Fundamentos de ciberseguridad.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">09</div>
+        <div class="mod-info">
+          <h4>Servicios en red</h4>
+          <div class="mod-h">230 horas</div>
+          <div class="mod-d">DNS, DHCP, FTP, HTTP, correo electrónico y servicios en red. Configuración de servidores de ficheros, impresión y acceso remoto.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">10</div>
+        <div class="mod-info">
+          <h4>Sistemas operativos en red</h4>
+          <div class="mod-h">230 horas</div>
+          <div class="mod-d">Windows Server y Linux en red. Active Directory, dominios, políticas de grupo, acceso remoto y administración centralizada.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">11</div>
+        <div class="mod-info">
+          <h4>Inglés profesional</h4>
+          <div class="mod-h">50 horas</div>
+          <div class="mod-d">Inglés técnico aplicado al sector IT. Documentación, comunicación con soporte de fabricantes y entornos de trabajo internacionales.</div>
+        </div>
+      </div>
+      <div class="mod-card">
+        <div class="mod-n">12–15</div>
+        <div class="mod-info">
+          <h4>Empleabilidad II · Sostenibilidad · Optativa · Proyecto</h4>
+          <div class="mod-h">240 horas</div>
+          <div class="mod-d">Itinerario laboral avanzado, tecnología sostenible, módulo optativo y proyecto integrador de competencias del ciclo completo.</div>
+        </div>
+      </div>
+      <div class="ffe-card">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#00C6FF" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div>
+          <h4>Fase de Formación en Empresa — 2º Curso</h4>
+          <p>440 horas · Total 500h en empresas tech reales como Indra, Accenture, BBVA IT, Cognizant y más de 10 colaboradoras del sector.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALIDAS -->
+<section id="salidas">
+  <div class="container">
+    <div class="sl" style="color:rgba(255,255,255,.4)">Salidas profesionales</div>
+    <h2 class="st">¿Dónde trabaja un técnico SMIR?</h2>
+    <p class="sd">El perfil IT Support es el más demandado en cualquier empresa con infraestructura digital. Eso es prácticamente cualquier empresa del mercado actual.</p>
+    <div class="salidas-grid">
+      <div class="sal-card">
+        <div class="sal-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C6FF" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+        <h3>Técnico/a de Soporte IT</h3>
+        <p>Helpdesk y soporte técnico en empresas de cualquier sector. Resolución de incidencias, instalación de software y atención a usuarios.</p>
+        <span class="sal-tag">Alta Demanda</span>
+      </div>
+      <div class="sal-card">
+        <div class="sal-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C6FF" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
+        <h3>Técnico/a de Redes</h3>
+        <p>Instalación y mantenimiento de infraestructura de red en empresas, centros de datos y proveedores de servicios de telecomunicaciones.</p>
+        <span class="sal-tag">Sector en crecimiento</span>
+      </div>
+      <div class="sal-card">
+        <div class="sal-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C6FF" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Técnico/a en Ciberseguridad</h3>
+        <p>Primer nivel de defensa en empresas. Monitorización, detección de amenazas y aplicación de medidas de seguridad en sistemas y redes.</p>
+        <span class="sal-tag">Alta proyección</span>
+      </div>
+      <div class="sal-card">
+        <div class="sal-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C6FF" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h3>Técnico/a en Sistemas</h3>
+        <p>Administración de servidores Windows Server y Linux, gestión de dominios, copias de seguridad y mantenimiento de infraestructura IT.</p>
+        <span class="sal-tag">Sector privado</span>
+      </div>
+      <div class="sal-card">
+        <div class="sal-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C6FF" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <h3>Técnico/a de CPD</h3>
+        <p>Operación en centros de procesamiento de datos. Gestión de servidores físicos, virtualización y servicios cloud con proveedores como AWS, Azure o Google Cloud.</p>
+        <span class="sal-tag">Cloud computing</span>
+      </div>
+      <div class="sal-card">
+        <div class="sal-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C6FF" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <h3>Técnico/a de Montaje</h3>
+        <p>Ensamblaje y reparación de equipos en talleres, tiendas de informática, empresas de distribución y servicios técnicos especializados.</p>
+        <span class="sal-tag">Autoempleo viable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RUTA TECNOLÓGICA -->
+<section id="ruta">
+  <div class="container">
+    <div class="sl">Ruta tecnológica</div>
+    <h2 class="st">SMIR: el primer paso de tu carrera tech</h2>
+    <p class="sd">En CampusFP, SMIR no es un final. Es la plataforma de entrada al ecosistema tecnológico más completo de la FP en Madrid.</p>
+    <div class="ruta-grid">
+      <div>
+        <div class="ruta-steps">
+          <div class="ruta-step">
+            <div class="rs-line"><div class="rs-dot current">GM</div><div class="rs-connector"></div></div>
+            <div class="rs-body">
+              <h4>🔵 SMIR — Ahora mismo</h4>
+              <p>Grado Medio en Sistemas Microinformáticos y Redes. La base técnica que necesitas para entrar en el sector IT.</p>
+              <span class="rs-tag active">Estás aquí</span>
+            </div>
+          </div>
+          <div class="ruta-step">
+            <div class="rs-line"><div class="rs-dot">GS</div><div class="rs-connector"></div></div>
+            <div class="rs-body">
+              <h4>Grado Superior — 3 opciones</h4>
+              <p>ASIR (Administración de Sistemas en Red), DAM (Desarrollo Multiplataforma) o DAW (Desarrollo Web). Progresión directa con posibles convalidaciones.</p>
+              <span class="rs-tag">Siguiente paso</span>
+            </div>
+          </div>
+          <div class="ruta-step">
+            <div class="rs-line"><div class="rs-dot">+</div><div class="rs-connector"></div></div>
+            <div class="rs-body">
+              <h4>Especialización FP</h4>
+              <p>Ciberseguridad, Inteligencia Artificial y Big Data, Desarrollo de Videojuegos y Realidad Virtual. Los perfiles más escasos y mejor pagados del mercado.</p>
+              <span class="rs-tag">Alta proyección</span>
+            </div>
+          </div>
+          <div class="ruta-step">
+            <div class="rs-line"><div class="rs-dot">🎓</div></div>
+            <div class="rs-body">
+              <h4>Universidad o mercado laboral</h4>
+              <p>El GS da acceso a la universidad. O puedes entrar directamente al mercado con un perfil técnico altamente empleable y certificaciones internacionales.</p>
+              <span class="rs-tag">Meta final</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sup-cards">
+          <div class="sup-card">
+            <div class="sc-icon">🖥️</div>
+            <div class="sc-body">
+              <h4>ASIR — Administración de Sistemas Informáticos en Red</h4>
+              <p>El perfil sysadmin. Gestión avanzada de servidores, virtualización, cloud y seguridad corporativa.</p>
+              <span class="sc-badge">GS · Misma familia</span>
+            </div>
+          </div>
+          <div class="sup-card">
+            <div class="sc-icon">📱</div>
+            <div class="sc-body">
+              <h4>DAM — Desarrollo de Aplicaciones Multiplataforma</h4>
+              <p>Programación de apps para escritorio, móvil y cualquier plataforma. Java, Kotlin, Swift y más.</p>
+              <span class="sc-badge">GS · Acceso con SMIR</span>
+            </div>
+          </div>
+          <div class="sup-card">
+            <div class="sc-icon">🌐</div>
+            <div class="sc-body">
+              <h4>DAW — Desarrollo de Aplicaciones Web</h4>
+              <p>Frontend, backend, frameworks modernos y despliegue en cloud. El perfil más buscado en startups y grandes empresas.</p>
+              <span class="sc-badge">GS · Acceso con SMIR</span>
+            </div>
+          </div>
+          <div class="sup-card">
+            <div class="sc-icon">🔐</div>
+            <div class="sc-body">
+              <h4>Especialización Ciberseguridad</h4>
+              <p>El mercado más escaso y mejor remunerado del sector IT. Hacking ético, análisis forense y respuesta a incidentes.</p>
+              <span class="sc-badge">Post GS · Alta demanda</span>
+            </div>
+          </div>
+          <div class="sup-card">
+            <div class="sc-icon">🤖</div>
+            <div class="sc-body">
+              <h4>Especialización IA y Big Data</h4>
+              <p>Machine learning, análisis de datos y automatización inteligente. El futuro del sector tecnológico.</p>
+              <span class="sc-badge">Post GS · Tendencia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FP DUAL -->
+<section id="dual">
+  <div class="container">
+    <div class="dual-grid">
+      <div>
+        <div class="sl">Metodología</div>
+        <h2 class="st">Aprende IT haciendo IT real</h2>
+        <p class="sd" style="margin-bottom:2.2rem">En CampusFP no simulamos el trabajo tecnológico, lo hacemos. Desde el primer año estás en empresas reales del sector resolviendo problemas reales con equipos reales.</p>
+        <div class="dual-steps">
+          <div class="ds">
+            <div class="ds-num">01</div>
+            <div class="ds-body">
+              <h4>Laboratorios de redes y sistemas reales</h4>
+              <p>Aulas equipadas con racks, switches, routers y servidores idénticos a los que encontrarás en el entorno profesional.</p>
+            </div>
+          </div>
+          <div class="ds">
+            <div class="ds-num">02</div>
+            <div class="ds-body">
+              <h4>Escenarios de ciberseguridad y eSports tech</h4>
+              <p>Simulación de ataques, configuración de firewalls, análisis de tráfico y tecnología aplicada al gaming y los eSports (XP Arena).</p>
+            </div>
+          </div>
+          <div class="ds">
+            <div class="ds-num">03</div>
+            <div class="ds-body">
+              <h4>500h en empresas top del sector</h4>
+              <p>Indra, Accenture, BBVA IT, Cognizant, Inetum y más de 10 empresas tecnológicas colaboradoras en Madrid.</p>
+            </div>
+          </div>
+          <div class="ds">
+            <div class="ds-num">04</div>
+            <div class="ds-body">
+              <h4>Bolsa de empleo activa</h4>
+              <p>CampusFP conecta a sus mejores alumnos con oportunidades laborales reales al finalizar el ciclo a través de su red de empresas colaboradoras.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dual-panel">
+        <div class="dp-title">⚡ SMIR en cifras</div>
+        <div class="dp-stat">
+          <div class="dp-n">500<span>h</span></div>
+          <div class="dp-l">En empresas tecnológicas reales. Los mejores empleadores tech de Madrid.</div>
+        </div>
+        <div class="dp-stat">
+          <div class="dp-n">4+<span> certs</span></div>
+          <div class="dp-l">Certificaciones internacionales de Cisco, Microsoft, Pearson y más. La 1ª es gratis.</div>
+        </div>
+        <div class="dp-stat">
+          <div class="dp-n">8<span> sedes</span></div>
+          <div class="dp-l">El ciclo SMIR más accesible de Madrid. Elige el campus más cercano a ti.</div>
+        </div>
+        <div class="dp-stat">
+          <div class="dp-n">2<span> años</span></div>
+          <div class="dp-l">Ciclo completo para salir al mercado con un perfil técnico acreditado y certificado.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMPRESAS COLABORADORAS -->
+<section id="empresas">
+  <div class="container">
+    <div class="empresas-intro">
+      <div class="sl">Red de empresas</div>
+      <h2 class="st">Empresas donde hacen prácticas nuestros alumnos</h2>
+      <p class="sd">Más de 10 empresas tecnológicas líderes colaboran con CampusFP para integrar a nuestros alumnos SMIR en equipos profesionales reales.</p>
+    </div>
+    <div class="logos-track-wrap">
+      <div class="logos-track">
+        <div class="logo-chip">Indra</div>
+        <div class="logo-chip">Accenture</div>
+        <div class="logo-chip">BBVA IT</div>
+        <div class="logo-chip">Cognizant</div>
+        <div class="logo-chip">Inetum</div>
+        <div class="logo-chip">BABEL</div>
+        <div class="logo-chip">Serbatic · VASS</div>
+        <div class="logo-chip">Petec</div>
+        <div class="logo-chip">Konplik</div>
+        <div class="logo-chip">MeaningCloud</div>
+        <div class="logo-chip">Auto Drive Solutions</div>
+        <!-- duplicated for seamless loop -->
+        <div class="logo-chip">Indra</div>
+        <div class="logo-chip">Accenture</div>
+        <div class="logo-chip">BBVA IT</div>
+        <div class="logo-chip">Cognizant</div>
+        <div class="logo-chip">Inetum</div>
+        <div class="logo-chip">BABEL</div>
+        <div class="logo-chip">Serbatic · VASS</div>
+        <div class="logo-chip">Petec</div>
+        <div class="logo-chip">Konplik</div>
+        <div class="logo-chip">MeaningCloud</div>
+        <div class="logo-chip">Auto Drive Solutions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFIL ALUMNO -->
+<section id="perfil">
+  <div class="container">
+    <div class="sl">¿Es para ti?</div>
+    <h2 class="st">El perfil que encaja en SMIR</h2>
+    <p class="sd">No hace falta ser un experto en informática. Hace falta querer serlo.</p>
+    <div class="perfil-grid">
+      <div class="pf-card">
+        <div class="pf-e">🔧</div>
+        <div>
+          <h4>Te gusta desmontar y entender cómo funciona todo</h4>
+          <p>Si de pequeño abrías los aparatos para ver qué había dentro, este ciclo es tuyo.</p>
+        </div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-e">🌐</div>
+        <div>
+          <h4>Las redes y la conectividad te generan curiosidad</h4>
+          <p>Quieres saber cómo funciona internet, por qué falla el Wi-Fi o cómo se configura un servidor.</p>
+        </div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-e">🎮</div>
+        <div>
+          <h4>Eres del mundo gamer o tech</h4>
+          <p>El entorno digital, los eSports y la tecnología son parte de tu vida. SMIR convierte esa pasión en profesión.</p>
+        </div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-e">🔐</div>
+        <div>
+          <h4>La ciberseguridad y los hackers te interesan</h4>
+          <p>Quieres aprender a proteger sistemas, entender los ataques y trabajar en el área más escasa del mercado IT.</p>
+        </div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-e">🧩</div>
+        <div>
+          <h4>Disfrutas resolviendo problemas</h4>
+          <p>Buscas la causa de un error, pruebas soluciones y no descansas hasta que el sistema funciona. El soporte IT es tu vocación.</p>
+        </div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-e">🚀</div>
+        <div>
+          <h4>Quieres trabajar en tecnología sin pasar por la universidad</h4>
+          <p>El sector IT valora lo que sabes hacer, no solo el título. SMIR te da ambas cosas: conocimiento y credenciales acreditadas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUISITOS -->
+<section id="requisitos">
+  <div class="container">
+    <div class="sl">Acceso</div>
+    <h2 class="st">Requisitos de acceso</h2>
+    <p class="sd">Accedes al ciclo si cumples alguno de estos requisitos. Sin más barreras para empezar tu carrera tech.</p>
+    <div class="req-grid">
+      <ul class="req-list">
+        <li><div class="rch"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>Graduado/a en Educación Secundaria Obligatoria (ESO)</li>
+        <li><div class="rch"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>Título de Técnico/a Básico/a, Técnico/a o Auxiliar</li>
+        <li><div class="rch"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>Bachillerato en cualquiera de sus modalidades</li>
+        <li><div class="rch"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>Prueba de acceso a ciclos de Grado Medio</li>
+        <li><div class="rch"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>Curso preparatorio específico autorizado por la Administración educativa</li>
+        <li><div class="rch"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>2º de BUP (con máximo 2 materias pendientes) u otros equivalentes</li>
+      </ul>
+      <div class="prog-box">
+        <h3>📈 ¿Y después del ciclo?</h3>
+        <div>
+          <div class="pi"><strong>🎓 Técnico en Sistemas Microinformáticos y Redes</strong>Título oficial GM al finalizar el ciclo</div>
+          <div class="pcon"></div>
+          <div class="pi"><strong>🔼 Grado Superior — ASIR · DAM · DAW</strong>Progresión natural con posibles convalidaciones de módulos</div>
+          <div class="pcon"></div>
+          <div class="pi"><strong>🔐 Especialización — Ciberseguridad · IA · Big Data</strong>Los perfiles más escasos y mejor remunerados del mercado</div>
+          <div class="pcon"></div>
+          <div class="pi"><strong>💼 Mercado laboral directo</strong>Con 500h de experiencia certificada y 4+ credenciales internacionales</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BECAS -->
+<section id="becas">
+  <div class="container">
+    <div class="sl">Financiación</div>
+    <h2 class="st">Becas FP y ayudas al estudio</h2>
+    <p class="sd">Estudiar el ciclo SMIR en CampusFP no tiene por qué suponer una barrera económica. Te informamos sobre todas las ayudas disponibles.</p>
+    <div class="becas-grid">
+      <div class="beca-card">
+        <div style="font-size:2.3rem;margin-bottom:.7rem">🎓</div>
+        <h3>Becas Ministerio de Educación</h3>
+        <p>Ayudas generales del Estado para alumnos de FP con criterios académicos y económicos. Convocatoria anual con plazos en septiembre.</p>
+        <a class="beca-link" href="https://campusfp.es/campus-becas-fp/" target="_blank">Ver condiciones →</a>
+      </div>
+      <div class="beca-card">
+        <div style="font-size:2.3rem;margin-bottom:.7rem">🏛️</div>
+        <h3>Becas Comunidad de Madrid</h3>
+        <p>Ayudas autonómicas para residentes en Madrid cursando FP presencial en centros autorizados como CampusFP. Compatibles con las del Ministerio.</p>
+        <a class="beca-link" href="https://campusfp.es/campus-becas-fp/" target="_blank">Ver condiciones →</a>
+      </div>
+      <div class="beca-card">
+        <div style="font-size:2.3rem;margin-bottom:.7rem">🌍</div>
+        <h3>Erasmus+ FP</h3>
+        <p>Movilidades internacionales para completar parte de las prácticas en empresas tecnológicas europeas con beca de desplazamiento y alojamiento.</p>
+        <a class="beca-link" href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank">Ver movilidades →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENTROS -->
+<section id="centros">
+  <div class="container">
+    <div class="sl">Nuestros centros</div>
+    <h2 class="st">8 campus en Madrid para estudiar SMIR</h2>
+    <p class="sd">El ciclo más extendido de CampusFP. Elige el campus más cercano a tu casa o con mejor comunicación. La formación y las certificaciones son idénticas en todos.</p>
+    <div class="centros-grid">
+      <div class="cen-card">
+        <div class="cen-num">01</div>
+        <div class="cen-info">
+          <h4>CampusFP Atocha</h4>
+          <p>Corazón de Madrid. Metro y Cercanías Atocha. Máxima accesibilidad desde cualquier punto de la capital.</p>
+          <span class="cen-tag">Centro de Madrid</span>
+        </div>
+      </div>
+      <div class="cen-card">
+        <div class="cen-num">02</div>
+        <div class="cen-info">
+          <h4>CampusFP Getafe</h4>
+          <p>Sur de Madrid. Metro Getafe Central y Cercanías. Zona industrial con gran demanda de perfiles IT.</p>
+          <span class="cen-tag">Sur Madrid</span>
+        </div>
+      </div>
+      <div class="cen-card">
+        <div class="cen-num">03</div>
+        <div class="cen-info">
+          <h4>CampusFP Leganés</h4>
+          <p>Sur metropolitano. Metro línea 12 y Cercanías. Bien comunicado con Getafe, Fuenlabrada y Móstoles.</p>
+          <span class="cen-tag">Sur Madrid</span>
+        </div>
+      </div>
+      <div class="cen-card">
+        <div class="cen-num">04</div>
+        <div class="cen-info">
+          <h4>CampusFP Móstoles</h4>
+          <p>Oeste sur. Cercanías y autobús interurbano. Municipio con alta actividad empresarial e industrial.</p>
+          <span class="cen-tag">Oeste Sur</span>
+        </div>
+      </div>
+      <div class="cen-card">
+        <div class="cen-num">05</div>
+        <div class="cen-info">
+          <h4>CampusFP Humanes – Fuenlabrada</h4>
+          <p>Sur metropolitano. Cercanías C5. Zona con gran ecosistema tecnológico y logístico en pleno crecimiento.</p>
+          <span class="cen-tag">Sur Madrid</span>
+        </div>
+      </div>
+      <div class="cen-card">
+        <div class="cen-num">06</div>
+        <div class="cen-info">
+          <h4>CampusFP Alcalá de Henares</h4>
+          <p>Corredor del Henares. RENFE C2 y C7. Zona con alta concentración de empresas tecnológicas e industriales.</p>
+          <span class="cen-tag">Este Madrid</span>
+        </div>
+      </div>
+      <div class="cen-card">
+        <div class="cen-num">07</div>
+        <div class="cen-info">
+          <h4>CampusFP Arganda del Rey</h4>
+          <p>Sureste. Metro L9 y autobús. Zona industrial con gran demanda de técnicos en sistemas y mantenimiento IT.</p>
+          <span class="cen-tag">Sureste</span>
+        </div>
+      </div>
+      <div class="cen-card">
+        <div class="cen-num">08</div>
+        <div class="cen-info">
+          <h4>CampusFP Vistalegre</h4>
+          <p>Suroeste de Madrid capital. Metro Oporto y Pradolongo. Fácil acceso desde Carabanchel, Villaverde y Vallecas.</p>
+          <span class="cen-tag">Suroeste Madrid</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div style="text-align:center;max-width:580px;margin:0 auto 1rem">
+      <div class="sl" style="justify-content:center">Preguntas frecuentes</div>
+      <h2 class="st">Resolvemos tus dudas sobre SMIR</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Necesito saber programar o tener conocimientos previos de informática?<span class="arr">+</span></button>
+        <div class="faq-a">No es obligatorio. El ciclo está diseñado para aprender desde cero hasta un nivel profesional. Sí es recomendable tener interés por la tecnología y ganas de aprender. Si ya tienes conocimientos básicos, los aprovecharás, pero no son un requisito de acceso.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Qué diferencia hay entre SMIR y otros ciclos de informática como ASIR o DAW?<span class="arr">+</span></button>
+        <div class="faq-a">SMIR es Grado Medio y cubre hardware, redes, sistemas operativos y soporte IT. ASIR y DAW son Grado Superior: ASIR profundiza en administración de sistemas y servidores, mientras DAW se centra en desarrollo web. SMIR es la entrada al sector tech y la base para acceder a los ciclos superiores.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿De verdad incluye certificaciones de Cisco y Microsoft?<span class="arr">+</span></button>
+        <div class="faq-a">Sí. En CampusFP el ciclo SMIR incorpora preparación para certificaciones de Cisco (CCST IT Support), Pearson (Networking IT Specialist), Microsoft (Azure AI Fundamentals) y Pearson AI (Generative AI Specialist). La primera certificación es completamente gratuita para todos los alumnos matriculados.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo trabajar de técnico informático al terminar el ciclo?<span class="arr">+</span></button>
+        <div class="faq-a">Sí, directamente. El ciclo incluye 500 horas de prácticas en empresas tecnológicas reales que en muchos casos se convierten en una primera experiencia laboral. Además, las certificaciones internacionales hacen que tu perfil sea competitivo frente a candidatos sin FP oficial.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿En qué campus de Madrid puedo estudiar SMIR?<span class="arr">+</span></button>
+        <div class="faq-a">En 8 centros: Atocha, Getafe, Leganés, Móstoles, Humanes-Fuenlabrada, Alcalá de Henares, Arganda del Rey y Vistalegre. Es el ciclo con mayor presencia en la red CampusFP. Todos tienen la misma formación, metodología FP Dual y certificaciones incluidas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si quiero seguir estudiando después de SMIR?<span class="arr">+</span></button>
+        <div class="faq-a">Tienes varias opciones: Grado Superior en ASIR, DAM o DAW (con posibles convalidaciones de módulos), Bachillerato en cualquier modalidad, o una especialización en Ciberseguridad o Inteligencia Artificial. CampusFP tiene todos estos ciclos disponibles y te orienta en la transición.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK LINKS -->
+<div class="ql-section">
+  <div class="ql-grid">
+    <a class="ql-card" href="#becas">
+      <div class="ql-icon">🎓</div>
+      <h4>Becas FP</h4>
+      <p>Ayudas y financiación disponibles</p>
+    </a>
+    <a class="ql-card" href="#centros">
+      <div class="ql-icon">🏛️</div>
+      <h4>Nuestros Centros</h4>
+      <p>8 campus en Madrid</p>
+    </a>
+    <a class="ql-card" href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank">
+      <div class="ql-icon">💼</div>
+      <h4>Bolsa de Empleo</h4>
+      <p>Red de empresas colaboradoras</p>
+    </a>
+    <a class="ql-card" href="#salidas">
+      <div class="ql-icon">🚀</div>
+      <h4>Salidas Profesionales</h4>
+      <p>Soporte IT, redes, ciberseguridad</p>
+    </a>
+    <a class="ql-card" href="#requisitos">
+      <div class="ql-icon">📋</div>
+      <h4>Requisitos de Acceso</h4>
+      <p>Qué necesitas para matricularte</p>
+    </a>
+    <a class="ql-card" href="#certs">
+      <div class="ql-icon">🏅</div>
+      <h4>Certificaciones</h4>
+      <p>Cisco, Microsoft, Pearson — gratis</p>
+    </a>
+    <a class="ql-card" href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank">
+      <div class="ql-icon">🌍</div>
+      <h4>Erasmus+ FP</h4>
+      <p>Prácticas en empresas de Europa</p>
+    </a>
+    <a class="ql-card" href="#ruta">
+      <div class="ql-icon">🗺️</div>
+      <h4>Ruta Tech</h4>
+      <p>SMIR → ASIR → Ciberseguridad</p>
+    </a>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-band">
+  <h2>El sector tech no espera.<br>Tu carrera empieza hoy en CampusFP.</h2>
+  <p>Solicita información gratuita y descubre cómo entrar al mercado laboral tecnológico con certificaciones reales desde el primer día.</p>
+  <a href="#contacto" class="btn-white">Solicitar información gratuita →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <div class="footer-brand">
+      <div class="fb-logo"><span>Campus</span>FP</div>
+      <p>Centro de Formación Profesional autorizado por la Comunidad de Madrid. Líderes en FP Dual con certificaciones internacionales Cisco, Microsoft y Pearson, acreditación Erasmus+ y British Council.</p>
+      <div class="slinks">
+        <a class="slink" href="https://www.facebook.com/campusfp/" target="_blank">f</a>
+        <a class="slink" href="https://www.instagram.com/campusfp_/" target="_blank">ig</a>
+        <a class="slink" href="https://www.linkedin.com/company/10575264/" target="_blank">in</a>
+        <a class="slink" href="https://www.tiktok.com/@campusfp.ia" target="_blank">tt</a>
+      </div>
+    </div>
+    <div class="fc">
+      <h5>El ciclo SMIR</h5>
+      <a href="#certs">Certificaciones</a>
+      <a href="#modulos">Contenidos</a>
+      <a href="#dual">FP Dual</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#ruta">Ruta Tech</a>
+    </div>
+    <div class="fc">
+      <h5>CampusFP</h5>
+      <a href="https://campusfp.es/centros/" target="_blank">Nuestros centros</a>
+      <a href="https://campusfp.es/campus-becas-fp/" target="_blank">Becas FP</a>
+      <a href="https://campusfp.es/bolsa-de-empleo-campusfp/" target="_blank">Bolsa de empleo</a>
+      <a href="https://campusfp.es/erasmus/movilidades-erasmus.php" target="_blank">Erasmus+</a>
+      <a href="https://campusfp.es/noticias/" target="_blank">Noticias</a>
+    </div>
+    <div class="fc">
+      <h5>Contacto</h5>
+      <a href="tel:+34911833122">📞 91 183 31 22</a>
+      <a href="mailto:secretaria@campusfp.es">✉ secretaria@campusfp.es</a>
+      <a href="#centros">Ver los 8 centros</a>
+    </div>
+  </div>
+  <div class="fb-bottom">
+    <p>© 2025 CampusFP · Centro autorizado Comunidad de Madrid · Todos los derechos reservados</p>
+    <div class="fb-badges">
+      <div class="fb-badge">Centro Autorizado</div>
+      <div class="fb-badge">Cisco Partner</div>
+      <div class="fb-badge">Erasmus+</div>
+      <div class="fb-badge">Pearson HND</div>
+      <div class="fb-badge">FP Dual</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showYear(n, btn) {
+    document.querySelectorAll('.ypanel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.ytab').forEach(t => t.classList.remove('active'));
+    document.getElementById('year'+n).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleFaq(btn) {
+    const a = btn.nextElementSibling, open = a.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(x => x.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(x => x.classList.remove('open'));
+    if (!open) { a.classList.add('open'); btn.classList.add('open'); }
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const h = a.getAttribute('href');
+      if (h === '#') return;
+      e.preventDefault();
+      const t = document.querySelector(h);
+      if (t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.mod-card, .sal-card, .cert-card, .pf-card, .beca-card, .cen-card, .sup-card').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(18px)';
+    el.style.transition='opacity .5s ease, transform .5s ease';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
