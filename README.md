@@ -1,5 +1,7 @@
 # Laboratorio Empresarial ASIR
 
+![Arquitectura General](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/arquitectura.png?raw=true)
+
 ## Proyecto de Infraestructura y Administración de Sistemas
 
 Proyecto desarrollado durante las prácticas de Administración de Sistemas Informáticos en Red (ASIR), orientado al diseño, despliegue y administración de una infraestructura tecnológica completa que simula un entorno empresarial real.
