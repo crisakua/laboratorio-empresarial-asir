@@ -2,148 +2,68 @@
 
 ![Arquitectura General](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/screenshots/arquitectura.png?raw=true)
 
-## Proyecto de Infraestructura y Administración de Sistemas
+## Proyecto de Infraestructura Empresarial
 
-Proyecto desarrollado durante las prácticas de Administración de Sistemas Informáticos en Red (ASIR), orientado al diseño, despliegue y administración de una infraestructura tecnológica completa que simula un entorno empresarial real.
+Proyecto desarrollado durante las prácticas de Administración de Sistemas Informáticos en Red (ASIR), orientado al diseño, despliegue y administración de una infraestructura tecnológica completa capaz de simular un entorno empresarial real.
 
-La solución integra tecnologías de virtualización, administración de sistemas, bases de datos, monitorización, automatización y ciberseguridad dentro de una arquitectura centralizada y escalable.
-
----
-
-## Objetivos del Proyecto
-
-- Diseñar una infraestructura empresarial virtualizada.
-- Implementar servicios Windows y Linux.
-- Desplegar bases de datos empresariales.
-- Automatizar procesos administrativos.
-- Aplicar monitorización avanzada.
-- Implementar medidas de seguridad y auditoría.
-- Documentar todos los componentes desplegados.
+La solución integra virtualización, sistemas Windows y Linux, bases de datos empresariales, contenedores Docker, monitorización avanzada, automatización, servicios web y herramientas de ciberseguridad dentro de una arquitectura centralizada, escalable y segura.
 
 ---
 
-## Tecnologías Utilizadas
+## Resumen del Proyecto
 
-### Virtualización
+### Infraestructura
 
-- Proxmox VE
-- Máquinas Virtuales Ubuntu Server
-- Kali Linux
-- Gestión de recursos y snapshots
+* Proxmox VE como plataforma principal de virtualización.
+* Máquinas virtuales Ubuntu Server y Kali Linux.
+* Windows Server para administración empresarial.
+* Raspberry Pi para servicios y monitorización.
 
-### Sistemas Operativos
+### Servicios Implementados
 
-- Windows Server
-- Ubuntu Server
-- Raspberry Pi OS
-- Kali Linux
+* Active Directory y GPOs.
+* Servidor FTP.
+* Servidor de correo interno.
+* Oracle Database 21c Multitenant.
+* PostgreSQL.
+* Docker y Portainer.
+* Proxy inverso NGINX.
+* Más de 10 sitios web desplegados.
+* Landing Page centralizada.
 
-### Contenedores
+### Monitorización y Seguridad
 
-- Docker
-- Portainer
-- NGINX
-- Apache
+* Grafana.
+* Prometheus.
+* cAdvisor.
+* Node Exporter.
+* Netdata.
+* Wireshark.
+* Nmap.
+* Laboratorio de análisis de red con Kali Linux.
 
-### Bases de Datos
+### Automatización
 
-- Oracle Database 21c
-- PostgreSQL
-- Oracle Multitenant (CDB y PDBs)
-
-### Monitorización
-
-- Grafana
-- Prometheus
-- Node Exporter
-- cAdvisor
-- Netdata
-
-### Redes y Ciberseguridad
-
-- Wireshark
-- Nmap
-- Kali Linux
-- Auditorías y análisis de red
-
-### Desarrollo y Automatización
-
-- Microsoft Excel VBA
-- Google Forms
-- Google Classroom
-- Procedimientos almacenados
-- Triggers
-- Automatización de backups
+* Triggers y procedimientos almacenados.
+* Auditorías automáticas.
+* Control de cambios y registros de actividad.
+* Backups automatizados.
+* Integración Excel + PostgreSQL.
+* Formularios VBA para gestión académica.
 
 ---
 
-## Componentes Implementados
+## Magnitud del Proyecto
 
-### Windows Server
-
-- Active Directory
-- Gestión de usuarios
-- Políticas GPO
-- Servidor FTP
-- Servidor de correo interno
-- Plan de copias de seguridad
-
-### Plataforma Proxmox
-
-- Infraestructura virtualizada
-- VM Oracle
-- VM Kali Linux
-- VM Ubuntu Server
-- Gestión centralizada
-
-### Oracle Database
-
-- Arquitectura Multitenant
-- PDBs por sedes
-- Procedimientos almacenados
-- Triggers
-- Auditorías automáticas
-- Control de operaciones críticas
-
-### Plataforma Docker
-
-- Proxy inverso NGINX
-- Landing Page centralizada
-- Sitios web corporativos
-- Gestión mediante Portainer
-
-### Monitorización
-
-- Métricas de infraestructura
-- Métricas de Docker
-- Dashboards Grafana
-- Supervisión en tiempo real
-
-### Excel + PostgreSQL
-
-- Sistema de login
-- Formularios VBA
-- Gestión de alumnos
-- Sincronización en tiempo real
-- Auditoría de operaciones
-
-### Raspberry Pi
-
-- Docker
-- Portainer
-- Apache
-- FTP
-- Grafana
-- Netdata
-- Emulación retro gaming
-
----
-
-## Arquitectura General
-
-La infraestructura está compuesta por servidores físicos y virtualizados que permiten desplegar múltiples servicios independientes dentro de una red centralizada.
-
-![Arquitectura General](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/arquitectura.png?raw=true)
+* 1 servidor Proxmox VE.
+* 3 máquinas virtuales principales.
+* 2 Raspberry Pi.
+* Más de 10 sitios web desplegados.
+* Oracle Database Multitenant.
+* PostgreSQL sincronizado con Excel.
+* Monitorización centralizada en tiempo real.
+* Servicios Windows y Linux integrados.
+* Sistemas de auditoría y copias de seguridad automatizadas.
 
 ---
 
@@ -151,53 +71,99 @@ La infraestructura está compuesta por servidores físicos y virtualizados que p
 
 ### Plataforma Proxmox
 
-![Proxmox](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/proxmox.png?raw=true)
+![Proxmox](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/screenshots/proxmox.png?raw=true)
 
 ### Monitorización con Grafana
 
-![Grafana](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/grafana.png?raw=true)
+![Grafana](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/screenshots/grafana.png?raw=true)
 
 ### Oracle Database y Automatización
 
-![Oracle](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/oracle.png?raw=true)
+![Oracle](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/screenshots/oracle.png?raw=true)
 
 ### Aplicación Excel integrada con PostgreSQL
 
-![Excel](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/excel.jpg?raw=true)
+![Excel](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/screenshots/excel.jpg?raw=true)
 
 ### Landing Page de Servicios
 
-![Landing](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/landing.png?raw=true)
+![Landing](https://github.com/crisakua/laboratorio-empresarial-asir/blob/main/screenshots/landing.png?raw=true)
 
-## Documentación
+---
 
-La documentación completa del proyecto se encuentra organizada en los siguientes apartados:
+## Aplicaciones Desarrolladas
 
-- Memoria General
-- Windows Server
-- Proxmox VE
-- Oracle Database
-- Wireshark y Nmap
-- Raspberry Pi
-- Excel y PostgreSQL
+### Sistema de Gestión Académica
+
+Aplicación desarrollada mediante Microsoft Excel VBA para la gestión administrativa y académica.
+
+Características principales:
+
+* Sistema de autenticación.
+* Gestión de usuarios.
+* Inserción de registros.
+* Actualización de información.
+* Eliminación de datos.
+* Búsquedas avanzadas.
+* Auditoría de operaciones.
+* Integración con PostgreSQL.
+* Copias de seguridad automatizadas.
+
+**Archivo disponible en el repositorio:**
+
+📄 [CONTROL MATRICULAS 2026-2027.xlsm](./appExcel/CONTROL%20MATRICULAS%202026-2027.xlsm)
+
+---
+
+## Documentación Técnica
+
+La documentación completa del proyecto se encuentra disponible en el repositorio:
+
+* 📘 Memoria General del Proyecto.
+* 🖥️ Windows Server.
+* 🐳 Proxmox VE.
+* 🗄️ Oracle Database.
+* 🔍 Wireshark y Nmap.
+* 🍓 Raspberry Pi.
+* 📋 Google Forms y Classroom.
+* 📊 Excel y PostgreSQL.
+* 🚀 Futuras Mejoras.
+
+---
+
+## Tecnologías Principales
+
+**Virtualización:** Proxmox VE
+
+**Sistemas Operativos:** Windows Server, Ubuntu Server, Kali Linux, Raspberry Pi OS
+
+**Contenedores:** Docker, Portainer, NGINX, Apache
+
+**Bases de Datos:** Oracle Database 21c, PostgreSQL
+
+**Monitorización:** Grafana, Prometheus, Netdata, cAdvisor, Node Exporter
+
+**Ciberseguridad:** Wireshark, Nmap, Kali Linux
+
+**Automatización y Desarrollo:** Excel VBA, Google Forms, Google Classroom, Triggers, Procedures
 
 ---
 
 ## Futuras Mejoras
 
-- Cluster Proxmox de Alta Disponibilidad
-- RAID 5 para almacenamiento
-- GLPI para gestión IT
-- Mattermost para comunicación interna
-- Automatización avanzada de despliegues
+* Cluster Proxmox con Alta Disponibilidad.
+* Implementación de RAID 5.
+* GLPI para gestión de activos IT.
+* Mattermost para comunicación interna.
+* Automatización avanzada de despliegues.
+* Sistema avanzado de alertas y monitorización.
 
 ---
 
 ## Autores
 
-Proyecto desarrollado por:
-
-- Cristina Calle Garrido
-- Sergio Román Gutiérrez
+**Cristina Calle Garrido**
+**Sergio Román Gutiérrez**
 
 Prácticas ASIR · CampusFP
+
