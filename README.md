@@ -120,11 +120,11 @@ Características principales:
 La documentación completa del proyecto se encuentra disponible en el repositorio:
 
 * 📘 Memoria General del Proyecto.
-* 🖥️ Windows Server. (./docs/PROYECTO_WINDOWSERVER_F.F.pdf)
-* 🐳 Proxmox VE. (./docs/servidor_proxmox.pdf)
+* 🖥️ Windows Server.
+* 🐳 Proxmox VE. 
 * 🗄️ Oracle Database.
-* 🔍 Wireshark y Nmap. (./docs/Wireshark%20y%20Nmap.pdf)
-* 🍓 Raspberry Pi. (./docs/Servicios%20y%20Monitorizaci%C3%B3n%20con%20Raspberry.pdf)
+* 🔍 Wireshark y Nmap.
+* 🍓 Raspberry Pi. 
 * 📋 Google Forms y Classroom.
 * 📊 Excel y PostgreSQL.
 * 🚀 Futuras Mejoras.
